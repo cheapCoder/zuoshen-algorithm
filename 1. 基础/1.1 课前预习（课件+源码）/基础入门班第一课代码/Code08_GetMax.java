@@ -21,7 +21,7 @@ public class Code08_GetMax {
 			return Math.max(arr[L], arr[R]);
 		}
 
-		int midIndex = (int) Math.floor(L + (R - L) >> 2);
+		int midIndex = (int) Math.floor(L + (R - L) >> 1);
 		int leftMax = process(arr, L, midIndex);
 		int rightMax = process(arr, midIndex + 1, R);
 		return Math.max(leftMax, rightMax);

@@ -2,43 +2,83 @@
 
 public class Code02_SmallSum {
 
-	public static int smallSum(int[] arr) {
+	// public static int smallSum(int[] arr) {
+	// if (arr == null || arr.length < 2) {
+	// return 0;
+	// }
+	// return mergeSort(arr, 0, arr.length - 1);
+	// }
+
+	// public static int mergeSort(int[] arr, int l, int r) {
+	// if (l == r) {
+	// return 0;
+	// }
+	// int mid = l + ((r - l) >> 1);
+	// return mergeSort(arr, l, mid) + mergeSort(arr, mid + 1, r) + merge(arr, l,
+	// mid, r);
+	// }
+
+	// public static int merge(int[] arr, int l, int m, int r) {
+	// int[] help = new int[r - l + 1];
+	// int i = 0;
+	// int p1 = l;
+	// int p2 = m + 1;
+	// int res = 0;
+	// while (p1 <= m && p2 <= r) {
+	// res += arr[p1] < arr[p2] ? (r - p2 + 1) * arr[p1] : 0;
+	// help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+	// }
+	// while (p1 <= m) {
+	// help[i++] = arr[p1++];
+	// }
+	// while (p2 <= r) {
+	// help[i++] = arr[p2++];
+	// }
+	// for (i = 0; i < help.length; i++) {
+	// arr[l + i] = help[i];
+	// }
+	// return res;
+	// }
+
+	public static int smallSum(int[] arr, int l, int r) {
 		if (arr == null || arr.length < 2) {
 			return 0;
 		}
-		return mergeSort(arr, 0, arr.length - 1);
-	}
-
-	public static int mergeSort(int[] arr, int l, int r) {
-		if (l == r) {
+		if (r == l) {
 			return 0;
 		}
-		int mid = l + ((r - l) >> 1);
-		return mergeSort(arr, l, mid) 
-				+ mergeSort(arr, mid + 1, r) 
-				+ merge(arr, l, mid, r);
-	}
+		int sum = 0;
+		int mid = (int) Math.floor(l + ((r - l) >> 1));
+		sum += smallSum(arr, l, mid);
+		sum += smallSum(arr, mid + 1, r);
 
-	public static int merge(int[] arr, int l, int m, int r) {
-		int[] help = new int[r - l + 1];
-		int i = 0;
-		int p1 = l;
-		int p2 = m + 1;
-		int res = 0;
-		while (p1 <= m && p2 <= r) {
-			res += arr[p1] < arr[p2] ? (r - p2 + 1) * arr[p1] : 0;
-			help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
+		int[] tem = new int[r - l + 1];
+		int current = 0;
+		int leftPointer = l;
+		int rightPointer = mid + 1;
+
+		while (leftPointer <= mid && rightPointer <= r) {
+			if (arr[leftPointer] < arr[rightPointer]) {
+				sum += arr[leftPointer] * (r - rightPointer + 1);
+				tem[current++] = arr[leftPointer++];
+			} else { // arr[leftPointer] == arr[rightPointer 时一定要移动右边的指针
+				tem[current++] = arr[rightPointer++];
+			}
 		}
-		while (p1 <= m) {
-			help[i++] = arr[p1++];
+
+		while (leftPointer <= mid) {
+			tem[current++] = arr[leftPointer++];
 		}
-		while (p2 <= r) {
-			help[i++] = arr[p2++];
+		while (rightPointer <= r) {
+			tem[current++] = arr[rightPointer++];
 		}
-		for (i = 0; i < help.length; i++) {
-			arr[l + i] = help[i];
+
+		// 复制tem到arr
+		for (int i = 0; i < tem.length; i++) {
+			arr[l + i] = tem[i];
 		}
-		return res;
+
+		return sum;
 	}
 
 	// for test
@@ -103,7 +143,10 @@ public class Code02_SmallSum {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-		System.out.println();System.out.println();System.out.println();System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	// for test
@@ -115,7 +158,7 @@ public class Code02_SmallSum {
 		for (int i = 0; i < testTime; i++) {
 			int[] arr1 = generateRandomArray(maxSize, maxValue);
 			int[] arr2 = copyArray(arr1);
-			if (smallSum(arr1) != comparator(arr2)) {
+			if (smallSum(arr1, 0, arr1.length - 1) != comparator(arr2)) {
 				succeed = false;
 				printArray(arr1);
 				printArray(arr2);
