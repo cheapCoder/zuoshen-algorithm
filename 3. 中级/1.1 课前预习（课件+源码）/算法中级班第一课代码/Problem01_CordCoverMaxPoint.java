@@ -1,4 +1,4 @@
-//package class01;
+package sort;
 
 public class Problem01_CordCoverMaxPoint {
 

@@ -1,32 +1,31 @@
+package sort;
 
-//package class01;
-import java.util.Arrays;
+public class Code11_SmallSum {
 
-public class Code01_MergeSort {
-
-	// public static void mergeSort(int[] arr) {
+	// public static int smallSum(int[] arr) {
 	// if (arr == null || arr.length < 2) {
-	// return;
+	// return 0;
 	// }
-	// mergeSort(arr, 0, arr.length - 1);
+	// return mergeSort(arr, 0, arr.length - 1);
 	// }
 
-	// public static void mergeSort(int[] arr, int l, int r) {
+	// public static int mergeSort(int[] arr, int l, int r) {
 	// if (l == r) {
-	// return;
+	// return 0;
 	// }
 	// int mid = l + ((r - l) >> 1);
-	// mergeSort(arr, l, mid);
-	// mergeSort(arr, mid + 1, r);
-	// merge(arr, l, mid, r);
+	// return mergeSort(arr, l, mid) + mergeSort(arr, mid + 1, r) + merge(arr, l,
+	// mid, r);
 	// }
 
-	// public static void merge(int[] arr, int l, int m, int r) {
+	// public static int merge(int[] arr, int l, int m, int r) {
 	// int[] help = new int[r - l + 1];
 	// int i = 0;
 	// int p1 = l;
 	// int p2 = m + 1;
+	// int res = 0;
 	// while (p1 <= m && p2 <= r) {
+	// res += arr[p1] < arr[p2] ? (r - p2 + 1) * arr[p1] : 0;
 	// help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
 	// }
 	// while (p1 <= m) {
@@ -38,58 +37,62 @@ public class Code01_MergeSort {
 	// for (i = 0; i < help.length; i++) {
 	// arr[l + i] = help[i];
 	// }
+	// return res;
 	// }
 
-	public static void mergeSort(int[] arr) {
+	public static int smallSum(int[] arr, int l, int r) {		// 小和问题
 		if (arr == null || arr.length < 2) {
-			return;
+			return 0;
 		}
-
-		mergeSort(arr, 0, arr.length - 1);
-	}
-
-	public static void mergeSort(int[] arr, int L, int R) {
-		if (L == R) {
-			return;
+		if (r == l) {
+			return 0;
 		}
-		int mid = (int) Math.floor(L + ((R - L) >> 1));
-		mergeSort(arr, L, mid);
-		mergeSort(arr, mid + 1, R);
+		int sum = 0;
+		int mid = (int) Math.floor(l + ((r - l) >> 1));
+		sum += smallSum(arr, l, mid);
+		sum += smallSum(arr, mid + 1, r);
 
-		int leftPointer = L;
+		int[] tem = new int[r - l + 1];
+		int current = 0;
+		int leftPointer = l;
 		int rightPointer = mid + 1;
-		int[] temArr = new int[R - L + 1];
-		int currentIndex = 0;
-		while (leftPointer <= mid && rightPointer <= R) {
-			if (arr[leftPointer] <= arr[rightPointer]) {
-				temArr[currentIndex++] = arr[leftPointer++];
-				// leftPointer++;
-			} else {
-				temArr[currentIndex++] = arr[rightPointer++];
-				// rightPointer++;
+
+		while (leftPointer <= mid && rightPointer <= r) {
+			if (arr[leftPointer] < arr[rightPointer]) {
+				sum += arr[leftPointer] * (r - rightPointer + 1);
+				tem[current++] = arr[leftPointer++];
+			} else { // arr[leftPointer] == arr[rightPointer 时一定要移动右边的指针
+				tem[current++] = arr[rightPointer++];
 			}
-			// currentIndex++;
 		}
 
 		while (leftPointer <= mid) {
-			temArr[currentIndex++] = arr[leftPointer++];
-			// leftPointer++;
-			// currentIndex++;
+			tem[current++] = arr[leftPointer++];
 		}
-		while (rightPointer <= R) {
-			temArr[currentIndex++] = arr[rightPointer++];
-			// currentIndex++;
-			// rightPointer++;
+		while (rightPointer <= r) {
+			tem[current++] = arr[rightPointer++];
 		}
 
-		for (int i = 0; i < temArr.length; i++) {
-			arr[L + i] = temArr[i];
+		// 复制tem到arr
+		for (int i = 0; i < tem.length; i++) {
+			arr[l + i] = tem[i];
 		}
+
+		return sum;
 	}
 
 	// for test
-	public static void comparator(int[] arr) {
-		Arrays.sort(arr);
+	public static int comparator(int[] arr) {
+		if (arr == null || arr.length < 2) {
+			return 0;
+		}
+		int res = 0;
+		for (int i = 1; i < arr.length; i++) {
+			for (int j = 0; j < i; j++) {
+				res += arr[j] < arr[i] ? arr[j] : 0;
+			}
+		}
+		return res;
 	}
 
 	// for test
@@ -142,6 +145,8 @@ public class Code01_MergeSort {
 		}
 		System.out.println();
 		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	// for test
@@ -153,9 +158,7 @@ public class Code01_MergeSort {
 		for (int i = 0; i < testTime; i++) {
 			int[] arr1 = generateRandomArray(maxSize, maxValue);
 			int[] arr2 = copyArray(arr1);
-			mergeSort(arr1);
-			comparator(arr2);
-			if (!isEqual(arr1, arr2)) {
+			if (smallSum(arr1, 0, arr1.length - 1) != comparator(arr2)) {
 				succeed = false;
 				printArray(arr1);
 				printArray(arr2);
@@ -163,12 +166,6 @@ public class Code01_MergeSort {
 			}
 		}
 		System.out.println(succeed ? "Nice!" : "Fucking fucked!");
-
-		int[] arr = generateRandomArray(maxSize, maxValue);
-		printArray(arr);
-		mergeSort(arr);
-		printArray(arr);
-
 	}
 
 }

@@ -1,57 +1,42 @@
-//package class03;
+package sort;
 
 import java.util.Arrays;
 
-public class Code02_RadixSort {
+public class Code02_BubbleSort {
 
-	// only for no-negative value
-	public static void radixSort(int[] arr) {
+	public static void bubbleSort_answer(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
 		}
-		radixSort(arr, 0, arr.length - 1, maxbits(arr));
-	}
-
-	public static int maxbits(int[] arr) {
-		int max = Integer.MIN_VALUE;
-		for (int i = 0; i < arr.length; i++) {
-			max = Math.max(max, arr[i]);
-		}
-		int res = 0;
-		while (max != 0) {
-			res++;
-			max /= 10;
-		}
-		return res;
-	}
-
-	public static void radixSort(int[] arr, int begin, int end, int digit) {
-		final int radix = 10;
-		int i = 0, j = 0;
-
-		int[] bucket = new int[end - begin + 1];
-		for (int d = 1; d <= digit; d++) {
-			int[] count = new int[radix];
-			for (i = begin; i <= end; i++) {
-				j = getDigit(arr[i], d);
-				count[j]++;
-			}
-			for (i = 1; i < radix; i++) {
-				count[i] = count[i] + count[i - 1];
-			}
-			for (i = end; i >= begin; i--) {
-				j = getDigit(arr[i], d);
-				bucket[count[j] - 1] = arr[i];
-				count[j]--;
-			}
-			for (i = begin, j = 0; i <= end; i++, j++) {
-				arr[i] = bucket[j];
+		for (int e = arr.length - 1; e > 0; e--) {
+			for (int i = 0; i < e; i++) {
+				if (arr[i] > arr[i + 1]) {
+					swap(arr, i, i + 1);
+				}
 			}
 		}
 	}
 
-	public static int getDigit(int x, int d) {
-		return ((x / ((int) Math.pow(10, d - 1))) % 10);
+	public static void bubbleSort(int[] arr) {
+		if (arr == null || arr.length < 2) {
+			return;
+		}
+
+		for (int i = arr.length - 1; i > 0; i--) {
+
+			for (int j = 0; j < i ; j++) {
+				if (arr[j] > arr[j + 1]) {
+					swap(arr, j, j + 1);
+				}
+			}
+		}
+	}
+
+	public static void swap(int[] arr, int i, int j) {
+		
+		arr[i] = arr[i] ^ arr[j];
+		arr[j] = arr[i] ^ arr[j];
+		arr[i] = arr[i] ^ arr[j];
 	}
 
 	// for test
@@ -63,7 +48,7 @@ public class Code02_RadixSort {
 	public static int[] generateRandomArray(int maxSize, int maxValue) {
 		int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = (int) ((maxValue + 1) * Math.random());
+			arr[i] = (int) ((maxValue + 1) * Math.random()) - (int) (maxValue * Math.random());
 		}
 		return arr;
 	}
@@ -107,24 +92,22 @@ public class Code02_RadixSort {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-		System.out.println();System.out.println();System.out.println();
+		System.out.println();System.out.println();
 	}
 
 	// for test
 	public static void main(String[] args) {
 		int testTime = 500000;
 		int maxSize = 100;
-		int maxValue = 100000;
+		int maxValue = 100;
 		boolean succeed = true;
 		for (int i = 0; i < testTime; i++) {
 			int[] arr1 = generateRandomArray(maxSize, maxValue);
 			int[] arr2 = copyArray(arr1);
-			radixSort(arr1);
+			bubbleSort(arr1);
 			comparator(arr2);
 			if (!isEqual(arr1, arr2)) {
 				succeed = false;
-				printArray(arr1);
-				printArray(arr2);
 				break;
 			}
 		}
@@ -132,9 +115,8 @@ public class Code02_RadixSort {
 
 		int[] arr = generateRandomArray(maxSize, maxValue);
 		printArray(arr);
-		radixSort(arr);
+		bubbleSort(arr);
 		printArray(arr);
-
 	}
 
 }

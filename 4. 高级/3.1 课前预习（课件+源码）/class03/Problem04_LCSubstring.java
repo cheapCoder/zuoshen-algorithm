@@ -1,4 +1,4 @@
-//package class03;
+package sort;
 
 public class Problem04_LCSubstring {
 

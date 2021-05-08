@@ -1,8 +1,8 @@
-//package class03;
+package sort;
 
 import java.util.Arrays;
 
-public class Code01_CountSort {
+public class Code16_CountSort {
 
 	// only for 0~200 value
 	public static void countSort(int[] arr) {

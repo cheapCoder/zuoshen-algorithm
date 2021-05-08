@@ -1,11 +1,11 @@
-//package class03;
+package sort;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.TreeSet;
 
-public class Code03_Comparator {
+public class Code18_Comparator {
 
 	public static class Student {
 		public String name;

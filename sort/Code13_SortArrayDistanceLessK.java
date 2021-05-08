@@ -1,8 +1,8 @@
-//package class01;
+package sort;
 
 import java.util.PriorityQueue;
 
-public class Code04_SortArrayDistanceLessK {
+public class Code13_SortArrayDistanceLessK {
 
 	public void sortedArrDistanceLessK(int[] arr, int k) {
 		PriorityQueue<Integer> heap = new PriorityQueue<>();
