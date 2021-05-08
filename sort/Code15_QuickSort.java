@@ -4,35 +4,66 @@ import java.util.Arrays;
 
 public class Code15_QuickSort {
 
-	public static void quickSort(int[] arr) {
+	// public static void quickSort(int[] arr) {
+	// if (arr == null || arr.length < 2) {
+	// return;
+	// }
+	// quickSort(arr, 0, arr.length - 1);
+	// }
+
+	// public static void quickSort(int[] arr, int l, int r) {
+	// if (l < r) {
+	// swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
+	// int[] p = partition(arr, l, r);
+	// quickSort(arr, l, p[0] - 1);
+	// quickSort(arr, p[1] + 1, r);
+	// }
+	// }
+
+	// public static int[] partition(int[] arr, int l, int r) {
+	// int less = l - 1;
+	// int more = r;
+	// while (l < more) {
+	// if (arr[l] < arr[r]) {
+	// swap(arr, ++less, l++);
+	// } else if (arr[l] > arr[r]) {
+	// swap(arr, --more, l);
+	// } else {
+	// l++;
+	// }
+	// }
+	// swap(arr, more, r);
+	// return new int[] { less + 1, more };
+	// }
+
+	public static void quickSort(int[] arr, int left, int right) {
+		if (left >= right) {
+			return;
+		}
 		if (arr == null || arr.length < 2) {
 			return;
 		}
-		quickSort(arr, 0, arr.length - 1);
+
+		swap(arr, left + (int) Math.random() * (right - left + 1), right);
+		int[] tem = partition(arr, left, right);
+		quickSort(arr, left, tem[0] - 1);
+		quickSort(arr, tem[1] + 1, right);
 	}
 
-	public static void quickSort(int[] arr, int l, int r) {
-		if (l < r) {
-			swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
-			int[] p = partition(arr, l, r);
-			quickSort(arr, l, p[0] - 1);
-			quickSort(arr, p[1] + 1, r);
-		}
-	}
-
-	public static int[] partition(int[] arr, int l, int r) {
-		int less = l - 1;
-		int more = r;
-		while (l < more) {
-			if (arr[l] < arr[r]) {
-				swap(arr, ++less, l++);
-			} else if (arr[l] > arr[r]) {
-				swap(arr, --more, l);
+	private static int[] partition(int[] arr, int left, int right) { // 返回数组，包含小于区域的边界和大于区域的边界
+		int less = left - 1;
+		int more = right ;
+		int i = left;
+		while (i < more) {
+			if (arr[i] > arr[right]) {
+				swap(arr, --more, i);
+			} else if (arr[i] == arr[right]) {
+				i++;
 			} else {
-				l++;
+				swap(arr, ++less, i++);
 			}
 		}
-		swap(arr, more, r);
+		swap(arr, more, right);
 		return new int[] { less + 1, more };
 	}
 
@@ -95,7 +126,8 @@ public class Code15_QuickSort {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-		System.out.println();System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	// for test
@@ -107,7 +139,7 @@ public class Code15_QuickSort {
 		for (int i = 0; i < testTime; i++) {
 			int[] arr1 = generateRandomArray(maxSize, maxValue);
 			int[] arr2 = copyArray(arr1);
-			quickSort(arr1);
+			quickSort(arr1, 0, arr1.length - 1);
 			comparator(arr2);
 			if (!isEqual(arr1, arr2)) {
 				succeed = false;
@@ -120,7 +152,7 @@ public class Code15_QuickSort {
 
 		int[] arr = generateRandomArray(maxSize, maxValue);
 		printArray(arr);
-		quickSort(arr);
+		quickSort(arr, 0, arr.length - 1);
 		printArray(arr);
 
 	}

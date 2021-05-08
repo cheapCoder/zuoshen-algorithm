@@ -2,19 +2,36 @@ package sort;
 
 public class Code14_NetherlandsFlag {
 
-	public static int[] partition(int[] arr, int l, int r, int p) {
-		int less = l - 1;
-		int more = r + 1;
-		while (l < more) {
-			if (arr[l] < p) {
-				swap(arr, ++less, l++);
-			} else if (arr[l] > p) {
-				swap(arr, --more, l);
+	// public static int[] partition(int[] arr, int l, int r, int p) {
+	// int less = l - 1;
+	// int more = r + 1;
+	// while (l < more) {
+	// if (arr[l] < p) {
+	// swap(arr, ++less, l++);
+	// } else if (arr[l] > p) {
+	// swap(arr, --more, l);
+	// } else {
+	// l++;
+	// }
+	// }
+	// return new int[] { less + 1, more - 1 };
+	// }
+
+	public static int[] partition(int[] arr, int start, int end, int val) {
+		int left = start - 1;
+		int right = end + 1;
+		int i = start;
+		while (i < right) {
+			if (arr[i] > val) {
+				swap(arr, i, --right);
+			} else if (arr[i] == val) {
+				i++;
 			} else {
-				l++;
+				swap(arr, i++, ++left);
 			}
 		}
-		return new int[] { less + 1, more - 1 };
+
+		return new int[] { left + 1, right - 1 };
 	}
 
 	// for test
@@ -41,7 +58,9 @@ public class Code14_NetherlandsFlag {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-		System.out.println();System.out.println();System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
