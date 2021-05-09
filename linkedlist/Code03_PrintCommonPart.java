@@ -1,30 +1,46 @@
 package linkedlist;
-//package class04;
 
 public class Code03_PrintCommonPart {
 
 	public static class Node {
 		public int value;
 		public Node next;
+
 		public Node(int data) {
 			this.value = data;
 		}
 	}
 
-	public static void printCommonPart(Node head1, Node head2) {
-		System.out.print("Common Part: ");
-		while (head1 != null && head2 != null) {
-			if (head1.value < head2.value) {
-				head1 = head1.next;
-			} else if (head1.value > head2.value) {
-				head2 = head2.next;
+	// public static void printCommonPart(Node head1, Node head2) {
+	// System.out.print("Common Part: ");
+	// while (head1 != null && head2 != null) {
+	// if (head1.value < head2.value) {
+	// head1 = head1.next;
+	// } else if (head1.value > head2.value) {
+	// head2 = head2.next;
+	// } else {
+	// System.out.print(head1.value + " ");
+	// head1 = head1.next;
+	// head2 = head2.next;
+	// }
+	// }
+	// System.out.println();
+	// }
+
+	private static void printCommonPart(Node node1, Node node2) {
+		while (node1 != null && node2 != null) {
+			if (node1.value > node2.value) {
+				node2 = node2.next;
+			} else if (node1.value < node2.value) {
+				node1 = node1.next;
 			} else {
-				System.out.print(head1.value + " ");
-				head1 = head1.next;
-				head2 = head2.next;
+				System.out.print(node1.value + " ");
+				node1 = node1.next;
+				node2 = node2.next;
 			}
+
 		}
-		System.out.println();
+
 	}
 
 	public static void printLinkedList(Node node) {
