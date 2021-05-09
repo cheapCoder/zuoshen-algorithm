@@ -1,4 +1,4 @@
-//package class04;
+package linkedlist;
 
 public class Code07_FindFirstIntersectNode {
 

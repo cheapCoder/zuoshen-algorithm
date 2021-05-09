@@ -1,8 +1,9 @@
+package linkedlist;
 //package class04;
 
 import java.util.Stack;
 
-public class Code04_IsPalindromeList {
+public class Code04_IsPalindromeList {		// PalindromeList:回文链表
 
 	public static class Node {
 		public int value;

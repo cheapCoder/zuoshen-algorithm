@@ -1,3 +1,4 @@
+package linkedlist;
 //package class04;
 
 import java.util.HashMap;

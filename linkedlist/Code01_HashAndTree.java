@@ -1,4 +1,4 @@
-//package class04;
+package linkedlist;
 
 import java.util.Comparator;
 import java.util.HashMap;

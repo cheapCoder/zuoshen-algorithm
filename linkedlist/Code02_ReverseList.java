@@ -1,4 +1,5 @@
-//package class04;
+package linkedlist;
+
 
 public class Code02_ReverseList {
 
