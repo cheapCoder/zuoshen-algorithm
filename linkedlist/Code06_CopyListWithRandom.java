@@ -1,5 +1,4 @@
 package linkedlist;
-//package class04;
 
 import java.util.HashMap;
 
@@ -15,55 +14,114 @@ public class Code06_CopyListWithRandom {
 		}
 	}
 
+	// public static Node copyListWithRand1(Node head) {
+	// HashMap<Node, Node> map = new HashMap<Node, Node>();
+	// Node cur = head;
+	// while (cur != null) {
+	// map.put(cur, new Node(cur.value));
+	// cur = cur.next;
+	// }
+	// cur = head;
+	// while (cur != null) {
+	// map.get(cur).next = map.get(cur.next);
+	// map.get(cur).rand = map.get(cur.rand);
+	// cur = cur.next;
+	// }
+	// return map.get(head);
+	// }
+
+	// public static Node copyListWithRand2(Node head) {
+	// if (head == null) {
+	// return null;
+	// }
+	// Node cur = head;
+	// Node next = null;
+	// // copy node and link to every node
+	// while (cur != null) {
+	// next = cur.next;
+	// cur.next = new Node(cur.value);
+	// cur.next.next = next;
+	// cur = next;
+	// }
+	// cur = head;
+	// Node curCopy = null;
+	// // set copy node rand
+	// while (cur != null) {
+	// next = cur.next.next;
+	// curCopy = cur.next;
+	// curCopy.rand = cur.rand != null ? cur.rand.next : null;
+	// cur = next;
+	// }
+	// Node res = head.next;
+	// cur = head;
+	// // split
+	// while (cur != null) {
+	// next = cur.next.next;
+	// curCopy = cur.next;
+	// cur.next = next;
+	// curCopy.next = next != null ? next.next : null;
+	// cur = next;
+	// }
+	// return res;
+	// }
+
 	public static Node copyListWithRand1(Node head) {
-		HashMap<Node, Node> map = new HashMap<Node, Node>();
-		Node cur = head;
-		while (cur != null) {
-			map.put(cur, new Node(cur.value));
-			cur = cur.next;
+		if (head == null) {
+			return head;
 		}
-		cur = head;
-		while (cur != null) {
-			map.get(cur).next = map.get(cur.next);
-			map.get(cur).rand = map.get(cur.rand);
-			cur = cur.next;
+
+		Node pointer = head;
+
+		HashMap<Node, Node> hashMap = new HashMap<>();
+		while (pointer != null) {
+			hashMap.put(pointer, new Node(pointer.value));
+			pointer = pointer.next;
 		}
-		return map.get(head);
+		pointer = head;
+		while (pointer != null) {
+			hashMap.get(pointer).next = hashMap.get(pointer.next);
+			hashMap.get(pointer).rand = hashMap.get(pointer.rand);
+			pointer = pointer.next;
+		}
+
+		return hashMap.get(head);
 	}
 
 	public static Node copyListWithRand2(Node head) {
 		if (head == null) {
-			return null;
+			return head;
 		}
-		Node cur = head;
-		Node next = null;
-		// copy node and link to every node
-		while (cur != null) {
-			next = cur.next;
-			cur.next = new Node(cur.value);
-			cur.next.next = next;
-			cur = next;
+
+		Node pointer = head;
+		Node post = pointer.next;
+		while (pointer != null) {
+			post = pointer.next;
+			pointer.next = new Node(pointer.value);
+			pointer.next.next = post;
+			pointer = pointer.next.next;
 		}
-		cur = head;
-		Node curCopy = null;
-		// set copy node rand
-		while (cur != null) {
-			next = cur.next.next;
-			curCopy = cur.next;
-			curCopy.rand = cur.rand != null ? cur.rand.next : null;
-			cur = next;
+
+		pointer = head;
+		Node storeCopyHead = head.next;
+		Node copyHead = head.next;
+
+		while (copyHead != null && copyHead.next != null) {
+			copyHead.rand = pointer.rand == null ? null : pointer.rand.next;
+			copyHead = copyHead.next.next;
+			pointer = pointer.next.next;
 		}
-		Node res = head.next;
-		cur = head;
-		// split
-		while (cur != null) {
-			next = cur.next.next;
-			curCopy = cur.next;
-			cur.next = next;
-			curCopy.next = next != null ? next.next : null;
-			cur = next;
+		copyHead.rand = pointer.rand == null ? null : pointer.rand.next;
+
+		pointer = head;
+		copyHead = head.next;
+		while (copyHead != null) { // 需要先修改rand再在单独的while中修改next
+			pointer.next = copyHead.next;
+			copyHead.next = copyHead.next == null ? null : copyHead.next.next;
+			pointer = pointer.next;
+			copyHead = copyHead.next;
 		}
-		return res;
+
+		return storeCopyHead;
 	}
 
 	public static void printRandLinkedList(Node head) {

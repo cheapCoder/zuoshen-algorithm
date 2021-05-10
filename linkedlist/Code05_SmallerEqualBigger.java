@@ -1,5 +1,6 @@
 package linkedlist;
-//package class04;
+
+import java.nio.file.NotLinkException;
 
 public class Code05_SmallerEqualBigger {
 
@@ -12,101 +13,212 @@ public class Code05_SmallerEqualBigger {
 		}
 	}
 
+	// public static Node listPartition1(Node head, int pivot) {
+	// if (head == null) {
+	// return head;
+	// }
+	// Node cur = head;
+	// int i = 0;
+	// while (cur != null) {
+	// i++;
+	// cur = cur.next;
+	// }
+	// Node[] nodeArr = new Node[i];
+	// i = 0;
+	// cur = head;
+	// for (i = 0; i != nodeArr.length; i++) {
+	// nodeArr[i] = cur;
+	// cur = cur.next;
+	// }
+	// arrPartition(nodeArr, pivot);
+	// for (i = 1; i != nodeArr.length; i++) {
+	// nodeArr[i - 1].next = nodeArr[i];
+	// }
+	// nodeArr[i - 1].next = null;
+	// return nodeArr[0];
+	// }
+
+	// public static void arrPartition(Node[] nodeArr, int pivot) {
+	// int small = -1;
+	// int big = nodeArr.length;
+	// int index = 0;
+	// while (index != big) {
+	// if (nodeArr[index].value < pivot) {
+	// swap(nodeArr, ++small, index++);
+	// } else if (nodeArr[index].value == pivot) {
+	// index++;
+	// } else {
+	// swap(nodeArr, --big, index);
+	// }
+	// }
+	// }
+
+	// public static void swap(Node[] nodeArr, int a, int b) {
+	// Node tmp = nodeArr[a];
+	// nodeArr[a] = nodeArr[b];
+	// nodeArr[b] = tmp;
+	// }
+
+	// public static Node listPartition2(Node head, int pivot) {
+	// Node sH = null; // small head
+	// Node sT = null; // small tail
+	// Node eH = null; // equal head
+	// Node eT = null; // equal tail
+	// Node bH = null; // big head
+	// Node bT = null; // big tail
+	// Node next = null; // save next node
+	// // every node distributed to three lists
+	// while (head != null) {
+	// next = head.next;
+	// head.next = null;
+	// if (head.value < pivot) {
+	// if (sH == null) {
+	// sH = head;
+	// sT = head;
+	// } else {
+	// sT.next = head;
+	// sT = head;
+	// }
+	// } else if (head.value == pivot) {
+	// if (eH == null) {
+	// eH = head;
+	// eT = head;
+	// } else {
+	// eT.next = head;
+	// eT = head;
+	// }
+	// } else {
+	// if (bH == null) {
+	// bH = head;
+	// bT = head;
+	// } else {
+	// bT.next = head;
+	// bT = head;
+	// }
+	// }
+	// head = next;
+	// }
+	// // small and equal reconnect
+	// if (sT != null) {
+	// sT.next = eH;
+	// eT = eT == null ? sT : eT;
+	// }
+	// // all reconnect
+	// if (eT != null) {
+	// eT.next = bH;
+	// }
+	// return sH != null ? sH : eH != null ? eH : bH;
+	// }
+
+	// TODO: 方法一：利用数组
 	public static Node listPartition1(Node head, int pivot) {
 		if (head == null) {
 			return head;
 		}
-		Node cur = head;
+
+		Node pointer = head;
+		int length = 0;
+		while (pointer != null) {
+			pointer = pointer.next;
+			length++;
+		}
+
+		Node[] arr = new Node[length];
 		int i = 0;
-		while (cur != null) {
-			i++;
-			cur = cur.next;
+		pointer = head;
+		while (pointer != null) {
+			arr[i++] = pointer;
+			pointer = pointer.next;
 		}
-		Node[] nodeArr = new Node[i];
+
 		i = 0;
-		cur = head;
-		for (i = 0; i != nodeArr.length; i++) {
-			nodeArr[i] = cur;
-			cur = cur.next;
+		arrPartition(arr, pivot);
+		for (; i < arr.length - 1; i++) {
+			arr[i].next = arr[i + 1];
 		}
-		arrPartition(nodeArr, pivot);
-		for (i = 1; i != nodeArr.length; i++) {
-			nodeArr[i - 1].next = nodeArr[i];
-		}
-		nodeArr[i - 1].next = null;
-		return nodeArr[0];
+		arr[i].next = null;
+
+		return arr[0];
 	}
 
-	public static void arrPartition(Node[] nodeArr, int pivot) {
-		int small = -1;
-		int big = nodeArr.length;
-		int index = 0;
-		while (index != big) {
-			if (nodeArr[index].value < pivot) {
-				swap(nodeArr, ++small, index++);
-			} else if (nodeArr[index].value == pivot) {
-				index++;
+	private static void arrPartition(Node[] arr, int pivot) {
+		if (arr == null || arr.length < 2) {
+			return;
+		}
+
+		int left = -1;
+		int right = arr.length;
+		int i = 0;
+		while (i < right) {
+			if (arr[i].value < pivot) {
+				swap(arr, i++, ++left);
+			} else if (arr[i].value > pivot) {
+				swap(arr, i, --right);
 			} else {
-				swap(nodeArr, --big, index);
+				i++;
 			}
 		}
 	}
 
-	public static void swap(Node[] nodeArr, int a, int b) {
-		Node tmp = nodeArr[a];
-		nodeArr[a] = nodeArr[b];
-		nodeArr[b] = tmp;
+	private static void swap(Node[] arr, int i, int j) {
+		if (i == j) {
+			return;
+		}
+		Node tem = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tem;
 	}
 
+	// TODO: 方法二：使用6个指针表示3个区域的边界
 	public static Node listPartition2(Node head, int pivot) {
-		Node sH = null; // small head
-		Node sT = null; // small tail
-		Node eH = null; // equal head
-		Node eT = null; // equal tail
-		Node bH = null; // big head
-		Node bT = null; // big tail
-		Node next = null; // save next node
-		// every node distributed to three lists
+		Node SH = null, ST = null, EH = null, ET = null, BH = null, BT = null;
+		Node next;
 		while (head != null) {
 			next = head.next;
 			head.next = null;
 			if (head.value < pivot) {
-				if (sH == null) {
-					sH = head;
-					sT = head;
+				if (SH == null && ST == null) {
+					SH = ST = head;
 				} else {
-					sT.next = head;
-					sT = head;
+					ST.next = head;
+					ST = head;
 				}
 			} else if (head.value == pivot) {
-				if (eH == null) {
-					eH = head;
-					eT = head;
+				if (EH == null && ET == null) {
+					EH = ET = head;
 				} else {
-					eT.next = head;
-					eT = head;
+					ET.next = head;
+					ET = head;
 				}
 			} else {
-				if (bH == null) {
-					bH = head;
-					bT = head;
+				if (BH == null && BT == null) {
+					BH = BT = head;
 				} else {
-					bT.next = head;
-					bT = head;
+					BT.next = head;
+					BT = head;
 				}
 			}
 			head = next;
 		}
-		// small and equal reconnect
-		if (sT != null) {
-			sT.next = eH;
-			eT = eT == null ? sT : eT;
+
+		// // small and equal reconnect
+		// if (ST != null) { // TODO: 不明白
+		// ST.next = EH;
+		// ET = ET == null ? ST : ET;
+		// }
+		// // all reconnect
+		// if (ET != null) {
+		// ET.next = BH;
+		// }
+		// return SH != null ? SH : EH != null ? EH : BH;
+
+		if (SH != null) {
+			ST.next = EH != null ? EH : BH;
 		}
-		// all reconnect
-		if (eT != null) {
-			eT.next = bH;
+		if (EH != null) {
+			ET.next = BH;
 		}
-		return sH != null ? sH : eH != null ? eH : bH;
+		return SH != null ? SH : (EH != null ? EH : BH);
 	}
 
 	public static void printLinkedList(Node node) {
@@ -127,7 +239,7 @@ public class Code05_SmallerEqualBigger {
 		head1.next.next.next.next.next = new Node(2);
 		head1.next.next.next.next.next.next = new Node(5);
 		printLinkedList(head1);
-		// head1 = listPartition1(head1, 4);
+		// head1 = listPartition1(head1, 5);
 		head1 = listPartition2(head1, 5);
 		printLinkedList(head1);
 
