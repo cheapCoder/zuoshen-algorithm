@@ -2,8 +2,6 @@ package linkedlist;
 
 import java.util.HashSet;
 
-import javax.print.attribute.HashAttributeSet;
-
 public class Code07_FindFirstIntersectNode {
 
 	public static class Node {
@@ -288,5 +286,4 @@ public class Code07_FindFirstIntersectNode {
 		System.out.println(getIntersectNode(head1, head2).value);
 
 	}
-
 }
