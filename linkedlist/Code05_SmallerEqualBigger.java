@@ -1,7 +1,5 @@
 package linkedlist;
 
-import java.nio.file.NotLinkException;
-
 public class Code05_SmallerEqualBigger {
 
 	public static class Node {
@@ -110,7 +108,7 @@ public class Code05_SmallerEqualBigger {
 	// return sH != null ? sH : eH != null ? eH : bH;
 	// }
 
-	// TODO: 方法一：利用数组
+	// 方法一：利用数组
 	public static Node listPartition1(Node head, int pivot) {
 		if (head == null) {
 			return head;
@@ -169,7 +167,7 @@ public class Code05_SmallerEqualBigger {
 		arr[j] = tem;
 	}
 
-	// TODO: 方法二：使用6个指针表示3个区域的边界
+	// 方法二：使用6个指针表示3个区域的边界
 	public static Node listPartition2(Node head, int pivot) {
 		Node SH = null, ST = null, EH = null, ET = null, BH = null, BT = null;
 		Node next;
