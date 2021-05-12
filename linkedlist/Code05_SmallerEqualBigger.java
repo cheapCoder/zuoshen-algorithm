@@ -1,4 +1,4 @@
-package linkedlist;
+package linkedList;
 
 public class Code05_SmallerEqualBigger {
 

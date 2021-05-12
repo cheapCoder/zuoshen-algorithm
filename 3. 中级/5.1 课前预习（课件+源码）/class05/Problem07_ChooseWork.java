@@ -1,4 +1,4 @@
-package class05;
+package binaryTree;
 
 import java.util.Arrays;
 import java.util.Comparator;

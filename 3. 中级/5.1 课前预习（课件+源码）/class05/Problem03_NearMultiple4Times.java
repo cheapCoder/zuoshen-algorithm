@@ -1,4 +1,4 @@
-package class05;
+package binaryTree;
 
 public class Problem03_NearMultiple4Times {
 

@@ -1,4 +1,4 @@
-package linkedlist;
+package linkedList;
 
 public class Code03_PrintCommonPart {
 

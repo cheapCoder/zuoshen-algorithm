@@ -1,4 +1,4 @@
-package class05;
+package binaryTree;
 
 import java.util.LinkedList;
 
@@ -14,7 +14,7 @@ public class Code05_IsCBT {
 		}
 	}
 
-	public static boolean isCBT(Node head) {
+	public static boolean isCBT(Node head) {	// 完全二叉树
 		if (head == null) {
 			return true;
 		}

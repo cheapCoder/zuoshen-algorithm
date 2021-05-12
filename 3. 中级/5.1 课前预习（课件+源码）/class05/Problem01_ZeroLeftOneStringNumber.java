@@ -1,4 +1,4 @@
-package class05;
+package binaryTree;
 
 public class Problem01_ZeroLeftOneStringNumber {
 
