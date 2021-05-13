@@ -42,7 +42,7 @@ public class Code05_IsCBT {
 	// return true;
 	// }
 
-	public static boolean isCBT(Node head) {
+	public static boolean isCBT(Node head) {		// 完全二叉树
 		if (head == null) {
 			return true;
 		}

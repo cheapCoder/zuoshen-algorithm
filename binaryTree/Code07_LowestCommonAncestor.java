@@ -1,7 +1,7 @@
 package binaryTree;
 
-import java.util.HashMap;
-import java.util.HashSet;
+// import java.util.HashMap;
+// import java.util.HashSet;
 
 public class Code07_LowestCommonAncestor {
 
@@ -15,137 +15,190 @@ public class Code07_LowestCommonAncestor {
 		}
 	}
 
+	// public static Node lowestAncestor(Node head, Node o1, Node o2) {
+	// if (head == null || head == o1 || head == o2) {
+	// return head;
+	// }
+	// Node left = lowestAncestor(head.left, o1, o2);
+	// Node right = lowestAncestor(head.right, o1, o2);
+	// if (left != null && right != null) {
+	// return head;
+	// }
+	// return left != null ? left : right;
+	// }
+
+	// // ��������--����һ
+	// public static class Record1 {
+
+	// private HashMap<Node, Node> map;
+
+	// public Record1(Node head) {
+	// map = new HashMap<Node, Node>();
+	// if (head != null) {
+	// map.put(head, null);
+	// }
+	// setMap(head);
+	// }
+
+	// private void setMap(Node head) {
+	// if (head == null) {
+	// return;
+	// }
+	// if (head.left != null) {
+	// map.put(head.left, head);
+	// }
+	// if (head.right != null) {
+	// map.put(head.right, head);
+	// }
+	// setMap(head.left);
+	// setMap(head.right);
+	// }
+
+	// public Node query(Node o1, Node o2) {
+	// HashSet<Node> path = new HashSet<Node>();
+	// while (map.containsKey(o1)) {
+	// path.add(o1);
+	// o1 = map.get(o1);
+	// }
+	// while (!path.contains(o2)) {
+	// o2 = map.get(o2);
+	// }
+	// return o2;
+	// }
+
+	// }
+
+	// // ��������--������
+	// public static class Record2 {
+	// private HashMap<Node, HashMap<Node, Node>> map;
+
+	// public Record2(Node head) {
+	// map = new HashMap<Node, HashMap<Node, Node>>();
+	// initMap(head);
+	// setMap(head);
+	// }
+
+	// private void initMap(Node head) {
+	// if (head == null) {
+	// return;
+	// }
+	// map.put(head, new HashMap<Node, Node>());
+	// initMap(head.left);
+	// initMap(head.right);
+	// }
+
+	// private void setMap(Node head) {
+	// if (head == null) {
+	// return;
+	// }
+	// headRecord(head.left, head);
+	// headRecord(head.right, head);
+	// subRecord(head);
+	// setMap(head.left);
+	// setMap(head.right);
+	// }
+
+	// private void headRecord(Node n, Node h) {
+	// if (n == null) {
+	// return;
+	// }
+	// map.get(n).put(h, h);
+	// headRecord(n.left, h);
+	// headRecord(n.right, h);
+	// }
+
+	// private void subRecord(Node head) {
+	// if (head == null) {
+	// return;
+	// }
+	// preLeft(head.left, head.right, head);
+	// subRecord(head.left);
+	// subRecord(head.right);
+	// }
+
+	// private void preLeft(Node l, Node r, Node h) {
+	// if (l == null) {
+	// return;
+	// }
+	// preRight(l, r, h);
+	// preLeft(l.left, r, h);
+	// preLeft(l.right, r, h);
+	// }
+
+	// private void preRight(Node l, Node r, Node h) {
+	// if (r == null) {
+	// return;
+	// }
+	// map.get(l).put(r, h);
+	// preRight(l, r.left, h);
+	// preRight(l, r.right, h);
+	// }
+
+	// public Node query(Node o1, Node o2) {
+	// if (o1 == o2) {
+	// return o1;
+	// }
+	// if (map.containsKey(o1)) {
+	// return map.get(o1).get(o2);
+	// }
+	// if (map.containsKey(o2)) {
+	// return map.get(o2).get(o1);
+	// }
+	// return null;
+	// }
+
+	// }
+
+	// // 法一：使用hashmap记录所有节点的父节点
+	// public static Node lowestAncestor(Node head, Node o1, Node o2) {
+	// HashMap<Node, Node> parentsMap = new HashMap<>();
+	// HashSet<Node> parentsSet = new HashSet<>();
+
+	// recordParentToMap(head, parentsMap);
+	// parentsSet.add(head);
+	// while (o1 != head) {
+	// parentsSet.add(o1);
+	// o1 = parentsMap.get(o1);
+	// }
+	// while (o2 != head) {
+	// if (parentsSet.contains(o2)) {
+	// return o2;
+	// } else {
+	// o2 = parentsMap.get(o2);
+	// }
+	// }
+	// return head;
+	// }
+
+	// private static void recordParentToMap(Node head, HashMap<Node, Node> map) {
+	// if (head == null) {
+	// return;
+	// }
+	// if (head.left != null) {
+	// map.put(head.left, head);
+	// }
+	// if (head.right != null) {
+	// map.put(head.right, head);
+	// }
+
+	// recordParentToMap(head.left, map);
+	// recordParentToMap(head.right, map);
+
+	// }
+
+	// 法二：
 	public static Node lowestAncestor(Node head, Node o1, Node o2) {
 		if (head == null || head == o1 || head == o2) {
 			return head;
 		}
-		Node left = lowestAncestor(head.left, o1, o2);
-		Node right = lowestAncestor(head.right, o1, o2);
-		if (left != null && right != null) {
+
+		Node leftGrap = lowestAncestor(head.left, o1, o2);
+		Node rightGrap = lowestAncestor(head.right, o1, o2);
+
+		if ((leftGrap == o1 && rightGrap == o2) || (leftGrap == o2 && rightGrap == o1)) {
 			return head;
 		}
-		return left != null ? left : right;
-	}
-
-	// ��������--����һ
-	public static class Record1 {
-		private HashMap<Node, Node> map;
-
-		public Record1(Node head) {
-			map = new HashMap<Node, Node>();
-			if (head != null) {
-				map.put(head, null);
-			}
-			setMap(head);
-		}
-
-		private void setMap(Node head) {
-			if (head == null) {
-				return;
-			}
-			if (head.left != null) {
-				map.put(head.left, head);
-			}
-			if (head.right != null) {
-				map.put(head.right, head);
-			}
-			setMap(head.left);
-			setMap(head.right);
-		}
-
-		public Node query(Node o1, Node o2) {
-			HashSet<Node> path = new HashSet<Node>();
-			while (map.containsKey(o1)) {
-				path.add(o1);
-				o1 = map.get(o1);
-			}
-			while (!path.contains(o2)) {
-				o2 = map.get(o2);
-			}
-			return o2;
-		}
-
-	}
-
-	// ��������--������
-	public static class Record2 {
-		private HashMap<Node, HashMap<Node, Node>> map;
-
-		public Record2(Node head) {
-			map = new HashMap<Node, HashMap<Node, Node>>();
-			initMap(head);
-			setMap(head);
-		}
-
-		private void initMap(Node head) {
-			if (head == null) {
-				return;
-			}
-			map.put(head, new HashMap<Node, Node>());
-			initMap(head.left);
-			initMap(head.right);
-		}
-
-		private void setMap(Node head) {
-			if (head == null) {
-				return;
-			}
-			headRecord(head.left, head);
-			headRecord(head.right, head);
-			subRecord(head);
-			setMap(head.left);
-			setMap(head.right);
-		}
-
-		private void headRecord(Node n, Node h) {
-			if (n == null) {
-				return;
-			}
-			map.get(n).put(h, h);
-			headRecord(n.left, h);
-			headRecord(n.right, h);
-		}
-
-		private void subRecord(Node head) {
-			if (head == null) {
-				return;
-			}
-			preLeft(head.left, head.right, head);
-			subRecord(head.left);
-			subRecord(head.right);
-		}
-
-		private void preLeft(Node l, Node r, Node h) {
-			if (l == null) {
-				return;
-			}
-			preRight(l, r, h);
-			preLeft(l.left, r, h);
-			preLeft(l.right, r, h);
-		}
-
-		private void preRight(Node l, Node r, Node h) {
-			if (r == null) {
-				return;
-			}
-			map.get(l).put(r, h);
-			preRight(l, r.left, h);
-			preRight(l, r.right, h);
-		}
-
-		public Node query(Node o1, Node o2) {
-			if (o1 == o2) {
-				return o1;
-			}
-			if (map.containsKey(o1)) {
-				return map.get(o1).get(o2);
-			}
-			if (map.containsKey(o2)) {
-				return map.get(o2).get(o1);
-			}
-			return null;
-		}
-
+		return leftGrap == null ? rightGrap : leftGrap;
 	}
 
 	// for test -- print tree
@@ -190,8 +243,11 @@ public class Code07_LowestCommonAncestor {
 		printTree(head);
 		System.out.println("===============");
 
-		Node o1 = head.left.right;
-		Node o2 = head.right.left;
+		Node o1 = head.left.left;
+		Node o2 = head.left.right;
+
+		// Node o1 = head.right.right;
+		// Node o2 = head.left.right;
 
 		System.out.println("o1 : " + o1.value);
 		System.out.println("o2 : " + o2.value);

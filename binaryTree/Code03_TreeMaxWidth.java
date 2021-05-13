@@ -1,6 +1,6 @@
 package binaryTree;
 
-import java.util.HashMap;
+// import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Code03_TreeMaxWidth {

@@ -13,30 +13,83 @@ public class Code08_SuccessorNode {
 		}
 	}
 
-	public static Node getSuccessorNode(Node node) {
-		if (node == null) {
-			return node;
-		}
-		if (node.right != null) {
-			return getLeftMost(node.right);
-		} else {
-			Node parent = node.parent;
-			while (parent != null && parent.left != node) {
-				node = parent;
-				parent = node.parent;
-			}
-			return parent;
-		}
-	}
+	// public static Node getSuccessorNode(Node node) {
+	// if (node == null) {
+	// return node;
+	// }
+	// if (node.right != null) {
+	// return getLeftMost(node.right);
+	// } else {
+	// Node parent = node.parent;
+	// while (parent != null && parent.left != node) {
+	// node = parent;
+	// parent = node.parent;
+	// }
+	// return parent;
+	// }
+	// }
 
-	public static Node getLeftMost(Node node) {
-		if (node == null) {
-			return node;
+	// public static Node getLeftMost(Node node) {
+	// if (node == null) {
+	// return node;
+	// }
+	// while (node.left != null) {
+	// node = node.left;
+	// }
+	// return node;
+	// }
+
+	// // 法一：用变量记住遍历的上一个节点
+	// public static Node preNode = null;
+	// public static boolean canChange = true;
+	// public static Node successor = null;
+
+	// private static Node getSuccessorNode(Node o) {
+	// Node head = o;
+	// while (head.parent != null) {
+	// head = head.parent;
+	// }
+	// inOrderTraversal(head, o);
+	// Node tem = successor; // 记得恢复属性为默认值
+	// successor = null;
+	// preNode = null;
+	// canChange = true;
+	// return tem;
+
+	// }
+
+	// public static void inOrderTraversal(Node head, Node o) {
+	// if (head == null) {
+	// return;
+	// }
+
+	// inOrderTraversal(head.left, o);
+	// if (canChange && preNode == o) {
+	// successor = head;
+	// canChange = false;
+	// } else {
+	// preNode = head;
+	// }
+	// inOrderTraversal(head.right, o);
+	// }
+
+	// 法二：分类讨论
+	private static Node getSuccessorNode(Node n) {
+		if (n == null) {
+			return null;
 		}
-		while (node.left != null) {
-			node = node.left;
+		if (n.right != null) { // 情况一：有右子树
+			Node tem = n.right;
+			while (tem.left != null) {
+				tem = tem.left;
+			}
+			return tem;
+		} else { // 情况二：没有右子树
+			while (n.parent != null && n.parent.left != n) {
+				n = n.parent;
+			}
+			return n.parent;
 		}
-		return node;
 	}
 
 	public static void main(String[] args) {

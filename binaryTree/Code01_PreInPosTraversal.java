@@ -255,7 +255,7 @@ public class Code01_PreInPosTraversal {
 		preOrderUnRecur(head);
 		inOrderUnRecur(head);
 		posOrderUnRecur1(head);
-		posOrderUnRecur2_(head);
+		posOrderUnRecur2(head);
 
 	}
 

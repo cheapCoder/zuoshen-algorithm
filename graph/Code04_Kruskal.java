@@ -1,4 +1,4 @@
-package class06;
+package graph;
 
 import java.util.Collection;
 import java.util.Comparator;

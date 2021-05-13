@@ -96,7 +96,7 @@ public class Code02_PrintBinaryTree {
 		head.right.left.right = new Node(15);
 		head.right.right = new Node(10);
 		head.right.right.left = new Node(9);
-		// head.right.right.right = new Node(11);
+		head.right.right.right = new Node(11);
 		printTree(head);
 
 	}

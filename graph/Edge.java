@@ -1,4 +1,4 @@
-package class06;
+package graph;
 
 public class Edge {
 	public int weight;

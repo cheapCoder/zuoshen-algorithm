@@ -1,7 +1,6 @@
 package binaryTree;
 
-import java.util.LinkedList;
-import java.util.List;
+// import java.util.LinkedList;
 
 public class Code04_IsBST {
 
@@ -15,7 +14,7 @@ public class Code04_IsBST {
 		}
 	}
 
-	// public static boolean isBST(Node head) {
+	// public static boolean isBST(Node head) {		// 二叉搜索树
 	// if (head == null) {
 	// return true;
 	// }
@@ -40,31 +39,81 @@ public class Code04_IsBST {
 	// process(node.right, inOrderList);
 	// }
 
-	// 法一
+	// // 法一
+	// public static boolean isBST(Node head) {
+	// if (head == null) {
+	// return true;
+	// }
+	// LinkedList<Node> tem = new LinkedList<>();
+	// Node preNode = null;
+	// inOrderTraversal(head, tem);
+	// for (Node node : tem) {
+	// if (preNode != null && preNode.value >= node.value) {
+	// return false;
+	// }
+	// preNode = node;
+	// }
+	// return true;
+	// }
+
+	// private static void inOrderTraversal(Node head, LinkedList<Node> list) {
+	// if (head == null) {
+	// return;
+	// }
+
+	// inOrderTraversal(head.left, list);
+	// list.add(head);
+	// inOrderTraversal(head.right, list);
+	// }
+
+
+	// 法二
 	public static boolean isBST(Node head) {
-		if (head == null) {
-			return true;
-		}
-		LinkedList<Node> tem = new LinkedList<>();
-		Node preNode = null;
-		inOrderTraversal(head, tem);
-		for (Node node : tem) {
-			if (preNode != null && preNode.value >= node.value) {
-				return false;
-			}
-			preNode = node;
-		}
-		return true;
+		return process(head).isBST;
 	}
 
-	private static void inOrderTraversal(Node head, LinkedList<Node> list) {
+	private static ReturnType process(Node head) {
 		if (head == null) {
-			return;
+			return null;
 		}
 
-		inOrderTraversal(head.left, list);
-		list.add(head);
-		inOrderTraversal(head.right, list);
+		ReturnType left = process(head.left);
+		ReturnType right = process(head.right);
+
+		int max = head.value;
+		int min = head.value;
+		boolean isBST = true;
+
+		if (left != null && (!left.isBST || left.max >= head.value)) {
+			isBST = false;
+		}
+		if (right != null && (!right.isBST || right.min <= head.value)) {
+			isBST = false;
+		}
+
+		if (left != null) {
+			max = Math.max(left.max, max);
+			min = Math.min(left.min, max);
+		}
+		if (right != null) {
+			max = Math.max(right.max, max);
+			min = Math.min(right.min, min);
+		}
+
+		return new ReturnType(max, min, isBST);
+	}
+
+	private static class ReturnType {
+		int max;
+		int min;
+		boolean isBST;
+
+		public ReturnType(int max, int min, boolean isBST) {
+			this.max = max;
+			this.min = min;
+			this.isBST = isBST;
+		}
+
 	}
 
 	public static void main(String[] args) {
