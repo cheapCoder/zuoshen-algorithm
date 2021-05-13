@@ -2,7 +2,6 @@ package binaryTree;
 
 import java.util.Stack;
 
-
 public class Code01_PreInPosTraversal {
 
 	public static class Node {
@@ -102,7 +101,7 @@ public class Code01_PreInPosTraversal {
 	// System.out.println();
 	// }
 
-	//TODO:不明白
+	// TODO:不明白
 	public static void posOrderUnRecur2_(Node h) {
 		System.out.print("pos-order: ");
 		if (h != null) {

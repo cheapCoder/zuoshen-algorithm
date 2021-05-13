@@ -42,31 +42,61 @@ public class Code02_PrintBinaryTree {
 	}
 
 	public static void main(String[] args) {
-		Node head = new Node(1);
-		head.left = new Node(-222222222);
-		head.right = new Node(3);
-		head.left.left = new Node(Integer.MIN_VALUE);
-		head.right.left = new Node(55555555);
-		head.right.right = new Node(66);
-		head.left.left.right = new Node(777);
-		printTree(head);
+		// Node head = new Node(1);
+		// head.left = new Node(-222222222);
+		// head.right = new Node(3);
+		// head.left.left = new Node(Integer.MIN_VALUE);
+		// head.right.left = new Node(55555555);
+		// head.right.right = new Node(66);
+		// head.left.left.right = new Node(777);
+		// printTree(head);
 
-		head = new Node(1);
-		head.left = new Node(2);
-		head.right = new Node(3);
-		head.left.left = new Node(4);
-		head.right.left = new Node(5);
-		head.right.right = new Node(6);
-		head.left.left.right = new Node(7);
-		printTree(head);
+		// head = new Node(1);
+		// head.left = new Node(2);
+		// head.right = new Node(3);
+		// head.left.left = new Node(4);
+		// head.right.left = new Node(5);
+		// head.right.right = new Node(6);
+		// head.left.left.right = new Node(7);
+		// printTree(head);
 
-		head = new Node(1);
-		head.left = new Node(1);
-		head.right = new Node(1);
-		head.left.left = new Node(1);
-		head.right.left = new Node(1);
-		head.right.right = new Node(1);
-		head.left.left.right = new Node(1);
+		// head = new Node(1);
+		// head.left = new Node(1);
+		// head.right = new Node(1);
+		// head.left.left = new Node(1);
+		// head.right.left = new Node(1);
+		// head.right.right = new Node(1);
+		// head.left.left.right = new Node(1);
+		// printTree(head);
+
+		// Node head = new Node(5);
+		// head.left = new Node(3);
+		// head.right = new Node(8);
+		// head.left.left = new Node(2);
+		// head.left.right = new Node(4);
+		// head.left.left.left = new Node(1);
+		// head.right.left = new Node(7);
+		// head.right.left.left = new Node(6);
+		// head.right.right = new Node(10);
+		// head.right.right.left = new Node(9);
+		// head.right.right.right = new Node(11);
+		// printTree(head);
+
+		Node head = new Node(5);
+		head.left = new Node(3);
+		head.right = new Node(8);
+		head.left.left = new Node(2);
+		head.left.right = new Node(4);
+		head.left.right.left = new Node(12);
+		head.left.right.right = new Node(13);
+		head.left.left.left = new Node(1);
+		head.left.left.right = new Node(10);
+		head.right.left = new Node(7);
+		head.right.left.left = new Node(6);
+		head.right.left.right = new Node(15);
+		head.right.right = new Node(10);
+		head.right.right.left = new Node(9);
+		// head.right.right.right = new Node(11);
 		printTree(head);
 
 	}
