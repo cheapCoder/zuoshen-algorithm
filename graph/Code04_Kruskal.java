@@ -10,6 +10,8 @@ import java.util.Set;
 //undirected graph only
 public class Code04_Kruskal {
 
+// P7:85
+
 	// Union-Find Set
 	public static class UnionFind {
 		private HashMap<Node, Node> fatherMap;
@@ -38,11 +40,11 @@ public class Code04_Kruskal {
 			}
 		}
 
-		public boolean isSameSet(Node a, Node b) {
+		public boolean isSameSet(Node a, Node b) {	//判断相等
 			return findFather(a) == findFather(b);
 		}
 
-		public void union(Node a, Node b) {
+		public void union(Node a, Node b) {		// 合并
 			if (a == null || b == null) {
 				return;
 			}
