@@ -1,4 +1,4 @@
-package class08;
+package force_recursion;
 
 public class Problem04_GasStations {
 

@@ -1,4 +1,4 @@
-package class08;
+package force_recursion;
 
 public class Problem05_EditCost {
 

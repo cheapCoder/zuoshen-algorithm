@@ -1,4 +1,4 @@
-package class07;
+package recursion;
 
 import java.util.Arrays;
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package class07;
+package recursion;
 
 public class Problem03_BurstBalloons {
 

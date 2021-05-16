@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 // no negative weight
 public class Code06_Dijkstra {
 
+	//法一
 	public static HashMap<Node, Integer> dijkstra1(Node head) {
 		HashMap<Node, Integer> distanceMap = new HashMap<>();
 		distanceMap.put(head, 0);
@@ -53,6 +54,8 @@ public class Code06_Dijkstra {
 		}
 	}
 
+
+	//法二
 	public static class NodeHeap {
 		private Node[] nodes;
 		private HashMap<Node, Integer> heapIndexMap;
@@ -115,11 +118,11 @@ public class Code06_Dijkstra {
 			}
 		}
 
-		private boolean isEntered(Node node) {
+		private boolean isEntered(Node node) {	// 进来过
 			return heapIndexMap.containsKey(node);
 		}
 
-		private boolean inHeap(Node node) {
+		private boolean inHeap(Node node) {		 // 进来过而且还在堆里
 			return isEntered(node) && heapIndexMap.get(node) != -1;
 		}
 
