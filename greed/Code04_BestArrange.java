@@ -1,4 +1,4 @@
-package force_recursion;
+package greed;
 
 import java.util.Arrays;
 import java.util.Comparator;

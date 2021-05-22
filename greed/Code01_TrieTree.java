@@ -1,4 +1,4 @@
-package force_recursion;
+package greed;
 
 public class Code01_TrieTree {
 

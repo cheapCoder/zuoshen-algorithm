@@ -1,4 +1,4 @@
-package force_recursion;
+package greed;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

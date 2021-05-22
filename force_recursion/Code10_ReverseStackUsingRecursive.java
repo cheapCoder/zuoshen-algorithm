@@ -4,24 +4,44 @@ import java.util.Stack;
 
 public class Code10_ReverseStackUsingRecursive {
 
+	// public static void reverse(Stack<Integer> stack) {
+	// if (stack.isEmpty()) {
+	// return;
+	// }
+	// int i = getAndRemoveLastElement(stack);
+	// reverse(stack);
+	// stack.push(i);
+	// }
+
+	// public static int getAndRemoveLastElement(Stack<Integer> stack) {
+	// int result = stack.pop();
+	// if (stack.isEmpty()) {
+	// return result;
+	// } else {
+	// int last = getAndRemoveLastElement(stack);
+	// stack.push(result);
+	// return last;
+	// }
+	// }
+
 	public static void reverse(Stack<Integer> stack) {
 		if (stack.isEmpty()) {
 			return;
 		}
-		int i = getAndRemoveLastElement(stack);
+
+		int tem = getAndRemoveLastElement(stack);
 		reverse(stack);
-		stack.push(i);
+		stack.push(tem);
 	}
 
-	public static int getAndRemoveLastElement(Stack<Integer> stack) {
-		int result = stack.pop();
-		if (stack.isEmpty()) {
-			return result;
-		} else {
-			int last = getAndRemoveLastElement(stack);
-			stack.push(result);
-			return last;
+	private static int getAndRemoveLastElement(Stack<Integer> stack) {
+		if (stack.size() <= 1) {
+			return stack.pop();
 		}
+		int tem1 = stack.pop();
+		int tem2 = getAndRemoveLastElement(stack);
+		stack.push(tem1);
+		return tem2;
 	}
 
 	public static void main(String[] args) {
