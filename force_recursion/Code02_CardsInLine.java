@@ -1,6 +1,6 @@
 package force_recursion;
 
-public class Code08_CardsInLine {
+public class Code02_CardsInLine {
 
 	// public static int win1(int[] arr) {
 	// if (arr == null || arr.length == 0) {

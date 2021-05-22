@@ -1,6 +1,6 @@
 package force_recursion;
 
-public class Code12_Knapsack {
+public class Code6_Knapsack {
 
 	// public static int maxValue1(int[] weights, int[] values, int bag) {
 	// return process1(weights, values, 0, 0, bag);
@@ -22,6 +22,7 @@ public class Code12_Knapsack {
 	// bag));
 	// }
 
+	// TODO:动态规划
 	// public static int maxValue2(int[] c, int[] p, int bag) {
 	// int[][] dp = new int[c.length + 1][bag + 1];
 	// for (int i = c.length - 1; i >= 0; i--) {
@@ -35,12 +36,26 @@ public class Code12_Knapsack {
 	// return dp[0][0];
 	// }
 
-	private static int maxValue1(int[] weights, int[] values, int bag) {
-		return ;
+	// 法一
+	public static int maxValue1(int[] weights, int[] values, int bag) {
+		return process1(weights, values, bag, 0, 0);
 	}
 
-	private static int maxValue2(int[] weights, int[] values, int bag) {
-		return null;
+	private static int process1(int[] weights, int[] values, int bag, int alreadyweight, int index) {
+		if (alreadyweight > bag) {
+			return 0;
+		}
+		if (index >= weights.length) {
+			return 0;
+		}
+		return Math.max(
+				alreadyweight + weights[index] + process1(weights, values, bag, alreadyweight + weights[index], index + 1),
+				alreadyweight + process1(weights, values, bag, alreadyweight, index + 1));
+	}
+
+	// 法二
+	public static int maxValue2(int[] weights, int[] values, int bag) {
+		return 0;
 	}
 
 	public static void main(String[] args) {

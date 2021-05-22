@@ -2,7 +2,7 @@ package force_recursion;
 
 import java.util.ArrayList;
 
-public class Code09_PrintAllPermutations {
+public class Code03_PrintAllPermutations {
 
 	// public static ArrayList<String> Permutation(String str) {
 	// ArrayList<String> res = new ArrayList<>();

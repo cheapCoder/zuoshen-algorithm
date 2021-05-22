@@ -1,6 +1,6 @@
 package force_recursion;
 
-public class Code07_Hanoi {
+public class Code01_Hanoi {
 
 	// public static void hanoi(int n) {
 	// if (n > 0) {
