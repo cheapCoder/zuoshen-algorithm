@@ -1,4 +1,4 @@
-package class01;
+package hash_function;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,11 +68,11 @@ public class Code01_HashMap {
 		System.out.println("=========================");
 
 		// you can not remove item in map when you use the iterator of map
-//		 for(Entry<String,String> entry : map.entrySet()){
-//			 if(!entry.getValue().equals("1")){
-//				 map.remove(entry.getKey());
-//			 }
-//		 }
+		// for(Entry<String,String> entry : map.entrySet()){
+		// if(!entry.getValue().equals("1")){
+		// map.remove(entry.getKey());
+		// }
+		// }
 
 		// if you want to remove items, collect them first, then remove them by
 		// this way.

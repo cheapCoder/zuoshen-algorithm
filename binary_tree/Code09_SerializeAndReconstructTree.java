@@ -15,7 +15,7 @@ public class Code09_SerializeAndReconstructTree {
 		}
 	}
 
-	// TODO:为做
+	// TODO:未做
 	public static String serialByPre(Node head) {	
 		if (head == null) {
 			return "#!";

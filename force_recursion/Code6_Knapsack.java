@@ -7,8 +7,8 @@ public class Code6_Knapsack {
 	// }
 
 	// public static int process1(int[] weights, int[] values, int i, int
-	// alreadyweight, int bag) {
-	// if (alreadyweight > bag) {
+	// alreadyWeight, int bag) {
+	// if (alreadyWeight > bag) {
 	// return 0;
 	// }
 	// if (i == weights.length) {
@@ -16,13 +16,13 @@ public class Code6_Knapsack {
 	// }
 	// return Math.max(
 
-	// process1(weights, values, i + 1, alreadyweight, bag),
+	// process1(weights, values, i + 1, alreadyWeight, bag),
 
-	// values[i] + process1(weights, values, i + 1, alreadyweight + weights[i],
+	// values[i] + process1(weights, values, i + 1, alreadyWeight + weights[i],
 	// bag));
 	// }
 
-	// TODO:动态规划
+	// TODO:动态规划?
 	// public static int maxValue2(int[] c, int[] p, int bag) {
 	// int[][] dp = new int[c.length + 1][bag + 1];
 	// for (int i = c.length - 1; i >= 0; i--) {
@@ -41,19 +41,19 @@ public class Code6_Knapsack {
 		return process1(weights, values, bag, 0, 0);
 	}
 
-	private static int process1(int[] weights, int[] values, int bag, int alreadyweight, int index) {
-		if (alreadyweight > bag) {
+	private static int process1(int[] weights, int[] values, int bag, int alreadyWeight, int index) {
+		if (alreadyWeight > bag) {
 			return 0;
 		}
 		if (index >= weights.length) {
 			return 0;
 		}
 		return Math.max(
-				alreadyweight + weights[index] + process1(weights, values, bag, alreadyweight + weights[index], index + 1),
-				alreadyweight + process1(weights, values, bag, alreadyweight, index + 1));
+				alreadyWeight + weights[index] + process1(weights, values, bag, alreadyWeight + weights[index], index + 1),
+				alreadyWeight + process1(weights, values, bag, alreadyWeight, index + 1));
 	}
 
-	// 法二
+	// 法二 TODO:未完成
 	public static int maxValue2(int[] weights, int[] values, int bag) {
 		return 0;
 	}

@@ -1,4 +1,4 @@
-package class01;
+package hash_function;
 
 import java.util.HashMap;
 import java.util.List;

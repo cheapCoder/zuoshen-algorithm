@@ -129,7 +129,7 @@ public class Code03_TreeMaxWidth {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		Node head = new Node(5);
 		head.left = new Node(3);
 		head.right = new Node(8);

@@ -1,4 +1,4 @@
-package class01;
+package hash_function;
 
 public class Code03_Islands {
 

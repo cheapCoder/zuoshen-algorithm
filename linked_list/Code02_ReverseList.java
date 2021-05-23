@@ -83,7 +83,7 @@ public class Code02_ReverseList {
 	private static class DoubleNode {
 		public int val;
 		public DoubleNode next;
-		public DoubleNode last
+		public DoubleNode last;
 
 		public DoubleNode(int val) {
 			this.val = val;

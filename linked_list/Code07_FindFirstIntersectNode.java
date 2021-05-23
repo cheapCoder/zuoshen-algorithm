@@ -120,7 +120,7 @@ public class Code07_FindFirstIntersectNode {
 	// }
 	// }
 
-	// TODO: 分类讨论
+	// NOTE: 分类讨论
 	public static Node getIntersectNode(Node head1, Node head2) {
 		Node loopStart1 = getStartLoopNode(head1);
 		Node loopStart2 = getStartLoopNode(head2);
