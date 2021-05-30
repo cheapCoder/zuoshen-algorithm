@@ -1,6 +1,6 @@
-package class03;
+package hash_function;
 
-public class Code02_Manacher {
+public class Code06_Manacher {
 
 	public static char[] manacherString(String str) {
 		char[] charArr = str.toCharArray();
@@ -22,7 +22,7 @@ public class Code02_Manacher {
 		int R = -1;
 		int max = Integer.MIN_VALUE;
 		for (int i = 0; i != charArr.length; i++) {
-			pArr[i] = R > i ? Math.min(pArr[2 * C - i], R - i) : 1;
+			pArr[i] = R > i ? Math.min(pArr[2 * C - i/* c - (i - c) */], R - i) : 1;
 			while (i + pArr[i] < charArr.length && i - pArr[i] > -1) {
 				if (charArr[i + pArr[i]] == charArr[i - pArr[i]])
 					pArr[i]++;

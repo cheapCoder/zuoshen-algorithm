@@ -1,8 +1,8 @@
-package class04;
+package hash_function;
 
 import java.util.LinkedList;
 
-public class Code01_SlidingWindowMaxArray {
+public class Code07_SlidingWindowMaxArray {
 
 	public static int[] getMaxWindow(int[] arr, int w) {
 		if (arr == null || w < 1 || arr.length < w) {

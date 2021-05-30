@@ -1,8 +1,8 @@
-package class04;
+package hash_function;
 
 import java.util.Stack;
 
-public class Code03_AllTimesMinToMax {
+public class Code09_AllTimesMinToMax {
 
 	public static int max1(int[] arr) {
 		int max = Integer.MIN_VALUE;

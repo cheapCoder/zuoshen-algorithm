@@ -1,10 +1,10 @@
-package class04;
+package hash_function;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Code02_MonotonousStack {
+public class Code08_MonotonousStack {
 
 	public static int[][] getNearLessNoRepeat(int[] arr) {
 		int[][] res = new int[arr.length][2];

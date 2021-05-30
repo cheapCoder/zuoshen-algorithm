@@ -1,6 +1,6 @@
-package class03;
+package hash_function;
 
-public class Code01_KMP {
+public class Code05_KMP {
 
 	public static int getIndexOf(String s, String m) {
 		if (s == null || m == null || m.length() < 1 || s.length() < m.length()) {
