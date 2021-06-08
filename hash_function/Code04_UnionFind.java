@@ -67,4 +67,38 @@ public class Code04_UnionFind {
 
 	}
 
+	// public class UnionFindSet {
+
+	// private class Element<T> {
+	// private T value;
+	// public Element<T> previous;
+
+	// public Element(T value) {
+	// this.value = value;
+	// }
+
+	// }
+
+	// private Element<Integer> getHead(Element<Integer> element) {
+	// Stack<Element<Integer>> sons = new Stack<>();
+
+	// while (element.previous != element) {
+	// sons.push(element);
+	// element = element.previous;
+	// }
+	// while (!sons.isEmpty()) {
+	// sons.pop().previous = element;
+	// }
+	// return element;
+	// }
+
+	// private boolean isSameSet(Element<Integer> e1, Element<Integer> e2) {
+	// return getHead(e1) == getHead(e2);
+	// }
+
+	// private void union() {
+
+	// }
+
+	// }
 }
