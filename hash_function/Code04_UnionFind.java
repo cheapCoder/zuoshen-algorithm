@@ -1,8 +1,14 @@
 package hash_function;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
+
+import javax.swing.text.AbstractDocument.ElementEdit;
+
+import org.graalvm.compiler.replacements.StandardGraphBuilderPlugins.UnsafeGetPlugin;
 
 public class Code04_UnionFind {
 
@@ -27,6 +33,7 @@ public class Code04_UnionFind {
 	// for (V value : list) {
 	// Element<V> element = new Element<V>(value);
 	// elementMap.put(value, element);
+
 	// fatherMap.put(element, element);
 	// rankMap.put(element, 1);
 	// }
@@ -69,7 +76,8 @@ public class Code04_UnionFind {
 
 	public class UnionFindSet {
 
-		
+		HashMap<Integer, Element<Integer>> originMap = new HashMap<>(); // 根据原始值找出生成的节点（Element）
+		HashMap<Element<Integer>, Integer> setCountMap = new HashMap<>(); // 顶级节点的集合
 
 		private class Element<T> {
 			private T value;
@@ -78,11 +86,18 @@ public class Code04_UnionFind {
 			public Element(T value) {
 				this.value = value;
 			}
+		}
 
+		public UnionFindSet(int[] list) {
+			for (int i = 0; i < list.length; i++) {
+				Element<Integer> element = new Element<Integer>(list[i]);
+				setCountMap.put(element, 1);
+				originMap.put(list[i], element);
+			}
 		}
 
 		private Element<Integer> getHead(Element<Integer> element) {
-			Stack<Element<Integer>> sons = new Stack<>();
+			Stack<Element<Integer>> sons = new Stack<>(); // 性能优化
 
 			while (element.previous != element) {
 				sons.push(element);
@@ -98,8 +113,20 @@ public class Code04_UnionFind {
 			return getHead(e1) == getHead(e2);
 		}
 
-		private void union() {
+		private void union(int i1, int i2) {
+			Element<Integer> head1 = getHead(originMap.get(i1));
+			Element<Integer> head2 = getHead(originMap.get(i2))
+			if (head1 == head2) {
+				return;
+			}
 
+			Element<Integer> big = setCountMap.get(head1) > setCountMap.get(head2) ? head1: head2;
+			Element<Integer> small = big == head2? head1: head2;
+			
+			small.previous = big;
+			setCountMap.put(big, setCountMap.get(big) + setCountMap.get(small));
+			setCountMap.remove(small);
+		
 		}
 
 	}
