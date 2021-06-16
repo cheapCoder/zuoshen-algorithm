@@ -1,17 +1,21 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
-
-public class what {
-  public static void main(String[] args) {
-    // int i = (0 - 1) >> 2;
-    // System.out.println(-1 >> 2);  // -1
-    // System.out.println(-1 / 2); // 0
-
-    // int[] arr = new int[10];
-    // System.out.println(++arr[0]);
-
-    // int[] arr = new int[10];
-    // System.out.println(arr[1]);
-    System.out.println(~0);
+class Solution {
+  public static int hIndex(int[] citations) {
+    Arrays.sort(citations);
+    int i = 0;
+    while (i < citations.length && citations[i] < citations.length - i) {
+      i++;
+    }
+    while (i + 1 < citations.length && citations[i + 1] == citations[i + 1]) {
+      i++;
+    }
+    return i + 1;
   }
 
+  public static void main(String[] args) {
+    hIndex(new int[] { 100, 12, 23, 5, 6, 8, 4, 3, 345, 35, 2 });
+    hIndex(new int[] { 0, 0, 0, 0, 0 });
+  }
 }
