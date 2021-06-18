@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 class Solution {
@@ -16,6 +15,6 @@ class Solution {
 
   public static void main(String[] args) {
     hIndex(new int[] { 100, 12, 23, 5, 6, 8, 4, 3, 345, 35, 2 });
-    hIndex(new int[] { 0, 0, 0, 0, 0 });
+    // hIndex(new int[] { 0, 0, 0, 0, 0 });
   }
 }

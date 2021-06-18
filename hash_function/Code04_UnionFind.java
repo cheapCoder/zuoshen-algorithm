@@ -1,12 +1,7 @@
 package hash_function;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Stack;
-
-
 
 public class Code04_UnionFind {
 
@@ -107,24 +102,23 @@ public class Code04_UnionFind {
 			return element;
 		}
 
-		private boolean isSameSet(Element<Integer> e1, Element<Integer> e2) {
-			return getHead(e1) == getHead(e2);
+		private boolean isSameSet(int i1, int i2) {
+			return getHead(originMap.get(i1)) == getHead(originMap.get(i2));
 		}
 
 		private void union(int i1, int i2) {
-			Element<Integer> head1 = getHead(originMap.get(i1));
-			Element<Integer> head2 = getHead(originMap.get(i2))
-			if (head1 == head2) {
+			if (isSameSet(i1, i2)) {
 				return;
 			}
+			Element<Integer> head1 = getHead(originMap.get(i1));
+			Element<Integer> head2 = getHead(originMap.get(i2));
+			System.out.println(head1.value + " " + head2.value);
+			Element<Integer> big = setCountMap.get(head1) > setCountMap.get(head2) ? head1 : head2;
+			Element<Integer> small = big == head2 ? head1 : head2;
 
-			Element<Integer> big = setCountMap.get(head1) > setCountMap.get(head2) ? head1: head2;
-			Element<Integer> small = big == head2? head1: head2;
-			
 			small.previous = big;
 			setCountMap.put(big, setCountMap.get(big) + setCountMap.get(small));
 			setCountMap.remove(small);
-		
 		}
 
 	}
