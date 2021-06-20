@@ -1,64 +1,119 @@
 package hash_function;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class Code08_MonotonousStack {
 
+	// public static int[][] getNearLessNoRepeat(int[] arr) {
+	// int[][] res = new int[arr.length][2];
+	// Stack<Integer> stack = new Stack<>();
+	// for (int i = 0; i < arr.length; i++) {
+	// while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
+	// int popIndex = stack.pop();
+	// int leftLessIndex = stack.isEmpty() ? -1 : stack.peek();
+	// res[popIndex][0] = leftLessIndex;
+	// res[popIndex][1] = i;
+	// }
+	// stack.push(i);
+	// }
+	// while (!stack.isEmpty()) {
+	// int popIndex = stack.pop();
+	// int leftLessIndex = stack.isEmpty() ? -1 : stack.peek();
+	// res[popIndex][0] = leftLessIndex;
+	// res[popIndex][1] = -1;
+	// }
+	// return res;
+	// }
+
+	// public static int[][] getNearLess(int[] arr) {
+	// int[][] res = new int[arr.length][2];
+	// Stack<List<Integer>> stack = new Stack<>();
+	// for (int i = 0; i < arr.length; i++) {
+	// while (!stack.isEmpty() && arr[stack.peek().get(0)] > arr[i]) {
+	// List<Integer> popIs = stack.pop();
+	// // 取位于下面位置的列表中，最晚加入的那个
+	// int leftLessIndex = stack.isEmpty() ? -1 : stack.peek().get(
+	// stack.peek().size() - 1);
+	// for (Integer popi : popIs) {
+	// res[popi][0] = leftLessIndex;
+	// res[popi][1] = i;
+	// }
+	// }
+	// if (!stack.isEmpty() && arr[stack.peek().get(0)] == arr[i]) {
+	// stack.peek().add(Integer.valueOf(i));
+	// } else {
+	// ArrayList<Integer> list = new ArrayList<>();
+	// list.add(i);
+	// stack.push(list);
+	// }
+	// }
+	// while (!stack.isEmpty()) {
+	// List<Integer> popIs = stack.pop();
+	// // 取位于下面位置的列表中，最晚加入的那个
+	// int leftLessIndex = stack.isEmpty() ? -1 : stack.peek().get(
+	// stack.peek().size() - 1);
+	// for (Integer popi : popIs) {
+	// res[popi][0] = leftLessIndex;
+	// res[popi][1] = -1;
+	// }
+	// }
+	// return res;
+	// }
+
+	// 无重复值
 	public static int[][] getNearLessNoRepeat(int[] arr) {
-		int[][] res = new int[arr.length][2];
 		Stack<Integer> stack = new Stack<>();
+		int[][] res = new int[arr.length][2];
+
 		for (int i = 0; i < arr.length; i++) {
 			while (!stack.isEmpty() && arr[stack.peek()] > arr[i]) {
-				int popIndex = stack.pop();
-				int leftLessIndex = stack.isEmpty() ? -1 : stack.peek();
-				res[popIndex][0] = leftLessIndex;
-				res[popIndex][1] = i;
+				int curIndex = stack.pop();
+				res[curIndex][0] = stack.isEmpty() ? -1 : stack.peek();
+				res[curIndex][1] = i;
 			}
 			stack.push(i);
 		}
+
 		while (!stack.isEmpty()) {
-			int popIndex = stack.pop();
-			int leftLessIndex = stack.isEmpty() ? -1 : stack.peek();
-			res[popIndex][0] = leftLessIndex;
-			res[popIndex][1] = -1;
+			int curIndex = stack.pop();
+			res[curIndex][0] = stack.isEmpty() ? -1 : stack.peek();
+			res[curIndex][1] = -1;
 		}
 		return res;
 	}
 
+	// 有重复值
 	public static int[][] getNearLess(int[] arr) {
+		Stack<LinkedList<Integer>> stack = new Stack<>();
 		int[][] res = new int[arr.length][2];
-		Stack<List<Integer>> stack = new Stack<>();
+
 		for (int i = 0; i < arr.length; i++) {
-			while (!stack.isEmpty() && arr[stack.peek().get(0)] > arr[i]) {
-				List<Integer> popIs = stack.pop();
-				// 取位于下面位置的列表中，最晚加入的那个
-				int leftLessIndex = stack.isEmpty() ? -1 : stack.peek().get(
-						stack.peek().size() - 1);
-				for (Integer popi : popIs) {
-					res[popi][0] = leftLessIndex;
-					res[popi][1] = i;
+			while (!stack.isEmpty() && arr[stack.peek().peek()] > arr[i]) {
+				LinkedList<Integer> curList = stack.pop();
+				for (int j : curList) {
+					res[j][0] = stack.isEmpty() ? -1 : stack.peek().peekLast();
+					res[j][1] = i;
 				}
 			}
-			if (!stack.isEmpty() && arr[stack.peek().get(0)] == arr[i]) {
-				stack.peek().add(Integer.valueOf(i));
+
+			if (!stack.isEmpty() && arr[stack.peek().peek()] == arr[i]) {
+				stack.peek().add(i);
 			} else {
-				ArrayList<Integer> list = new ArrayList<>();
+				LinkedList<Integer> list = new LinkedList<>();
 				list.add(i);
 				stack.push(list);
 			}
 		}
+
 		while (!stack.isEmpty()) {
-			List<Integer> popIs = stack.pop();
-			// 取位于下面位置的列表中，最晚加入的那个
-			int leftLessIndex = stack.isEmpty() ? -1 : stack.peek().get(
-					stack.peek().size() - 1);
-			for (Integer popi : popIs) {
-				res[popi][0] = leftLessIndex;
-				res[popi][1] = -1;
+			LinkedList<Integer> curList = stack.pop();
+			for (int j : curList) {
+				res[j][0] = stack.isEmpty() ? -1 : stack.peek().peekLast();
+				res[j][1] = -1;
 			}
 		}
+
 		return res;
 	}
 
@@ -149,10 +204,11 @@ public class Code08_MonotonousStack {
 				break;
 			}
 			if (!isEqual(getNearLess(arr2), rightWay(arr2))) {
-				System.out.println("Oops!");
-				printArray(arr2);
-				break;
+			System.out.println("Oops!");
+			printArray(arr2);
+			break;
 			}
 		}
 	}
+
 }

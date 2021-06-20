@@ -1,20 +1,18 @@
-import java.util.Arrays;
-
 class Solution {
-  public static int hIndex(int[] citations) {
-    Arrays.sort(citations);
-    int i = 0;
-    while (i < citations.length && citations[i] < citations.length - i) {
-      i++;
+  public static int reachNumber(int target) {
+    
+    return choice(1, 0, target);
+  }
+
+  private static int choice(int time, int pos, int target) {
+    if (pos == target) {
+      return time;
     }
-    while (i + 1 < citations.length && citations[i + 1] == citations[i + 1]) {
-      i++;
-    }
-    return i + 1;
+
+    return Math.min(choice(time + 1, pos - time, target), choice(time + 1, pos + time, target));
   }
 
   public static void main(String[] args) {
-    hIndex(new int[] { 100, 12, 23, 5, 6, 8, 4, 3, 345, 35, 2 });
-    // hIndex(new int[] { 0, 0, 0, 0, 0 });
+    System.out.println(reachNumber(3));
   }
 }
