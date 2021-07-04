@@ -1,6 +1,6 @@
-package class05;
+package DP;
 
-public class Code03_MaxHappy {
+public class Code02_MaxHappy {
 
 	public static int maxHappy(int[][] matrix) {
 		int[][] dp = new int[matrix.length][2];

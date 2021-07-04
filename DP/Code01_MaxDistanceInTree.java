@@ -1,6 +1,6 @@
-package class05;
+package DP;
 
-public class Code02_MaxDistanceInTree {
+public class Code01_MaxDistanceInTree {
 
 	public static class Node {
 		public int value;

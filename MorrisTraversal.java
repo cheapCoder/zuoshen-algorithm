@@ -1,6 +1,6 @@
-package class05;
 
-public class Code01_MorrisTraversal {
+
+public class MorrisTraversal {
 	
 	public static class Node {
 		public int value;
@@ -16,24 +16,24 @@ public class Code01_MorrisTraversal {
 		if (head == null) {
 			return;
 		}
-		Node cur1 = head;
-		Node cur2 = null;
-		while (cur1 != null) {
-			cur2 = cur1.left;
-			if (cur2 != null) {
-				while (cur2.right != null && cur2.right != cur1) {
-					cur2 = cur2.right;
+		Node cur = head;
+		Node mostRight = null;
+		while (cur != null) {	
+			mostRight = cur.left;	
+			if (mostRight != null) {	// cur有左树
+				while (mostRight.right != null && mostRight.right != cur) {
+					mostRight = mostRight.right;
 				}
-				if (cur2.right == null) {
-					cur2.right = cur1;
-					cur1 = cur1.left;
+				if (mostRight.right == null) {
+					mostRight.right = cur;
+					cur = cur.left;
 					continue;
 				} else {
-					cur2.right = null;
+					mostRight.right = null;
 				}
 			}
-			System.out.print(cur1.value + " ");
-			cur1 = cur1.right;
+			System.out.print(cur.value + " ");
+			cur = cur.right;	// cur没有左树，向右移动
 		}
 		System.out.println();
 	}
@@ -42,26 +42,26 @@ public class Code01_MorrisTraversal {
 		if (head == null) {
 			return;
 		}
-		Node cur1 = head;
-		Node cur2 = null;
-		while (cur1 != null) {
-			cur2 = cur1.left;
-			if (cur2 != null) {
-				while (cur2.right != null && cur2.right != cur1) {
-					cur2 = cur2.right;
+		Node cur = head;
+		Node mostRight = null;
+		while (cur != null) {
+			mostRight = cur.left;
+			if (mostRight != null) {
+				while (mostRight.right != null && mostRight.right != cur) {
+					mostRight = mostRight.right;
 				}
-				if (cur2.right == null) {
-					cur2.right = cur1;
-					System.out.print(cur1.value + " ");
-					cur1 = cur1.left;
+				if (mostRight.right == null) {
+					mostRight.right = cur;
+					System.out.print(cur.value + " ");
+					cur = cur.left;
 					continue;
 				} else {
-					cur2.right = null;
+					mostRight.right = null;
 				}
 			} else {
-				System.out.print(cur1.value + " ");
+				System.out.print(cur.value + " ");
 			}
-			cur1 = cur1.right;
+			cur = cur.right;
 		}
 		System.out.println();
 	}
@@ -70,24 +70,24 @@ public class Code01_MorrisTraversal {
 		if (head == null) {
 			return;
 		}
-		Node cur1 = head;
-		Node cur2 = null;
-		while (cur1 != null) {
-			cur2 = cur1.left;
-			if (cur2 != null) {
-				while (cur2.right != null && cur2.right != cur1) {
-					cur2 = cur2.right;
+		Node cur = head;
+		Node mostRight = null;
+		while (cur != null) {
+			mostRight = cur.left;
+			if (mostRight != null) {
+				while (mostRight.right != null && mostRight.right != cur) {
+					mostRight = mostRight.right;
 				}
-				if (cur2.right == null) {
-					cur2.right = cur1;
-					cur1 = cur1.left;
+				if (mostRight.right == null) {
+					mostRight.right = cur;
+					cur = cur.left;
 					continue;
 				} else {
-					cur2.right = null;
-					printEdge(cur1.left);
+					mostRight.right = null;
+					printEdge(cur.left);
 				}
 			}
-			cur1 = cur1.right;
+			cur = cur.right;
 		}
 		printEdge(head);
 		System.out.println();
