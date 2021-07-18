@@ -22,7 +22,7 @@ public class Code01_MaxDistanceInTree {
 		public int h;
 		
 		public ReturnType(int m, int h) {
-			this.maxDistance = m;;
+			this.maxDistance = m;
 			this.h = h;
 		}
 	}
