@@ -1,4 +1,4 @@
-package class02;
+package Aremain;
 
 /**
  * Not implemented by zuochengyun

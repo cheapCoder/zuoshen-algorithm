@@ -1,6 +1,6 @@
 package binary_tree;
 
-public class Code06_IsBalancedTree {
+public class C06_IsBalancedTree {
 
 	public static class Node {
 		public int value;

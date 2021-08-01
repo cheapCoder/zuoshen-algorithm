@@ -3,7 +3,7 @@ package binary_tree;
 // import java.util.HashMap;
 // import java.util.HashSet;
 
-public class Code07_LowestCommonAncestor {
+public class C07_LowestCommonAncestor {
 
 	public static class Node {
 		public int value;

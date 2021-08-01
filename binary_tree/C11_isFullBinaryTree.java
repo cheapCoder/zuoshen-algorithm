@@ -1,6 +1,6 @@
 package binary_tree;
 
-public class Code11_isFullBinaryTree {
+public class C11_isFullBinaryTree {
 
   public static class Node {
     public int value;

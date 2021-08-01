@@ -1,6 +1,7 @@
+package binary_tree;
 
 
-public class MorrisTraversal {
+public class C12_MorrisTraversal {
 	
 	public static class Node {
 		public int value;

@@ -12,48 +12,76 @@ public class Code01_MaxDistanceInTree {
 		}
 	}
 
-	public static int maxDistance(Node head) {
-		int[] record = new int[1];
-		return posOrder(head, record);
-	}
-	
-	public static class ReturnType{
+	public static class ReturnType {
 		public int maxDistance;
 		public int h;
-		
+
 		public ReturnType(int m, int h) {
 			this.maxDistance = m;
 			this.h = h;
 		}
 	}
-	
-	public static ReturnType process(Node head) {
-		if(head == null) {
-			return new ReturnType(0,0);
-		}
-		ReturnType leftReturnType = process(head.left);
-		ReturnType rightReturnType = process(head.right);
-		int includeHeadDistance = leftReturnType.h + 1 + rightReturnType.h;
-		int p1 = leftReturnType.maxDistance;
-		int p2 = rightReturnType.maxDistance;
-		int resultDistance = Math.max(Math.max(p1, p2), includeHeadDistance);
-		int hitself  = Math.max(leftReturnType.h, leftReturnType.h) + 1;
-		return new ReturnType(resultDistance, hitself);
-	}
 
-	public static int posOrder(Node head, int[] record) {
-		if (head == null) {
-			record[0] = 0;
+	// 法一：暴力递归
+	private static int maxDistance(Node head1) {
+		if (head1 == null) {
 			return 0;
 		}
-		int lMax = posOrder(head.left, record);
-		int maxfromLeft = record[0];
-		int rMax = posOrder(head.right, record);
-		int maxFromRight = record[0];
-		int curNodeMax = maxfromLeft + maxFromRight + 1;
-		record[0] = Math.max(maxfromLeft, maxFromRight) + 1;
-		return Math.max(Math.max(lMax, rMax), curNodeMax);
+
+		return process(head1).maxDistance;
 	}
+
+	private static ReturnType process(Node head) {
+		if (head == null) {
+			return new ReturnType(0, 0);
+		}
+		ReturnType left = process(head.left);
+		ReturnType right = process(head.right);
+
+		// 经过父节点
+		int maxDisOverFa = left.h + right.h + 1;
+		// 不经过父节点
+		int maxDisNotOverFa = Math.max(left.maxDistance, right.maxDistance);
+
+		return new ReturnType(Math.max(maxDisOverFa, maxDisNotOverFa), Math.max(left.h, right.h) + 1);
+	}
+
+
+	// NOTE: answer
+
+	// public static int maxDistance(Node head) {
+	// int[] record = new int[1];
+	// return posOrder(head, record);
+	// }
+
+	// public static ReturnType process(Node head) {
+	// 	if (head == null) {
+	// 		return new ReturnType(0, 0);
+	// 	}
+	// 	ReturnType leftReturnType = process(head.left);
+	// 	ReturnType rightReturnType = process(head.right);
+	// 	int includeHeadDistance = leftReturnType.h + 1 + rightReturnType.h;
+	// 	int p1 = leftReturnType.maxDistance;
+	// 	int p2 = rightReturnType.maxDistance;
+	// 	int resultDistance = Math.max(Math.max(p1, p2), includeHeadDistance);
+	// 	int hitSelf = Math.max(leftReturnType.h, rightReturnType.h) + 1;
+	// 	return new ReturnType(resultDistance, hitSelf);
+	// }
+
+	// 法二： 通过一个对象记住当前最大距离
+	// public static int posOrder(Node head, int[] record) {
+	// if (head == null) {
+	// record[0] = 0;
+	// return 0;
+	// }
+	// int lMax = posOrder(head.left, record);
+	// int maxFromLeft = record[0];
+	// int rMax = posOrder(head.right, record);
+	// int maxFromRight = record[0];
+	// int curNodeMax = maxFromLeft + maxFromRight + 1;
+	// record[0] = Math.max(maxFromLeft, maxFromRight) + 1;
+	// return Math.max(Math.max(lMax, rMax), curNodeMax);
+	// }
 
 	public static void main(String[] args) {
 		Node head1 = new Node(1);

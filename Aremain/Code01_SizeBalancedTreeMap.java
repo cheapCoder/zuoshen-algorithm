@@ -1,4 +1,4 @@
-package class02;
+package Aremain;
 
 public class Code01_SizeBalancedTreeMap {
 

@@ -1,4 +1,4 @@
-package class02;
+package Aremain;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package binary_tree;
 
-public class Code02_PrintBinaryTree {
+public class C02_PrintBinaryTree {
 
 	public static class Node {
 		public int value;

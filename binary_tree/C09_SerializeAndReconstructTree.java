@@ -3,7 +3,7 @@ package binary_tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Code09_SerializeAndReconstructTree {
+public class C09_SerializeAndReconstructTree {
 
 	public static class Node {
 		public int value;

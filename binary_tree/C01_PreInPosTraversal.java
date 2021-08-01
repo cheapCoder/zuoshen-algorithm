@@ -2,7 +2,7 @@ package binary_tree;
 
 import java.util.Stack;
 
-public class Code01_PreInPosTraversal {
+public class C01_PreInPosTraversal {
 
 	public static class Node {
 		public int value;

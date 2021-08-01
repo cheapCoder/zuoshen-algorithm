@@ -3,7 +3,7 @@ package binary_tree;
 // import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Code03_TreeMaxWidth {
+public class C03_TreeMaxWidth {
 
 	public static class Node {
 		public int value;

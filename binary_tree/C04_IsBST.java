@@ -2,7 +2,7 @@ package binary_tree;
 
 // import java.util.LinkedList;
 
-public class Code04_IsBST {
+public class C04_IsBST {
 
 	public static class Node {
 		public int value;

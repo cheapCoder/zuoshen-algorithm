@@ -67,7 +67,7 @@ public class Code04_UnionFind {
 
 	// }
 
-	public class UnionFindSet {
+	public static class UnionFindSet {
 
 		HashMap<Integer, Element<Integer>> originMap = new HashMap<>(); // 根据原始值找出生成的节点（Element）
 		HashMap<Element<Integer>, Integer> setCountMap = new HashMap<>(); // 顶级节点的集合
@@ -121,5 +121,9 @@ public class Code04_UnionFind {
 			setCountMap.remove(small);
 		}
 
+		public static void main(String[] args) {
+			// resolve the warning
+			(new UnionFindSet(new int[5])).union(1, 2);
+		}
 	}
 }

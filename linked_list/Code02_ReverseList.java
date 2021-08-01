@@ -142,6 +142,8 @@ public class Code02_ReverseList {
 	}
 
 	public static void main(String[] args) {
+		System.out.println(new DoubleNode(1).last);
+
 		Node head1 = new Node(1);
 		head1.next = new Node(2);
 		head1.next.next = new Node(3);

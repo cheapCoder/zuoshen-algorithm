@@ -1,6 +1,6 @@
 package binary_tree;
 
-public class Code10_PaperFolding {
+public class C10_PaperFolding {
 
 	// public static void printAllFolds(int N) {
 	// printProcess(1, N, true);

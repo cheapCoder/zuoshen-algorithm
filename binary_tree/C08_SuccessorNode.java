@@ -1,6 +1,6 @@
 package binary_tree;
 
-public class Code08_SuccessorNode {
+public class C08_SuccessorNode {
 
 	public static class Node {
 		public int value;
