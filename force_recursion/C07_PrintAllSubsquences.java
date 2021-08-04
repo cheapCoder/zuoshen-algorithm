@@ -3,7 +3,7 @@ package force_recursion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class C7_PrintAllSubsquences {
+public class C07_PrintAllSubsquences {
 
 	// public static void printAllSubsequence(String str) {
 	// char[] chs = str.toCharArray();

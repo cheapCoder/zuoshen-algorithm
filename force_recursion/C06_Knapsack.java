@@ -1,6 +1,6 @@
 package force_recursion;
 
-public class C6_Knapsack {
+public class C06_Knapsack {
 
 	// public static int maxValue1(int[] weights, int[] values, int bag) {
 	// return process1(weights, values, 0, 0, bag);

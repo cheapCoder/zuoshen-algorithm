@@ -2,7 +2,7 @@ package force_recursion;
 
 import java.util.Stack;
 
-public class C4_ReverseStackUsingRecursive {
+public class C04_ReverseStackUsingRecursive {
 
 	// public static void reverse(Stack<Integer> stack) {
 	// if (stack.isEmpty()) {
