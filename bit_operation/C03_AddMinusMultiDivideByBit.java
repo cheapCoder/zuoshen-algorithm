@@ -1,4 +1,4 @@
-package class06;
+package bit_operation;
 
 public class C03_AddMinusMultiDivideByBit {
 
