@@ -1,5 +1,5 @@
 package bit_operation;
-
+// 给定两个有符号32位整数a和b，返回a和b中较大的。
 public class C01_GetMax {
 
 	// public static int flip(int n) {
@@ -17,7 +17,7 @@ public class C01_GetMax {
 	// return a * scA + b * scB;
 	// }
 
-	// c无溢出问题
+	// c无溢出问题,因为当c溢出时，就不看c的符号位了，单独有a, b符号位决定
 	// public static int getMax2(int a, int b) {
 	// int c = a - b;
 	// int sa = sign(a);
@@ -31,8 +31,8 @@ public class C01_GetMax {
 	// }
 	public static int getMax1(int a, int b) {
 		int c = a - b;
-		// NOTE: 为什么不能这样：~((c >>> 31) & 1);
-		int isPositive = ((c >>> 31) & 1) ^ 1;
+		// NOTE: 不能这样得出符号位：~((c >>> 31) & 1), 取反会前31为都由0变为1
+		int isPositive = (c >>> 31) ^ 1;
 		// System.out.println("negative: " + isPositive);
 		int isNegative = isPositive ^ 1;
 

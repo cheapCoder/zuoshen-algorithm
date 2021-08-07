@@ -1,6 +1,6 @@
-package dp;
+package force_recursion;
 
-public class C01_MaxDistanceInTree {
+public class C08_MaxDistanceInTree {
 
 	public static class Node {
 		public int value;
@@ -47,7 +47,7 @@ public class C01_MaxDistanceInTree {
 	}
 
 
-	// NOTE: answer
+	// answer
 
 	// public static int maxDistance(Node head) {
 	// int[] record = new int[1];

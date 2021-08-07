@@ -1,8 +1,8 @@
-package dp;
+package force_recursion;
 
 import java.util.List;
 
-public class C02_MaxHappy {
+public class C09_MaxHappy {
 	// answer:
 
 	// public static int maxHappy(int[][] matrix) {
