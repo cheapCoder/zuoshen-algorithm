@@ -42,7 +42,7 @@ public class C01_GetMax {
 	public static int getMax2(int a, int b) {
 		int c = a - b;
 		int aSign = ((a >> 31) & 1) ^ 1;
-		int bSign = ((b >> 31) & 1) ^ 1;
+		// int bSign = ((b >> 31) & 1) ^ 1;
 		int cSign = ((c >> 31) & 1) ^ 1;
 		int abDiff = a ^ b;
 		int abSame = abDiff ^ 1;

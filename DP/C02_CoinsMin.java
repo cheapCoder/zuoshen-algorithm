@@ -1,4 +1,4 @@
-package class07;
+package DP;
 
 public class C02_CoinsMin {
 
