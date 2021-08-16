@@ -135,7 +135,8 @@ public class C01_RobotWalk {
 		}
 		return cache[pos][rest];
 	}
-
+	
+	// 严格表结构
 	public static int ways3(int N, int M, int K, int P) {
 		int[][] cache = new int[K + 1][N + 1];
 		cache[0][P] = 1;
