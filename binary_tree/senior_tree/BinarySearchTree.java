@@ -1,4 +1,4 @@
-package Aremain;
+package binary_tree.senior_tree;
 
 /**
  * Not implemented by zuochengyun
