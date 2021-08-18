@@ -1,6 +1,6 @@
-package sort;
+package skill;
 
-public class Problem02_AppleMinBags {
+public class C02_AppleMinBags {
 
 	public static int minBags(int apple) {
 		if (apple < 0) {

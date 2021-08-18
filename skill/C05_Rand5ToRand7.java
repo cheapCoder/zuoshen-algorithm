@@ -1,6 +1,6 @@
-package sort;
+package skill;
 
-public class Problem05_Rand5ToRand7 {
+public class C05_Rand5ToRand7 {
 
 	public static int rand1To5() {
 		return (int) (Math.random() * 5) + 1;

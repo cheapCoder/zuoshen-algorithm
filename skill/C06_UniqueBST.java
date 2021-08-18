@@ -1,9 +1,9 @@
-package sort;
+package skill;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Problem06_UniqueBST {
+public class C06_UniqueBST {
 
 	public static class Node {
 		public int value;

@@ -1,6 +1,6 @@
-package sort;
+package skill;
 
-public class Problem04_MaxOneBorderSize {
+public class C04_MaxOneBorderSize {
 
 	public static void setBorderMap(int[][] m, int[][] right, int[][] down) {
 		int r = m.length;

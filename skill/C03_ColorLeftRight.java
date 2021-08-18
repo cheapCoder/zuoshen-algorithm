@@ -1,6 +1,6 @@
-package sort;
+package skill;
 
-public class Problem03_ColorLeftRight {
+public class C03_ColorLeftRight {
 
 	// RGRGR -> RRRGG
 	public static int minPaint(String s) {

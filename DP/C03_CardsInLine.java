@@ -119,7 +119,7 @@ public class C03_CardsInLine {
 		if (arr == null || arr.length == 0) {
 			return 0;
 		}
-	
+		return 0;
 	}
 	public static void main(String[] args) {
 		int[] arr = { 1, 9, 1 };
