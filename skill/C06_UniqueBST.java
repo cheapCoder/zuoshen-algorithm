@@ -3,6 +3,8 @@ package skill;
 import java.util.LinkedList;
 import java.util.List;
 
+// 题目
+// 给定一个非负整数n，代表二叉树的节点个数。返回能形成多少种不同的二叉树结构
 public class C06_UniqueBST {
 
 	public static class Node {
@@ -15,6 +17,32 @@ public class C06_UniqueBST {
 		}
 	}
 
+	// 暴力递归
+	public static int process(int n) {
+		if (n < 0) {
+			return 0;
+		}
+		if (n == 0) {
+			return 1;
+		}
+		if (n == 1) {
+			return 1;
+		}
+		if (n == 2) {
+			return 2;
+		}
+
+		int res = 0;
+		for (int leftNum = 0; leftNum <= n - 1; leftNum++) {
+			int leftWays = process(leftNum);
+			int rightWays = process(n - 1 - leftNum);
+			res += leftWays * rightWays;
+		}
+		return res;
+	}
+	// TODO:法二：记忆化搜索
+
+	// 动态规划
 	public static int numTrees(int n) {
 		if (n < 2) {
 			return 1;
@@ -29,10 +57,12 @@ public class C06_UniqueBST {
 		return num[n];
 	}
 
+	// for test
 	public static List<Node> generateTrees(int n) {
 		return generate(1, n);
 	}
 
+	// for test
 	public static List<Node> generate(int start, int end) {
 		List<Node> res = new LinkedList<Node>();
 		if (start > end) {
@@ -54,6 +84,7 @@ public class C06_UniqueBST {
 		return res;
 	}
 
+	// for test
 	public static Node cloneTree(Node head) {
 		if (head == null) {
 			return null;
@@ -71,6 +102,7 @@ public class C06_UniqueBST {
 		System.out.println();
 	}
 
+	// for test
 	public static void printInOrder(Node head, int height, String to, int len) {
 		if (head == null) {
 			return;
@@ -85,6 +117,7 @@ public class C06_UniqueBST {
 		printInOrder(head.left, height + 1, "^", len);
 	}
 
+	// for test
 	public static String getSpace(int num) {
 		String space = " ";
 		StringBuffer buf = new StringBuffer("");

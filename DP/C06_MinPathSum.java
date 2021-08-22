@@ -1,5 +1,12 @@
 package DP;
 
+// 矩阵的最小路径和
+// 【题目】
+// 给定一个矩阵 m，从左上角开始每次只能向右或者向下走，最后到达右下角的位置，
+// 路径上所有的数字累加起来就是路径和，返回所有的路径中最小的路径和。
+// 【举例】
+// 如果给定的 m 如下: 1359 8134 5061 8840
+// 路径 1，3，1，0，6，1，0 是所有路径中路径和最小的，所以返回12
 public class C06_MinPathSum {
 
 	public static int minPathSum1(int[][] m) {
@@ -28,10 +35,10 @@ public class C06_MinPathSum {
 		if (m == null || m.length == 0 || m[0] == null || m[0].length == 0) {
 			return 0;
 		}
-		int more = Math.max(m.length, m[0].length); // �����������ϴ���Ǹ�Ϊmore
-		int less = Math.min(m.length, m[0].length); // ������������С���Ǹ�Ϊless
-		boolean rowmore = more == m.length; // �����ǲ��Ǵ��ڵ�������
-		int[] arr = new int[less]; // ��������ĳ��Ƚ�Ϊ�����������е���Сֵ
+		int more = Math.max(m.length, m[0].length);
+		int less = Math.min(m.length, m[0].length);
+		boolean rowmore = more == m.length;
+		int[] arr = new int[less];
 		arr[0] = m[0][0];
 		for (int i = 1; i < less; i++) {
 			arr[i] = arr[i - 1] + (rowmore ? m[0][i] : m[i][0]);
@@ -39,8 +46,7 @@ public class C06_MinPathSum {
 		for (int i = 1; i < more; i++) {
 			arr[0] = arr[0] + (rowmore ? m[i][0] : m[0][i]);
 			for (int j = 1; j < less; j++) {
-				arr[j] = Math.min(arr[j - 1], arr[j])
-						+ (rowmore ? m[i][j] : m[j][i]);
+				arr[j] = Math.min(arr[j - 1], arr[j]) + (rowmore ? m[i][j] : m[j][i]);
 			}
 		}
 		return arr[less - 1];
@@ -72,8 +78,7 @@ public class C06_MinPathSum {
 
 	public static void main(String[] args) {
 		// int[][] m = generateRandomMatrix(3, 4);
-		int[][] m = { { 1, 3, 5, 9 }, { 8, 1, 3, 4 }, { 5, 0, 6, 1 },
-				{ 8, 8, 4, 0 } };
+		int[][] m = { { 1, 3, 5, 9 }, { 8, 1, 3, 4 }, { 5, 0, 6, 1 }, { 8, 8, 4, 0 } };
 		printMatrix(m);
 		System.out.println(minPathSum1(m));
 		System.out.println(minPathSum2(m));

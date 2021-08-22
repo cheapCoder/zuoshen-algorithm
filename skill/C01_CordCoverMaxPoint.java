@@ -1,6 +1,7 @@
 package skill;
 
-// 给定一个有序数组arr，代表数轴上从左到右有n个点arr[0]、arr[1]...arr[n-1]， 给定一个正数L，代表一根长度为L的绳子，求绳子最多能覆盖其中的几个点。
+// 给定一个有序数组arr，代表数轴上从左到右有n个点arr[0]、arr[1]...arr[n-1]， 
+// 给定一个正数L，代表一根长度为L的绳子，求绳子最多能覆盖其中的几个点
 public class C01_CordCoverMaxPoint {
 
 	//法一： O(Nlog(N))的方式
@@ -31,6 +32,7 @@ public class C01_CordCoverMaxPoint {
 	}
 
 	//TODO 法二：O(N)方式
+	// 维持一个窗口(L、R)都往右移动
 
 
 	public static void main(String[] args) {

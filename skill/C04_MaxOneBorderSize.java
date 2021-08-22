@@ -2,6 +2,26 @@ package skill;
 
 public class C04_MaxOneBorderSize {
 
+	// 暴力枚举 => O(n4)
+	public static int maxAllOneBorder(int[][] m) {
+		// TODO:basecase
+		int res = 0;
+		for (int i = 0; i < m.length; i++) {
+			for (int j = 0; j < m[i].length; j++) {
+				// for (int border = 1; border <= Math.min(N - i, N - j); border++) {
+					// 验证这个正方形边界是否为1 
+					// for{}
+					// for{}
+					// for{}
+					// for{}
+				// }
+			}
+		}
+		return res;
+	}
+
+	// 空间换时间
+	// 缓存任意点右边和下边有多少个连续的1(包括自己)
 	public static void setBorderMap(int[][] m, int[][] right, int[][] down) {
 		int r = m.length;
 		int c = m[0].length;
