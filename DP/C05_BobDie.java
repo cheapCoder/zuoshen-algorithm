@@ -1,4 +1,4 @@
-package DP;
+package dp;
 
 
 // Bob的生存概率

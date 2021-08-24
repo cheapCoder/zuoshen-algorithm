@@ -1,4 +1,4 @@
-package DP;
+package dp;
 
 // 矩阵的最小路径和
 // 【题目】

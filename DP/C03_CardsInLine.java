@@ -1,4 +1,4 @@
-package DP;
+package dp;
 // 排成一条线的纸牌博弈问题
 
 // 【题目】
