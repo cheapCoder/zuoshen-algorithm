@@ -1,26 +1,27 @@
 package DP;
 
+
 // 题目：给定一个int数组，里面包含不同面值的货币值，每种货币有无限张，要凑出K元有多少中方法？
 public class C07_CoinsWay {
 
-	public static int coins1(int[] arr, int aim) {
-		if (arr == null || arr.length == 0 || aim < 0) {
-			return 0;
-		}
-		return process1(arr, 0, aim);
-	}
+	// public static int coins1(int[] arr, int aim) {
+	// if (arr == null || arr.length == 0 || aim < 0) {
+	// return 0;
+	// }
+	// return process1(arr, 0, aim);
+	// }
 
-	public static int process1(int[] arr, int index, int aim) {
-		int res = 0;
-		if (index == arr.length) {
-			res = aim == 0 ? 1 : 0;
-		} else {
-			for (int i = 0; arr[index] * i <= aim; i++) {
-				res += process1(arr, index + 1, aim - arr[index] * i);
-			}
-		}
-		return res;
-	}
+	// public static int process1(int[] arr, int index, int aim) {
+	// int res = 0;
+	// if (index == arr.length) {
+	// res = aim == 0 ? 1 : 0;
+	// } else {
+	// for (int i = 0; arr[index] * i <= aim; i++) {
+	// res += process1(arr, index + 1, aim - arr[index] * i);
+	// }
+	// }
+	// return res;
+	// }
 
 	public static int coinsOther(int[] arr, int aim) {
 		if (arr == null || arr.length == 0 || aim < 0) {
@@ -128,9 +129,33 @@ public class C07_CoinsWay {
 		return dp[aim];
 	}
 
+	// 暴力递归
+	// TODO:答案错误
+	public static int coins1(int[] arr, int aim) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+		if (aim < 0) {
+			// System.out.println(0);
+			return 0;
+		}
+		if (aim == 0) {
+			// System.out.println(1);
+			return 1;
+		}
+		int res = 0;
+		for (int i = 0; i < arr.length; i++) {
+			res += coins1(arr, aim - arr[i]);
+		}
+		// System.out.println(res);
+		return res;
+	}
+
+	// private static int process()
+
 	public static void main(String[] args) {
 		int[] coins = { 10, 5, 1, 25 };
-		int aim = 2000;
+		int aim = 20;
 
 		long start = 0;
 		long end = 0;
