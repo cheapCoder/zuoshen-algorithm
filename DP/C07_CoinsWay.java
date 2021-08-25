@@ -1,7 +1,5 @@
 package dp;
 
-
-
 // 题目：给定一个int数组，里面包含不同面值的货币值，每种货币有无限张，要凑出K元有多少中方法？
 public class C07_CoinsWay {
 
@@ -24,24 +22,24 @@ public class C07_CoinsWay {
 	// return res;
 	// }
 
-	public static int coinsOther(int[] arr, int aim) {
-		if (arr == null || arr.length == 0 || aim < 0) {
-			return 0;
-		}
-		return processOther(arr, arr.length - 1, aim);
-	}
+	// public static int coinsOther(int[] arr, int aim) {
+	// if (arr == null || arr.length == 0 || aim < 0) {
+	// return 0;
+	// }
+	// return processOther(arr, arr.length - 1, aim);
+	// }
 
-	public static int processOther(int[] arr, int index, int aim) {
-		int res = 0;
-		if (index == -1) {
-			res = aim == 0 ? 1 : 0;
-		} else {
-			for (int i = 0; arr[index] * i <= aim; i++) {
-				res += processOther(arr, index - 1, aim - arr[index] * i);
-			}
-		}
-		return res;
-	}
+	// public static int processOther(int[] arr, int index, int aim) {
+	// int res = 0;
+	// if (index == -1) {
+	// res = aim == 0 ? 1 : 0;
+	// } else {
+	// for (int i = 0; arr[index] * i <= aim; i++) {
+	// res += processOther(arr, index - 1, aim - arr[index] * i);
+	// }
+	// }
+	// return res;
+	// }
 
 	public static int coins2(int[] arr, int aim) {
 		if (arr == null || arr.length == 0 || aim < 0) {
@@ -131,32 +129,75 @@ public class C07_CoinsWay {
 	}
 
 	// 暴力递归
-	// TODO:答案错误
+	// 错误示例:答案错误，没有保证顺序，会有重复， 比如 1 5 10 5 和5 1 5 10 会算为两种方法
+	// public static int coins1(int[] arr, int aim) {
+	// if (arr == null || arr.length == 0) {
+	// return 0;
+	// }
+	// if (aim < 0) {
+	// System.out.println(0);
+	// return 0;
+	// }
+	// if (aim == 0) {
+	// return 1;
+	// }
+	// int res = 0;
+	// for (int i = 0; i < arr.length; i++) {
+	// res += coins1(arr, aim - arr[i]);
+	// }
+	// return res;
+	// }
+
+	// 暴力递归(从0往arr.length - 1位置选择)
 	public static int coins1(int[] arr, int aim) {
 		if (arr == null || arr.length == 0) {
 			return 0;
 		}
+
+		return process(arr, 0, aim);
+	}
+
+	private static int process(int[] arr, int i, int aim) {
 		if (aim < 0) {
-			// System.out.println(0);
 			return 0;
 		}
-		if (aim == 0) {
-			// System.out.println(1);
-			return 1;
+		if (i == arr.length) {
+			return aim == 0 ? 1 : 0;
 		}
 		int res = 0;
-		for (int i = 0; i < arr.length; i++) {
-			res += coins1(arr, aim - arr[i]);
+		for (int j = 0; j * arr[i] <= aim; j++) {
+			res += process(arr, i + 1, aim - arr[i] * j);
 		}
-		// System.out.println(res);
 		return res;
 	}
 
-	// private static int process()
+	// 暴力递归(从arr.length - 1往0位置选择)
+	public static int coinsOther(int[] arr, int aim) {
+		if (arr == null || arr.length == 0 || aim < 0) {
+			return 0;
+		}
+
+		return processOther(arr, arr.length - 1, aim);
+	}
+
+	private static int processOther(int[] arr, int i, int aim) {
+		// if (aim < 0) {
+		// return 0;
+		// }
+		int res = 0;
+		if (i == -1) {
+			res = aim == 0 ? 1 : 0;
+		} else {
+			for (int j = 0; j * arr[i] <= aim; j++) {
+				res += processOther(arr, i - 1, aim - arr[i] * j);
+			}
+		}
+		return res;
+	}
 
 	public static void main(String[] args) {
 		int[] coins = { 10, 5, 1, 25 };
-		int aim = 20;
+		int aim = 2000;
 
 		long start = 0;
 		long end = 0;
