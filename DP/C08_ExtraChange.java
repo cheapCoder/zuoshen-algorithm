@@ -1,4 +1,4 @@
-package DP;
+package dp;
 
 // TODO: 补充freeCodeCamp的题目
 // 计算找零
