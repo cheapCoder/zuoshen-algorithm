@@ -1,10 +1,18 @@
-package DP;
+package dp;
 
 // 机器人达到指定位置方法数
 
-//【题目】假设有排成一行的N个位置，记为1~N，N一定大于或等于2。开始时机器人在其中的M位置上(M一定是1~N中的一个)，机器人可以往左走或者往右走，如果机器人来到1位置，那么下一步只能往右来到2位置;如果机器人来到N位置，那么下一步只能往左来到N-1位置。规定机器人必须走K步，最终能来到P位置(P也一定是1~N中的一个)的方法有多少种。给定四个参数N、M、K、P，返回方法数。
+//【题目】假设有排成一行的N个位置，记为1~N，N一定大于或等于2。
+// 开始时机器人在其中的M位置上(M一定是1~N中的一个)，机器人可以往左走或者往右走，如果机器人来到1位置，
+// 那么下一步只能往右来到2位置;如果机器人来到N位置，那么下一步只能往左来到N-1位置。
+// 规定机器人必须走K步，最终能来到P位置(P也一定是1~N中的一个)的方法有多少种。
+// 给定四个参数N、M、K、P，返回方法数。
 
-// 【举例】N=5,M=2,K=3,P=3上面的参数代表所有位置为 1 2 3 4 5。机器人最开始在2位置上，必须经过3步，最后到达3位置。走的方法只有如下3种:1)从2到1，从1到2，从2到32)从2到3，从3到2，从2到33)从2到3，从3到4，从4到3所以返回方法数3。N=3,M=1,K=3,P=3上面的参数代表所有位置为 1 2 3。机器人最开始在1位置上，必须经过3步，最后到达3位置。怎么走也不可能，所以返回方法数 0。
+// 【举例】N=5,M=2,K=3,P=3上面的参数代表所有位置为 1 2 3 4 5。
+// 机器人最开始在2位置上，必须经过3步，最后到达3位置。
+// 走的方法只有如下3种:1)从2到1，从1到2，从2到32)从2到3，从3到2，从2到33)从2到3，从3到4，从4到3所以返回方法数3。
+// N=3,M=1,K=3,P=3上面的参数代表所有位置为 1 2 3。
+// 机器人最开始在1位置上，必须经过3步，最后到达3位置。怎么走也不可能，所以返回方法数 0。
 
 public class C01_RobotWalk {
 
@@ -67,30 +75,29 @@ public class C01_RobotWalk {
 	// return dp[K][M];
 	// }
 
-	// TODO:为啥只用一个一维数组dp，不是二维？
-	public static int ways4(int N, int M, int K, int P) {
-		// 参数无效直接返回0
-		if (N < 2 || K < 1 || M < 1 || M > N || P < 1 || P > N) {
-			return 0;
-		}
-		int[] dp = new int[N + 1];
-		dp[P] = 1;
-		for (int i = 1; i <= K; i++) {
-			int leftUp = dp[1];// 左上角的值
-			for (int j = 1; j <= N; j++) {
-				int tmp = dp[j];
-				if (j == 1) {
-					dp[j] = dp[j + 1];
-				} else if (j == N) {
-					dp[j] = leftUp;
-				} else {
-					dp[j] = leftUp + dp[j + 1];
-				}
-				leftUp = tmp;
-			}
-		}
-		return dp[M];
-	}
+	// public static int ways4(int N, int M, int K, int P) {
+	// // 参数无效直接返回0
+	// if (N < 2 || K < 1 || M < 1 || M > N || P < 1 || P > N) {
+	// return 0;
+	// }
+	// int[] dp = new int[N + 1];
+	// dp[P] = 1;
+	// for (int i = 1; i <= K; i++) {
+	// int leftUp = dp[1];// 左上角的值
+	// for (int j = 1; j <= N; j++) {
+	// int tmp = dp[j];
+	// if (j == 1) {
+	// dp[j] = dp[j + 1];
+	// } else if (j == N) {
+	// dp[j] = leftUp;
+	// } else {
+	// dp[j] = leftUp + dp[j + 1];
+	// }
+	// leftUp = tmp;
+	// }
+	// }
+	// return dp[M];
+	// }
 
 	// 暴力递归
 	public static int ways1(int N, int pos, int rest, int target) {
@@ -135,8 +142,8 @@ public class C01_RobotWalk {
 		}
 		return cache[pos][rest];
 	}
-	
-	// 严格表结构
+
+	// 严格表结构@1
 	public static int ways3(int N, int M, int K, int P) {
 		int[][] cache = new int[K + 1][N + 1];
 		cache[0][P] = 1;
@@ -154,9 +161,35 @@ public class C01_RobotWalk {
 		return cache[K][M];
 	}
 
+	// 严格表结构@2
+	// NOTE:每个各自只与上行的左侧格子和右侧格子有关，可以只缓存上一行的值和上一个左侧格子的值(因为算到当前格子时上行左侧的格子值已经被覆盖了)
+	public static int ways4(int N, int M, int K, int P) {
+		int[] cache = new int[N + 1];
+		int leftUpCache;
+		cache[P] = 1;
+
+		for (int i = 1; i < K + 1; i++) {
+			leftUpCache = cache[1];
+			for (int j = 1; j < cache.length; j++) {
+				int tem = cache[j];
+				if (j == 1) {
+					cache[j] = cache[j + 1];
+				} else if (j == cache.length - 1) {
+					cache[j] = leftUpCache;
+				} else {
+					cache[j] = leftUpCache + cache[j + 1];
+				}
+				leftUpCache = tem;
+			}
+		}
+
+		return cache[M];
+	}
+
 	public static void main(String[] args) {
 		System.out.println(ways1(7, 4, 9, 5));
 		System.out.println(ways2(7, 4, 9, 5));
 		System.out.println(ways3(7, 4, 9, 5));
+		System.out.println(ways4(7, 4, 9, 5));
 	}
 }

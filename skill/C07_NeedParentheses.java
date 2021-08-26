@@ -1,6 +1,6 @@
-package sort;
+package skill;
 
-public class Problem07_NeedParentheses {
+public class C07_NeedParentheses {
 
 	public static int needParentheses(String str) {
 		int leftRest = 0;

@@ -1,4 +1,4 @@
-package Aremain;
+package binary_tree.senior_tree;
 
 /**
  * Not implemented by zuochengyun
@@ -22,19 +22,14 @@ public class AbstractBinarySearchTree {
 	protected int size;
 
 	/**
-	 * Because this is abstract class and various trees have different
-	 * additional information on different nodes subclasses uses this abstract
-	 * method to create nodes (maybe of class {@link Node} or maybe some
-	 * different node sub class).
+	 * Because this is abstract class and various trees have different additional
+	 * information on different nodes subclasses uses this abstract method to create
+	 * nodes (maybe of class {@link Node} or maybe some different node sub class).
 	 * 
-	 * @param value
-	 *            Value that node will have.
-	 * @param parent
-	 *            Node's parent.
-	 * @param left
-	 *            Node's left child.
-	 * @param right
-	 *            Node's right child.
+	 * @param value  Value that node will have.
+	 * @param parent Node's parent.
+	 * @param left   Node's left child.
+	 * @param right  Node's right child.
 	 * @return Created node instance.
 	 */
 	protected Node createNode(int value, Node parent, Node left, Node right) {
@@ -42,11 +37,9 @@ public class AbstractBinarySearchTree {
 	}
 
 	/**
-	 * Finds a node with concrete value. If it is not found then null is
-	 * returned.
+	 * Finds a node with concrete value. If it is not found then null is returned.
 	 * 
-	 * @param element
-	 *            Element value.
+	 * @param element Element value.
 	 * @return Node with value provided, or null if not found.
 	 */
 	public Node search(int element) {
@@ -64,8 +57,7 @@ public class AbstractBinarySearchTree {
 	/**
 	 * Insert new element to tree.
 	 * 
-	 * @param element
-	 *            Element to insert.
+	 * @param element Element to insert.
 	 */
 	public Node insert(int element) {
 		if (root == null) {
@@ -99,8 +91,7 @@ public class AbstractBinarySearchTree {
 	/**
 	 * Removes element if node with such value exists.
 	 * 
-	 * @param element
-	 *            Element value to remove.
+	 * @param element Element value to remove.
 	 * 
 	 * @return New node that is in place of deleted node. Or null if element for
 	 *         delete was not found.
@@ -117,8 +108,7 @@ public class AbstractBinarySearchTree {
 	/**
 	 * Delete logic when node is already found.
 	 * 
-	 * @param deleteNode
-	 *            Node that needs to be deleted.
+	 * @param deleteNode Node that needs to be deleted.
 	 * 
 	 * @return New node that is in place of deleted node. Or null if element for
 	 *         delete was not found.
@@ -153,10 +143,8 @@ public class AbstractBinarySearchTree {
 	/**
 	 * Put one node from tree (newNode) to the place of another (nodeToReplace).
 	 * 
-	 * @param nodeToReplace
-	 *            Node which is replaced by newNode and removed from tree.
-	 * @param newNode
-	 *            New node.
+	 * @param nodeToReplace Node which is replaced by newNode and removed from tree.
+	 * @param newNode       New node.
 	 * 
 	 * @return New replaced node.
 	 */
@@ -199,11 +187,10 @@ public class AbstractBinarySearchTree {
 	/**
 	 * Get next element element who is bigger than provided element.
 	 * 
-	 * @param element
-	 *            Element for whom descendand element is searched
+	 * @param element Element for whom descendand element is searched
 	 * @return Successor value.
 	 */
-	// TODO Predecessor
+	// Predecessor
 	public int getSuccessor(int element) {
 		return getSuccessor(search(element)).value;
 	}

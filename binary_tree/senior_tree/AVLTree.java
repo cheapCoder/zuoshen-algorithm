@@ -1,4 +1,4 @@
-package Aremain;
+package binary_tree.senior_tree;
 
 /**
  * Not implemented by zuochengyun
@@ -64,6 +64,7 @@ public class AVLTree extends AbstractSelfBalancingBinarySearchTree {
         return new AVLNode(value, parent, left, right);
     }
 
+    // see 
     /**
      * Go up from inserted node, and update height and balance informations if needed.
      * If some node balance reaches 2 or -2 that means that subtree must be rebalanced.

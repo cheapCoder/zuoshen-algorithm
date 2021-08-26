@@ -1,6 +1,10 @@
-package sort;
+package skill;
+// 题目：
+// 1. 给定一个函数f，可以1~5 的数字等概率返回一个。请加工出1~7 的数字等概率 返回一个的函数g。
+// 2. 给定一个函数f，可以a~b的数字等概率返回一个。请加工出c~d的数字等概率 返回一个的函数g。
+// 3. 给定一个函数f，以p概率返回0，以1-p概率返回1。请加工出等概率返回0和1的 函数g
 
-public class Problem05_Rand5ToRand7 {
+public class C05_Rand5ToRand7 {
 
 	public static int rand1To5() {
 		return (int) (Math.random() * 5) + 1;
