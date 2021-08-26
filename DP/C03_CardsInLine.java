@@ -118,7 +118,7 @@ public class C03_CardsInLine {
 		return sCache[left][right];
 	}
 
-	// TODO:法三 严格表结构
+	// 法三 严格表结构
 	public static int win3(int[] arr) {
 		if (arr == null || arr.length == 0) {
 			return 0;
