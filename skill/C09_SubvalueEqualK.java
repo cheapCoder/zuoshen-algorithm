@@ -1,11 +1,12 @@
-package sort;
+package skill;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-public class Problem01_SubvalueEqualK {
+// 给定一个数组arr，求差值为k的去重数字对。
+public class C09_SubvalueEqualK {
 
 	public static List<List<Integer>> allPair(int[] arr, int k) {
 		HashSet<Integer> set = new HashSet<>();
