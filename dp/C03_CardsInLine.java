@@ -71,7 +71,7 @@ public class C03_CardsInLine {
 		if (left == right) {
 			return 0;
 		}
-		// NOTE: 不用加arr[left]和arr[right], 数组后选就相当于在先选后剩下的数组中进行先选
+		// NOTE: 不用加arr[left]和arr[right], 数组后选就相当于在经先选后剩下的数组中进行先选
 		return Math.min(f(arr, left + 1, right), f(arr, left, right - 1));
 	}
 
