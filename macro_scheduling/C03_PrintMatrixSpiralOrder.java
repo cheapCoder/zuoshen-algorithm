@@ -1,13 +1,24 @@
-package sort;
+package macro_scheduling;
 
-public class Problem04_PrintMatrixSpiralOrder {
+// 给定一个正方形矩阵，只用有限几个变量，实现矩阵中每个位置的数顺时针转动 90度，比如如下的矩阵
+// 0 1  2 3 
+// 4 5  6 7 
+// 8 9 10 11
+// 12 13 14 15 
+// 矩阵应该被调整为: 
+// 12 8  4 0
+// 13 9  5 1
+// 14 10 6 2
+// 15 11 7 3
+
+public class C03_PrintMatrixSpiralOrder {
 
 	public static void spiralOrderPrint(int[][] matrix) {
 		int tR = 0;
 		int tC = 0;
 		int dR = matrix.length - 1;
 		int dC = matrix[0].length - 1;
-		while (tR <= dR && tC <= dC) {
+		while (tR <= dR && tC <= dC) {	// 正方形,只用满足一个就行
 			printEdge(matrix, tR++, tC++, dR--, dC--);
 		}
 	}
@@ -44,8 +55,7 @@ public class Problem04_PrintMatrixSpiralOrder {
 	}
 
 	public static void main(String[] args) {
-		int[][] matrix = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 },
-				{ 13, 14, 15, 16 } };
+		int[][] matrix = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 }, { 13, 14, 15, 16 } };
 		spiralOrderPrint(matrix);
 
 	}

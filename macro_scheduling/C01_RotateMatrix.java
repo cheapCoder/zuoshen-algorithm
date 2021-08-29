@@ -1,6 +1,12 @@
-package sort;
+package macro_scheduling;
 
-public class Problem03_RotateMatrix {
+// 用螺旋的方式打印矩阵，比如如下的矩阵 0123
+// 4567
+// 8 91011
+// 打印顺序为:0 1 2 3 7 11 10 9 8 4 5 6
+
+// NOTE: 宏观调度
+public class C01_RotateMatrix {
 
 	public static void rotate(int[][] matrix) {
 		int tR = 0;
@@ -24,6 +30,7 @@ public class Problem03_RotateMatrix {
 		}
 	}
 
+	// for test
 	public static void printMatrix(int[][] matrix) {
 		for (int i = 0; i != matrix.length; i++) {
 			for (int j = 0; j != matrix[0].length; j++) {

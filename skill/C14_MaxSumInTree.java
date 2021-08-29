@@ -1,9 +1,12 @@
-package sort;
+package skill;
 
 import java.util.HashMap;
 import java.util.Stack;
 
-public class Problem07_MaxSumInTree {
+// 二叉树每个结点都有一个int型权值，
+// 给定一棵二叉树，要求计算出从根结点到叶结点的所有路径中，最大的权值和为多少。
+
+public class C14_MaxSumInTree {
 
 	public static class Node {
 		public int value;

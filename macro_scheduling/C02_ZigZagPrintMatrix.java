@@ -1,6 +1,10 @@
-package sort;
+package macro_scheduling;
 
-public class Problem02_ZigZagPrintMatrix {
+// 用zigzag的方式打印矩阵，比如如下的矩阵 0123
+// 4567
+// 8 91011
+// 打印顺序为:0 1 4 8 5 2 3 6 9 10 7 11
+public class C02_ZigZagPrintMatrix {
 
 	public static void printMatrixZigZag(int[][] matrix) {
 		int tR = 0;

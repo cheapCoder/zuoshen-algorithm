@@ -1,6 +1,8 @@
-package sort;
+package skill;
 
-public class Problem05_FindNumInSortedMatrix {
+// 给定一个元素为非负整数的二维数组matrix，每行和每列都是从小到大有序的。 
+// 再给定一个非负整数aim，请判断aim是否在matrix中。
+public class C15_FindNumInSortedMatrix {
 
 	public static boolean isContains(int[][] matrix, int K) {
 		int row = 0;
@@ -16,6 +18,8 @@ public class Problem05_FindNumInSortedMatrix {
 		}
 		return false;
 	}
+
+	// TODO:尝试二维二分法
 
 	public static void main(String[] args) {
 		int[][] matrix = new int[][] { { 0, 1, 2, 3, 4, 5, 6 },// 0
