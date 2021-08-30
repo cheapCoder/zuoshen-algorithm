@@ -1,12 +1,12 @@
-package sort;
+package skill;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
-public class Problem07_TopKTimes {
+// 给定一个字符串类型的数组arr，求其中出现次数最多的前K个
+public class C18_TopKTimes {
 
 	public static class Node {
 		public String str;
@@ -56,6 +56,7 @@ public class Problem07_TopKTimes {
 		}
 	}
 
+	// for test
 	public static String[] generateRandomArray(int len, int max) {
 		String[] res = new String[len];
 		for (int i = 0; i != len; i++) {
@@ -64,6 +65,7 @@ public class Problem07_TopKTimes {
 		return res;
 	}
 
+	// for test
 	public static void printArray(String[] arr) {
 		for (int i = 0; i != arr.length; i++) {
 			System.out.print(arr[i] + " ");
