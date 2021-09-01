@@ -1,89 +1,184 @@
 package skill;
 
-// 给定一个N*N的矩阵matrix，只有0和1两种值，返回边框全是1的最大正方形的边 长长度。
+// 题目:
+// 给定一个N*N的矩阵matrix，只有0和1两种值，返回边框全是1的最大正方形的边长长度。
 // 例如:
-// 01111
-// 01001
-// 01001
-// 01111
-// 01011 
+// 0 1 1 1 1
+// 0 1 0 0 1
+// 0 1 0 0 1
+// 0 1 1 1 1
+// 0 1 0 1 1 
 // 其中边框全是1的最大正方形的大小为4*4，所以返回4。
 public class C05_MaxOneBorderSize {
 
+	// public static int getMaxSize1(int[][] m) {
+	// int res = 0;
+	// for (int i = 0; i < m.length; i++) {
+	// for (int j = 0; j < m[i].length; j++) {
+	// // for (int border = 1; border <= Math.min(N - i, N - j); border++) {
+	// // 验证这个正方形边界是否为1
+	// // for{}
+	// // for{}
+	// // for{}
+	// // for{}
+	// // }
+	// }
+	// }
+	// return res;
+	// }
+
+	// public static int getMaxSize2(int[][] m) {
+	// int[][] right = new int[m.length][m[0].length];
+	// int[][] down = new int[m.length][m[0].length];
+	// setBorderMap(m, right, down);
+	// for (int size = Math.min(m.length, m[0].length); size != 0; size--) {
+	// if (hasSizeOfBorder(size, right, down)) {
+	// return size;
+	// }
+	// }
+	// return 0;
+	// }
+
+	// // 空间换时间
+	// // 缓存任意点右边和下边有多少个连续的1(包括自己)
+	// private static void setBorderMap(int[][] m, int[][] right, int[][] down) {
+	// int r = m.length;
+	// int c = m[0].length;
+	// if (m[r - 1][c - 1] == 1) {
+	// right[r - 1][c - 1] = 1;
+	// down[r - 1][c - 1] = 1;
+	// }
+	// for (int i = r - 2; i != -1; i--) {
+	// if (m[i][c - 1] == 1) {
+	// right[i][c - 1] = 1;
+	// down[i][c - 1] = down[i + 1][c - 1] + 1;
+	// }
+	// }
+	// for (int i = c - 2; i != -1; i--) {
+	// if (m[r - 1][i] == 1) {
+	// right[r - 1][i] = right[r - 1][i + 1] + 1;
+	// down[r - 1][i] = 1;
+	// }
+	// }
+	// for (int i = r - 2; i != -1; i--) {
+	// for (int j = c - 2; j != -1; j--) {
+	// if (m[i][j] == 1) {
+	// right[i][j] = right[i][j + 1] + 1;
+	// down[i][j] = down[i + 1][j] + 1;
+	// }
+	// }
+	// }
+	// }
+
+	// private static boolean hasSizeOfBorder(int size, int[][] right, int[][] down)
+	// {
+	// for (int i = 0; i != right.length - size + 1; i++) {
+	// for (int j = 0; j != right[0].length - size + 1; j++) {
+	// if (right[i][j] >= size && down[i][j] >= size && right[i + size - 1][j] >=
+	// size
+	// && down[i][j + size - 1] >= size) {
+	// System.out.println("2: " + i + " " + j + " " + size);
+	// return true;
+	// }
+	// }
+	// }
+	// return false;
+	// }
+
 	// 暴力枚举 => O(n4)
-	public static int maxAllOneBorder(int[][] m) {
-		// TODO:basecase
+	public static int getMaxSize1(int[][] m) {
+		if (m == null || m.length == 0 || m[0].length == 0) {
+			return 0;
+		}
+
 		int res = 0;
 		for (int i = 0; i < m.length; i++) {
-			for (int j = 0; j < m[i].length; j++) {
-				// for (int border = 1; border <= Math.min(N - i, N - j); border++) {
-					// 验证这个正方形边界是否为1 
-					// for{}
-					// for{}
-					// for{}
-					// for{}
-				// }
+			for (int j = 0; j < m[0].length; j++) {
+				if (m[i][j] == 0) {
+					continue;
+				}
+				// NOTE: l只是表示两点的索引差，为距离差，所求的边长由一个个点表示多长，为l + 1
+				for (int l = Math.min(m[0].length - j - 1, m.length - i - 1) - 1; l >= 0; l--) {
+					if (isSquare(m, i, j, l)) {
+						if (l > 0) {
+							System.out.println("1: " + i + " " + j + " " + l);
+						}
+						res = Math.max(res, l + 1);
+						break;
+					}
+				}
+
 			}
 		}
 		return res;
 	}
 
-	// 空间换时间
-	// 缓存任意点右边和下边有多少个连续的1(包括自己)
-	public static void setBorderMap(int[][] m, int[][] right, int[][] down) {
-		int r = m.length;
-		int c = m[0].length;
-		if (m[r - 1][c - 1] == 1) {
-			right[r - 1][c - 1] = 1;
-			down[r - 1][c - 1] = 1;
-		}
-		for (int i = r - 2; i != -1; i--) {
-			if (m[i][c - 1] == 1) {
-				right[i][c - 1] = 1;
-				down[i][c - 1] = down[i + 1][c - 1] + 1;
+	private static boolean isSquare(int[][] m, int x, int y, int l) {
+		// 上行
+		for (int i = y; i <= y + l; i++) {
+			if (m[x][i] != 1) {
+				return false;
 			}
 		}
-		for (int i = c - 2; i != -1; i--) {
-			if (m[r - 1][i] == 1) {
-				right[r - 1][i] = right[r - 1][i + 1] + 1;
-				down[r - 1][i] = 1;
+		// 右竖
+		for (int i = x + 1; i <= x + l; i++) {
+			if (m[i][y + l] != 1) {
+				return false;
 			}
 		}
-		for (int i = r - 2; i != -1; i--) {
-			for (int j = c - 2; j != -1; j--) {
-				if (m[i][j] == 1) {
-					right[i][j] = right[i][j + 1] + 1;
-					down[i][j] = down[i + 1][j] + 1;
-				}
+		// 下行
+		for (int i = y; i < y + l; i++) {
+			if (m[x + l][i] != 1) {
+				return false;
 			}
 		}
+		// 左竖
+		for (int i = x; i < x + l; i++) {
+			if (m[i][y] != 1) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	public static int getMaxSize(int[][] m) {
-		int[][] right = new int[m.length][m[0].length];
-		int[][] down = new int[m.length][m[0].length];
-		setBorderMap(m, right, down);
-		for (int size = Math.min(m.length, m[0].length); size != 0; size--) {
-			if (hasSizeOfBorder(size, right, down)) {
-				return size;
+	public static int getMaxSize2(int[][] m) {
+		if (m == null || m.length == 0 || m[0].length == 0) {
+			return 0;
+		}
+
+		int rowLength = m.length;
+		int colLength = m[0].length;
+
+		// 初始化缓存
+		int[][] rightCache = new int[rowLength][colLength];
+		int[][] downCache = new int[rowLength][colLength];
+		// 任意位置右侧有多少个1
+		for (int row = 0; row < rowLength; row++) {
+			rightCache[row][colLength - 1] = m[row][colLength - 1] == 1 ? 1 : 0;
+		}
+		for (int i = 0; i < rowLength; i++) {
+			for (int j = colLength - 2; j >= 0; j--) {
+				rightCache[i][j] = m[i][j] == 1 ? rightCache[i][j + 1] + 1 : rightCache[i][j + 1];
 			}
 		}
-		return 0;
-	}
-
-	public static boolean hasSizeOfBorder(int size, int[][] right, int[][] down) {
-		for (int i = 0; i != right.length - size + 1; i++) {
-			for (int j = 0; j != right[0].length - size + 1; j++) {
-				if (right[i][j] >= size && down[i][j] >= size
-						&& right[i + size - 1][j] >= size
-						&& down[i][j + size - 1] >= size) {
-					return true;
-				}
+		// 任意位置下面有多少个1
+		for (int col = 0; col < colLength; col++) {
+			rightCache[rowLength - 1][col] = m[rowLength - 1][col] == 1 ? 1 : 0;
+		}
+		for (int i = rowLength - 2; i >= 0; i--) {
+			for (int j = 0; j < colLength; j++) {
+				rightCache[i][j] = m[i][j] == 1 ? rightCache[i + 1][j] + 1 : rightCache[i + 1][j];
 			}
 		}
-		return false;
+
+		// TODO:判断可为正方形
+		for (int i = 0; i < rowLength; i++) {
+			
+		}
+
 	}
 
+	// for test
 	public static int[][] generateRandom01Matrix(int rowSize, int colSize) {
 		int[][] res = new int[rowSize][colSize];
 		for (int i = 0; i != rowSize; i++) {
@@ -94,6 +189,7 @@ public class C05_MaxOneBorderSize {
 		return res;
 	}
 
+	// for test
 	public static void printMatrix(int[][] matrix) {
 		for (int i = 0; i != matrix.length; i++) {
 			for (int j = 0; j != matrix[0].length; j++) {
@@ -104,8 +200,9 @@ public class C05_MaxOneBorderSize {
 	}
 
 	public static void main(String[] args) {
-		int[][] matrix = generateRandom01Matrix(7, 8);
+		int[][] matrix = generateRandom01Matrix(30, 40);
 		printMatrix(matrix);
-		System.out.println(getMaxSize(matrix));
+		System.out.println(getMaxSize1(matrix));
+		System.out.println(getMaxSize2(matrix));
 	}
 }
