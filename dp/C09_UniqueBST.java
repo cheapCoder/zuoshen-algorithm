@@ -98,11 +98,11 @@ public class C09_UniqueBST {
 		cache[0] = 1;
 		for (int i = 1; i < cache.length; i++) {
 			// 0 ~ n - 1
-			for (int leftCount = 0; leftCount < n; leftCount++) {
-				cache[i] += numTrees1(leftCount) * numTrees1(n - 1 - leftCount);
+			for (int leftCount = 0; leftCount < i; leftCount++) {
+				cache[i] += cache[leftCount] * cache[i - 1 - leftCount];
 			}
 		}
-	
+
 		return cache[n];
 	}
 
@@ -177,7 +177,7 @@ public class C09_UniqueBST {
 	}
 
 	public static void main(String[] args) {
-		int n = 5;
+		int n = 10;
 		System.out.println(numTrees1(n));
 		System.out.println(numTrees2(n));
 		System.out.println(numTrees3(n));
