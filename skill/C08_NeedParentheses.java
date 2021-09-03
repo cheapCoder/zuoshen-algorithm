@@ -9,21 +9,41 @@ package skill;
 // 请问牛牛至少需要添加多少个括号。
 public class C08_NeedParentheses {
 
+	// public static int needParentheses(String str) {
+	// int leftRest = 0;
+	// int needSolveRight = 0;
+	// for (int i = 0; i < str.length(); i++) {
+	// if (str.charAt(i) == '(') {
+	// leftRest++;
+	// } else {
+	// if (leftRest == 0) {
+	// needSolveRight++;
+	// } else {
+	// leftRest--;
+	// }
+	// }
+	// }
+	// return leftRest + needSolveRight;
+	// }
+
 	public static int needParentheses(String str) {
-		int leftRest = 0;
-		int needSolveRight = 0;
-		for (int i = 0; i < str.length(); i++) {
-			if (str.charAt(i) == '(') {
-				leftRest++;
-			} else {
-				if (leftRest == 0) {
-					needSolveRight++;
-				} else {
-					leftRest--;
-				}
+		int makeUp = 0;
+		int last = 0;
+		char[] arr = str.toCharArray();
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] == '(') {
+				last++;
+			} else if (arr[i] == ')') {
+				last--;
+			}
+
+			if (last < 0) {
+				makeUp++;
+				last++;
 			}
 		}
-		return leftRest + needSolveRight;
+
+		return last + makeUp;
 	}
 
 	public static void main(String args[]) {
