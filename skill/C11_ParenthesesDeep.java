@@ -10,7 +10,7 @@ package skill;
 // 1空串""的深度是0 
 // 2如果字符串"X"的深度是x,字符串"Y"的深度是y,那么字符串"XY"的深度为 max(x,y) 3、如果"X"的深度是x,那么字符串"(X)"的深度是x+1
 // 例如: "()()()"的深度是1,"((()))"的深度是3。
-// 牛牛现在给你一个合法的括号 序列,需要你计算出其深度。
+// 现在给你一个合法的括号序列,需要你计算出其深度。
 public class C11_ParenthesesDeep {
 
 	public static boolean isValid(char[] str) {
