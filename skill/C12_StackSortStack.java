@@ -7,18 +7,41 @@ import java.util.Stack;
 // 栈存放临时数据，但不得将元素复制到别的数据结构中。
 public class C12_StackSortStack {
 
+	// public static void sortStackByStack(Stack<Integer> stack) {
+	// Stack<Integer> help = new Stack<Integer>();
+	// while (!stack.isEmpty()) {
+	// int cur = stack.pop();
+	// while (!help.isEmpty() && help.peek() < cur) {
+	// stack.push(help.pop());
+	// }
+	// help.push(cur);
+	// }
+	// while (!help.isEmpty()) {
+	// stack.push(help.pop());
+	// }
+	// }
+
 	public static void sortStackByStack(Stack<Integer> stack) {
-		Stack<Integer> help = new Stack<Integer>();
-		while (!stack.isEmpty()) {
-			int cur = stack.pop();
-			while (!help.isEmpty() && help.peek() < cur) {
-				stack.push(help.pop());
+		if (stack == null || stack.isEmpty()) {
+			return;
+		}
+
+		Stack<Integer> tem = new Stack<>();
+		int n;
+		tem.push(stack.pop());
+
+		while (!stack.empty()) {
+			n = stack.pop();
+			while (!tem.isEmpty() && tem.peek() < n) {
+				stack.push(tem.pop());
 			}
-			help.push(cur);
+			tem.push(n);
 		}
-		while (!help.isEmpty()) {
-			stack.push(help.pop());
+
+		while (!tem.isEmpty()) {
+			stack.push(tem.pop());
 		}
+
 	}
 
 	public static void main(String[] args) {
