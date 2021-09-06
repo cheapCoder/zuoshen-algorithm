@@ -49,6 +49,7 @@ public class C11_ParenthesesDeep {
 		return max;
 	}
 
+	// TODO:not understand
 	// 拓展题：找到最长的合法子序列
 	public static int maxLength(String str) {
 		if (str == null || str.equals("")) {
@@ -70,12 +71,41 @@ public class C11_ParenthesesDeep {
 		return res;
 	}
 
-	// TODO:自己的想法：两个变量表示左右边界，一个变量表示当前找到的最长子序列，用count表示栈，
+	// 拓展题
+	// 自己的想法：两个变量表示左右边界，一个变量表示当前找到的最长子序列，用count表示栈，
 	// count==0就对比左右边界是否是更大的子序列，count<0就把左边界右移到右边界
+	public static int maxLength2(String str) {
+		// if (str == null || str.length() == 0) {
+		// return 0;
+		// }
+		int leftBorder = 0;
+		int rightBorder = 0;
+		int count = 0;
+		int maxLen = 0;
+		while (rightBorder < str.length()) {
+			if (str.charAt(rightBorder) == '(') {
+				count++;
+			} else if (str.charAt(rightBorder) == ')') {
+				count--;
+				if (count == 0) {
+					maxLen = Math.max(maxLen, rightBorder - leftBorder + 1);
+					leftBorder = rightBorder + 1;
+				} else if (count < 0) {	// 序列不合法
+					return -1;
+				}
+			}
+
+			rightBorder++;
+		}
+
+		return maxLen;
+	}
 
 	public static void main(String[] args) {
-		String test = "((()))";
+		String test = "((()()()((()))()))";
 		System.out.println(deep(test));
+		System.out.println(maxLength(test));
+		System.out.println(maxLength2(test));
 
 	}
 
