@@ -1,7 +1,5 @@
 package macro_scheduling;
 
-import javax.swing.plaf.metal.MetalTreeUI;
-
 // 给定一个正方形矩阵，只用有限几个变量，实现矩阵中每个位置的数顺时针转动 90度，比如如下的矩阵
 // 0 1  2 3 
 // 4 5  6 7 
@@ -53,12 +51,13 @@ public class C01_RotateMatrix {
 	}
 
 	private static void rotateEdge(int[][] matrix, int a, int b, int x, int y) {
-		for (int i = 0; i < matrix[0].length - 1; i++) {
-			int tem = matrix[x - i][b];
-			matrix[a + i][y] = matrix[a][b + i];
-			matrix[x][y - i] = matrix[a + i][y];
+		int tem;
+		for (int i = b; i < y; i++) {
+			tem = matrix[a][b + i];
+			matrix[a][b + i] = matrix[x - i][b];
 			matrix[x - i][b] = matrix[x][y - i];
-			matrix[a][b + i] = tem;
+			matrix[x][y - i] = matrix[a + i][y];
+			matrix[a + i][y] = tem;
 		}
 	}
 
