@@ -20,74 +20,48 @@ public class C15_FindNumInSortedMatrix {
 	// return false;
 	// }
 
-	// TODO:
+	// 暴力O(n2)
 	public static boolean isContains(int[][] matrix, int K) {
-		// if (matrix == null) {
-		// return false;
-		// }
-
-		// int row = 0;
-		// int col = 0;
-		// while () {
-
-		// }
-		return false;
-	}
-
-	// TODO:尝试二维二分法
-	public static boolean isContains2(int[][] matrix, int K) {
 		if (matrix == null) {
 			return false;
 		}
 
-		// int left = 0;
-		// int right = matrix[0].length - 1;
-		// int rowMid = 0;
-		// while (left < right) {
-		// rowMid = (right + left) / 2;
-		// if (matrix[0][rowMid] > K) {
-		// right = rowMid - 1;
-		// } else if (matrix[0][rowMid + 1] < K) {
-		// left = rowMid + 1;
-		// } else if (matrix[0][rowMid] < K && matrix[0][rowMid + 1] > K) {
-		// break;
-		// }
-		// }
-		// if (left >= right) {
-		// rowMid = right;
-		// }
-		// // System.out.println(1);
-		// int top = 0;
-		// int bottom = matrix.length - 1;
-		// int colMid = 0;
-		// while (top < bottom) {
-		// colMid = (bottom + top) / 2;
-		// if (matrix[0][rowMid] <= K && (rowMid + 1 >= matrix[0].length ||
-		// matrix[0][rowMid + 1] >= K)) {
-		// break;
-		// } else if (matrix[rowMid][colMid] > K) {
-		// bottom = colMid - 1;
-		// } else if (matrix[rowMid][colMid] < K) {
-		// top = colMid + 1;
-		// }
-		// }
-		// if (top >= bottom) {
-		// colMid = bottom;
-		// System.out.println(colMid);
-		// }
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				if (matrix[i][j] == K) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-		// left = 0;
-		// right = rowMid;
-		// while (left <= right) {
-		// rowMid = (right + left) / 2;
-		// if (matrix[rowMid][colMid] == K) {
-		// return true;
-		// } else if (matrix[rowMid][colMid] > K) {
-		// right = rowMid - 1;
-		// } else {
-		// left = rowMid + 1;
-		// }
-		// }
+	// O(n)复杂度
+	public static boolean isContains2(int[][] matrix, int K) {
+		if (matrix == null || matrix[0][0] > K) {
+			return false;
+		}
+
+		int row = 0;
+		// 为什么列从最后一列开始，因为这样整个查找过程都是col--; 从0开始的话，一开始的col++，后面可能有要col--，不够固定
+		int col = matrix[0].length - 1;
+		while (row < matrix.length && col >= 0) {
+			if (matrix[row][col] == K) {
+				return true;
+			} else if (matrix[row][col] > K) {
+				col--;
+			} else if (matrix[row][col] < K) {
+				row++;
+			}
+		}
+		return false;
+	}
+
+	// TODO:尝试"二维"二分法
+	public static boolean isContains3(int[][] matrix, int K) {
+		if (matrix == null) {
+			return false;
+		}
 
 		return false;
 	}
@@ -105,6 +79,7 @@ public class C15_FindNumInSortedMatrix {
 		int K = 233;
 		System.out.println(isContains(matrix, K));
 		System.out.println(isContains2(matrix, K));
+		System.out.println(isContains3(matrix, K));
 	}
 
 }

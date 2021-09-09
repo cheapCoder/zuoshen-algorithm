@@ -10,9 +10,9 @@ package skill;
 // 1空串""的深度是0 
 // 2如果字符串"X"的深度是x,字符串"Y"的深度是y,那么字符串"XY"的深度为 max(x,y) 3、如果"X"的深度是x,那么字符串"(X)"的深度是x+1
 // 例如: "()()()"的深度是1,"((()))"的深度是3。
-// 现在给你一个合法的括号序列,需要你计算出其深度。
+// q1：现在给你一个合法的括号序列,需要你计算出其深度。
 
-// 拓展题：找到最长的合法子序列
+// q2拓展题：找到最长的合法子序列
 public class C11_ParenthesesDeep {
 
 	// public static boolean isValid(char[] str) {
@@ -51,24 +51,48 @@ public class C11_ParenthesesDeep {
 	// return max;
 	// }
 
-	// TODO:not understand
 	// 拓展题：找到最长的合法子序列
+	// public static int maxLength(String str) {
+	// if (str == null || str.equals("")) {
+	// return 0;
+	// }
+	// char[] chas = str.toCharArray();
+	// int[] dp = new int[chas.length];
+	// int pre = 0;
+	// int res = 0;
+	// for (int i = 1; i < chas.length; i++) {
+	// if (chas[i] == ')') {
+	// pre = i - dp[i - 1] - 1;
+	// if (pre >= 0 && chas[pre] == '(') {
+	// dp[i] = dp[i - 1] + 2 + (pre > 0 ? dp[pre - 1] : 0);
+	// }
+	// }
+	// res = Math.max(res, dp[i]);
+	// }
+	// return res;
+	// }
+
+	// 左神做法：对整个字符串所有位置，求必须以当前位置结尾的字符串最长合法长度为多少;
+	// 两种情况：
+	// 1. 当前字符为'('，则结果为0;
+	// 2. 当前字符为')'，则看前一字符的最长合法串长度的前一位是后为'('
+	// 注意索引溢出的判断
 	public static int maxLength(String str) {
-		if (str == null || str.equals("")) {
+		if (str == null || str.length() == 0) {
 			return 0;
 		}
-		char[] chas = str.toCharArray();
-		int[] dp = new int[chas.length];
-		int pre = 0;
+
 		int res = 0;
-		for (int i = 1; i < chas.length; i++) {
-			if (chas[i] == ')') {
-				pre = i - dp[i - 1] - 1;
-				if (pre >= 0 && chas[pre] == '(') {
-					dp[i] = dp[i - 1] + 2 + (pre > 0 ? dp[pre - 1] : 0);
+		int[] cache = new int[str.length()];
+		cache[0] = 0;
+		for (int i = 1; i < str.length(); i++) {
+			if (str.charAt(i) == ')') {
+				int j = i - cache[i - 1] - 1;
+				if (j >= 0 && str.charAt(j) == '(') {
+					cache[i] = cache[i - 1] + 2 + (j - 1 >= 0 ? cache[j - 1] : 0);
 				}
 			}
-			res = Math.max(res, dp[i]);
+			res = Math.max(res, cache[i]);
 		}
 		return res;
 	}
