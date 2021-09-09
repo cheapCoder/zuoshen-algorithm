@@ -6,20 +6,24 @@ public class C06_Knapsack {
 	// return process1(weights, values, 0, 0, bag);
 	// }
 
-	// public static int process1(int[] weights, int[] values, int i, int
-	// alreadyWeight, int bag) {
-	// if (alreadyWeight > bag) {
-	// return 0;
-	// }
-	// if (i == weights.length) {
-	// return 0;
-	// }
-	// return Math.max(
+	// public static int process1(int[] weights, int[] values, int i, int alreadyWeight, int bag) {
+	// 	if (alreadyWeight > bag) {
+	// 		return 0;
+	// 	}
+	// 	// 有bug：
+	// 	// if (i == weights.length) {
+	// 	// return 0;
+	// 	// }
+	// 	// return Math.max(
+	// 	// process1(weights, values, i + 1, alreadyWeight, bag),
+	// 	// values[i] + process1(weights, values, i + 1, alreadyWeight + weights[i],
+	// 	// bag));
 
-	// process1(weights, values, i + 1, alreadyWeight, bag),
-
-	// values[i] + process1(weights, values, i + 1, alreadyWeight + weights[i],
-	// bag));
+	// 	// 正确写法：
+	// 	return Math.max(process1(weights, values, i + 1, alreadyWeight, bag),
+	// 			alreadyWeight + weights[i] <= bag
+	// 					? values[i] + process1(weights, values, i + 1, alreadyWeight + weights[i], bag)
+	// 					: 0);
 	// }
 
 	// TODO:动态规划?
