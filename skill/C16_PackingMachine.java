@@ -17,35 +17,74 @@ package skill;
 // NOTE:复杂的题目，考虑任意位置i的相关情况，一般是i的值什么情况，左侧什么情况，右侧什么情况，进行分类讨论，发现规律
 public class C16_PackingMachine {
 
-	public static int MinOps(int[] arr) {
-		if (arr == null || arr.length == 0) {
-			return 0;
-		}
-		int size = arr.length;
+	// public static int MinOps(int[] arr) {
+	// if (arr == null || arr.length == 0) {
+	// return 0;
+	// }
+	// int size = arr.length;
+	// int sum = 0;
+	// for (int i = 0; i < size; i++) {
+	// sum += arr[i];
+	// }
+	// if (sum % size != 0) {
+	// return -1;
+	// }
+	// int avg = sum / size;
+	// int leftSum = 0;
+	// int ans = 0;
+	// for (int i = 0; i < arr.length; i++) {
+	// int L = i * avg - leftSum;
+	// int R = (size - i - 1) * avg - (sum - leftSum - arr[i]);
+	// if (L > 0 && R > 0) {
+	// ans = Math.max(ans, Math.abs(L) + Math.abs(R));
+	// } else {
+	// ans = Math.max(ans, Math.max(Math.abs(L), Math.abs(R)));
+	// }
+	// leftSum += arr[i];
+	// }
+	// return ans;
+	// }
+
+	public static int MinOps2(int[] arr) {
 		int sum = 0;
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < arr.length; i++) {
 			sum += arr[i];
 		}
-		if (sum % size != 0) {
+		if (sum % arr.length != 0) {
 			return -1;
 		}
-		int avg = sum / size;
-		int leftSum = 0;
-		int ans = 0;
-		for (int i = 0; i < arr.length; i++) {
-			int L = i * avg - leftSum;
-			int R = (size - i - 1) * avg - (sum - leftSum - arr[i]);
-			if (L > 0 && R > 0) {
-				ans = Math.max(ans, Math.abs(L) + Math.abs(R));
+
+		int average = sum / arr.length;
+		int preOver = 0; // 当前值之前部分多出的份数
+		int postOver = (sum - arr[0]) - (average * (arr.length - 1)); // 当前值之后部分多出的份数
+		int res = arr[0] - average * 1;
+		for (int i = 1; i < arr.length; i++) {
+			preOver += (arr[i - 1] - average);
+			postOver -= (arr[i] - average);
+
+			// if (preOver > 0 && postOver > 0) {
+			// res = Math.max(res, Math.max(preOver, postOver));
+			// } else if (preOver <= 0 && postOver <= 0) {
+			// res = Math.max(res, -(preOver + postOver));
+			// } else {
+			// res = Math.max(res, Math.max(Math.abs(preOver), Math.abs(postOver)));
+			// }
+
+			// 简化后
+			if (preOver <= 0 && postOver <= 0) {
+				res = Math.max(res, -(preOver + postOver));
 			} else {
-				ans = Math.max(ans, Math.max(Math.abs(L), Math.abs(R)));
+				res = Math.max(res, Math.max(Math.abs(preOver), Math.abs(postOver)));
 			}
-			leftSum += arr[i];
 		}
-		return ans;
+
+		return res;
 	}
 
 	public static void main(String[] args) {
+		int[] arr = new int[] { 4, 9, 29 };
+		// System.out.println(MinOps(arr));
+		System.out.println(MinOps2(arr));
 
 	}
 

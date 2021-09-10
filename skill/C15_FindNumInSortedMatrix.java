@@ -57,15 +57,6 @@ public class C15_FindNumInSortedMatrix {
 		return false;
 	}
 
-	// TODO:尝试"二维"二分法
-	public static boolean isContains3(int[][] matrix, int K) {
-		if (matrix == null) {
-			return false;
-		}
-
-		return false;
-	}
-
 	public static void main(String[] args) {
 		int[][] matrix = new int[][] { { 0, 1, 2, 3, 4, 5, 6 }, // 0
 				{ 10, 12, 13, 15, 16, 17, 18 }, // 1
@@ -79,7 +70,6 @@ public class C15_FindNumInSortedMatrix {
 		int K = 233;
 		System.out.println(isContains(matrix, K));
 		System.out.println(isContains2(matrix, K));
-		System.out.println(isContains3(matrix, K));
 	}
 
 }

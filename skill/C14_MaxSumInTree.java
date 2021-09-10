@@ -73,7 +73,6 @@ public class C14_MaxSumInTree {
 		}
 
 		int res = 0;
-		// NOTE: 有瑕疵，若树有存在值相同的node呢
 		HashMap<Node, Integer> preSumMap = new HashMap<>();
 		preSumMap.put(head, head.value);
 
