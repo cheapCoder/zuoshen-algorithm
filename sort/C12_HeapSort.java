@@ -2,6 +2,7 @@ package sort;
 
 import java.util.Arrays;
 
+// TODO: review
 public class C12_HeapSort {
 
 	// public static void heapSort(int[] arr) {
@@ -66,21 +67,23 @@ public class C12_HeapSort {
 
 	}
 
+	// 上浮过程
 	private static void heapInsert(int[] arr, int i) {
-		while (arr[(i - 1) / 2] < arr[i]) {
+		while ((i - 1) / 2 >= 0 && arr[(i - 1) / 2] < arr[i]) {
 			swap(arr, i, (i - 1) / 2);
 			i = (i - 1) / 2;
 		}
 	}
 
+	// 下沉过程
 	public static void heapify(int[] arr, int i, int size) {
 		int largest = i;
 		while ((2 * i + 1) < size) {
-			largest = arr[i] < arr[2 * i + 1] ? 2 * i + 1 : i;
+			largest = arr[i] < arr[2 * i + 1] ? 2 * i + 1 : i; // 比较左子节点
 			// System.out.println("first " + largest);
-			largest = (2 * i + 2) < size && arr[2 * i + 2] > arr[largest] ? 2 * i + 2 : largest;
+			largest = (2 * i + 2) < size && arr[2 * i + 2] > arr[largest] ? 2 * i + 2 : largest; // 优先往右节点下沉
 			// System.out.println(largest);
-			if(largest == i) {			// 注意在发现当前节点就是子节点中最大时，退出循环
+			if (largest == i) { // 注意在发现当前节点就是子节点中最大时，退出循环
 				break;
 			}
 			swap(arr, i, largest);

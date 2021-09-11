@@ -18,42 +18,85 @@ public class C18_TopKTimes {
 		}
 	}
 
-	public static class NodeComparator implements Comparator<Node> {
+	// // 小根堆写法
+	// public static class NodeComparator implements Comparator<Node> {
 
-		@Override
-		public int compare(Node o1, Node o2) {
-			return o2.times - o1.times;
-		}
+	// @Override
+	// public int compare(Node o1, Node o2) {
+	// return o2.times - o1.times;
+	// }
 
-	}
+	// }
 
-	public static void printTopKAndRank(String[] arr, int topK) {
-		if (arr == null || arr.length == 0 || topK < 1) {
+	// public static void printTopKAndRank(String[] arr, int topK) {
+	// if (arr == null || arr.length == 0 || topK < 1) {
+	// return;
+	// }
+	// HashMap<String, Integer> map = new HashMap<>();
+	// for (String str : arr) {
+	// if (!map.containsKey(str)) {
+	// map.put(str, 0);
+	// }
+	// map.put(str, map.get(str) + 1);
+	// }
+	// topK = Math.min(arr.length, topK);
+	// PriorityQueue<Node> heap = new PriorityQueue<>(new NodeComparator());
+	// for (Entry<String, Integer> entry : map.entrySet()) {
+	// Node cur = new Node(entry.getKey(), entry.getValue());
+	// if (heap.size() < topK) {
+	// heap.add(cur);
+	// } else {
+	// if (heap.peek().times < cur.times) {
+	// heap.poll();
+	// heap.add(cur);
+	// }
+	// }
+
+	// }
+	// while (!heap.isEmpty()) {
+	// System.out.print(heap.poll().str + " ");
+	// }
+	// System.out.println();
+	// }
+
+	// 小根堆写法
+	public static void printTopKAndRank2(String[] arr, int topK) {
+		if (arr == null || arr.length == 0) {
 			return;
 		}
-		HashMap<String, Integer> map = new HashMap<>();
-		for (String str : arr) {
-			if (!map.containsKey(str)) {
-				map.put(str, 0);
+
+		HashMap<String, Integer> freqMap = new HashMap<>();
+		// PriorityQueue<Node> heap = new PriorityQueue<>(new NodeComparator());
+		PriorityQueue<Node> lessRootHeap = new PriorityQueue<>(new Comparator<Node>() {
+			@Override
+			public int compare(Node o1, Node o2) {
+				return o2.times - o1.times;
 			}
-			map.put(str, map.get(str) + 1);
-		}
-		topK = Math.min(arr.length, topK);
-		PriorityQueue<Node> heap = new PriorityQueue<>(new NodeComparator());
-		for (Entry<String, Integer> entry : map.entrySet()) {
-			Node cur = new Node(entry.getKey(), entry.getValue());
-			if (heap.size() < topK) {
-				heap.add(cur);
+		});
+
+		for (int i = 0; i < arr.length; i++) {
+			if (freqMap.containsKey(arr[i])) {
+				freqMap.put(arr[i], freqMap.get(arr[i]) + 1);
 			} else {
-				if (heap.peek().times < cur.times) {
-					heap.poll();
+				freqMap.put(arr[i], 1);
+			}
+		}
+
+		for (Entry<String, Integer> e : freqMap.entrySet()) {
+			if (lessRootHeap.size() < topK) {
+				lessRootHeap.add(new Node(e.getKey(), e.getValue()));
+			} else {
+				if (e.getValue() > lessRootHeap.peek().times) { // 等于可加可不加
+					lessRootHeap.poll();
+					lessRootHeap.add(new Node(e.getKey(), e.getValue()));
 				}
 			}
+		}
 
+		while (!lessRootHeap.isEmpty()) {
+			System.out.print(lessRootHeap.poll().str + " ");
 		}
-		while (!heap.isEmpty()) {
-			System.out.println(heap.poll().str);
-		}
+		System.out.println();
 	}
 
 	// for test
@@ -74,13 +117,15 @@ public class C18_TopKTimes {
 	}
 
 	public static void main(String[] args) {
-		String[] arr1 = { "A", "B", "A", "C", "A", "C", "B", "B", "K" };
-		printTopKAndRank(arr1, 2);
+		// String[] arr1 = { "A", "B", "A", "C", "A", "C", "B", "B", "K" };
+		// printTopKAndRank(arr1, 2);
 
 		String[] arr2 = generateRandomArray(50, 10);
 		int topK = 3;
 		printArray(arr2);
-		printTopKAndRank(arr2, topK);
+		System.out.println("----------------");
+		// printTopKAndRank(arr2, topK);
+		printTopKAndRank2(arr2, topK);
 
 	}
 }
