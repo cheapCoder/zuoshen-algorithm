@@ -1,5 +1,6 @@
 package sort;
 
+// 给出n个数字 a_1,...,a_n，问最多有多少不重叠的非空区间，使得每个区间内数字的xor(异或运算)都等于0。
 public class C02_LongestSumSubArrayLengthInPositiveArray {
 
 	public static int getMaxLength(int[] arr, int k) {

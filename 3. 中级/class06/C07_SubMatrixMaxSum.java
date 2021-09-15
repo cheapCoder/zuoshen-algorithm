@@ -1,5 +1,6 @@
 package graph;
 
+// 给定一个整型矩阵，返回子矩阵的最大累计和
 public class C07_SubMatrixMaxSum {
 
 	public static int maxSum(int[][] m) {

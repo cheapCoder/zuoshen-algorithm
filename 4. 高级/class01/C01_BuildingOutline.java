@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-
+// 给定一个数组，求如果排序之后，相邻两数的最大差值。要求时间复杂度O(N)，且要求不能用非基于比较的排序。
 public class C01_BuildingOutline {
 
 	// 描述高度变化的对象

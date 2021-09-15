@@ -1,4 +1,4 @@
-//package class04;
+package others;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,5 +1,15 @@
-package binaryTree;
+package 斐波那契数列推理;
 
+// NOTE: 当一个问题除了前几项是base case能直接已知结果外，
+// 后续的每一项都按照之前值的严格递推表达式来求出的问题，典例：斐波那契数列的O(logN)算法
+// 斐波那契数列的O(logN)算法
+
+// 题目：
+// 字符串只由'0'和'1'两种字符构成，当字符串长度为1时，所有可能的字符串为"0"、"1";
+// 当字符串长度为2时，所有可能的字符串为"00"、"01"、"10"、"11";
+// 当字符串长度为3时，所有可能的字符串为"000"、"001"、"010"、"011"、"100"、 "101"、"110"、"111"...
+// 如果某一个字符串中，只要是出现'0'的位置，左边就靠着'1'，这样的字符串叫作达标字符串。
+// 给定一个正数N，返回所有长度为N的字符串中，达标字符串的数量。 比如，N=3，返回3，因为只有"101"、"110"、"111"达标。
 public class C01_ZeroLeftOneStringNumber {
 
 	public static int getNum1(int n) {
@@ -64,6 +74,7 @@ public class C01_ZeroLeftOneStringNumber {
 		return res;
 	}
 
+	// 行列式相乘
 	public static int[][] muliMatrix(int[][] m1, int[][] m2) {
 		int[][] res = new int[m1.length][m2[0].length];
 		for (int i = 0; i < m1.length; i++) {

@@ -1,7 +1,7 @@
 package force_recursion;
 
 import java.util.HashMap;
-
+// 一个数组的异或和是指数组中所有的数异或在一起的结果。给定一个数组arr，求最大子数组异或和。
 public class C01_MostEOR {
 
 	public static int mostEOR(int[] arr) {

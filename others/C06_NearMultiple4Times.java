@@ -1,8 +1,7 @@
-// package binaryTree;
+package others;
 
-// 给定一个数组arr，如果通过调整可以做到arr中任意两个相邻的数字相乘是4的倍数，返回true;
-// 如果不能返回false
-public class C08_NearMultiple4Times {
+// 给定一个数组arr，如果通过调整可以做到arr中任意两个相邻的数字相乘是4的倍数，返回true;如果不能返回false
+public class C06_NearMultiple4Times {
 
 	public static boolean nearMultiple4Times(int[] arr) {
 		int fourTimes = 0; // 是4的倍数的数有多少个

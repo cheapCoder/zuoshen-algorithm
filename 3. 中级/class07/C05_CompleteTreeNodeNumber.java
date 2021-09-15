@@ -1,5 +1,6 @@
 package recursion;
 
+// 求完全二叉树节点的个数
 public class C05_CompleteTreeNodeNumber {
 
 	public static class Node {

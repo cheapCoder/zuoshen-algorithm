@@ -1,5 +1,6 @@
 package graph;
 
+// 找到一棵二叉树中，最大的搜索二叉子树，返回最大搜索二叉子树的节点个数。
 public class C03_BiggestSubBSTInTree {
 
 	public static class Node {
@@ -50,11 +51,9 @@ public class C03_BiggestSubBSTInTree {
 		// 如果只考虑可能性一和可能性二，以X为头的子树的最大搜索二叉树大小
 		int maxBSTSize = Math.max(lData.maxBSTSize, rData.maxBSTSize);
 		// 如果只考虑可能性一和可能性二，以X为头的子树的最大搜索二叉树头节点
-		Node maxBSTHead = lData.maxBSTSize >= rData.maxBSTSize ? lData.maxBSTHead
-				: rData.maxBSTHead;
+		Node maxBSTHead = lData.maxBSTSize >= rData.maxBSTSize ? lData.maxBSTHead : rData.maxBSTHead;
 		// 利用收集的信息，可以判断是否存在可能性三
-		if (lData.maxBSTHead == X.left && rData.maxBSTHead == X.right
-				&& X.value > lData.max && X.value < rData.min) {
+		if (lData.maxBSTHead == X.left && rData.maxBSTHead == X.right && X.value > lData.max && X.value < rData.min) {
 			maxBSTSize = lData.maxBSTSize + rData.maxBSTSize + 1;
 			maxBSTHead = X;
 		}

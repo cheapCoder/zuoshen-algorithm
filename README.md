@@ -1,12 +1,14 @@
 # 左神算法班笔记
 
-视频地址：https://www.bilibili.com/video/BV16K4y157vm
+视频地址：https://www.bilibili.com/video/BV13g41157hK/
 
 其他版本的源码笔记：https://github.com/necessityOVO/zuoshen-algorithm/tree/another-note
 
 可借鉴的笔记及源码解析链接：https://github.com/renyujie518/StrcuctandAlgorithm/tree/master/StructandAlgorithm/src
 
-
+待整理：
+1. determinant_reasoning：当一个问题除了前几项是base case能直接已知结果外，后续的每一项都按照之前值的严格递推表达式来求出的问题，推理结果为`f(n, n-1,... n-m) = f(m,...2,1) * Math.pow(|{x x x} {x x x}{x x x}|, n - m)`
+典例：斐波那契数列的O(logN)算法
 
 TODO: 
 - [ ] 补充题目注释

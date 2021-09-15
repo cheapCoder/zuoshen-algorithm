@@ -1,4 +1,4 @@
-//package class04;
+package others;
 
 // 实现一种狗猫队列的结构，要求如下:
 // 用户可以调用add方法将cat类或dog类的实例放入队列中; 
@@ -9,7 +9,6 @@
 // 用户可以调用isDogEmpty方法，检查队列中是否有dog类的实例; 
 // 用户可以调用isCatEmpty方法，检查队列中是否有cat类的实例。
 // 要求以上所有方法时间复杂度都是O(1)的
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 

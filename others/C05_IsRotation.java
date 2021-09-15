@@ -1,4 +1,4 @@
-//package class04;
+package others;
 
 // 如果一个字符串为str，把字符串str前面任意的部分挪到后面形成的字符串叫作str的旋转词。
 // 比如str="12345"，str的旋转词有"12345"、"23451"、 "34512"、"45123"和"51234"。
@@ -8,7 +8,7 @@
 // a="1ab2"，b="ab12"，返回false。 
 // a="2ab1"，b="ab12"，返回true。
 
-public class C07_IsRotation {
+public class C05_IsRotation {
 
 	public static boolean isRotation(String a, String b) {
 		if (a == null || b == null || a.length() != b.length()) {

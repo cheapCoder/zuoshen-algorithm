@@ -1,5 +1,6 @@
 package graph;
 
+// 给定一个整型矩阵，返回子矩阵的最大累计和
 public class C06_SubArrayMaxSum {
 
 	public static int maxSum(int[] arr) {
