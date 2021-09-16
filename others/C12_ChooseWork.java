@@ -27,40 +27,59 @@ public class C12_ChooseWork {
 		}
 	}
 
-	public static class JobComparator implements Comparator<Job> {
-		@Override
-		public int compare(Job o1, Job o2) {
-			return o1.hard != o2.hard ? (o1.hard - o2.hard) : (o2.money - o1.money);
-		}
-	}
+	// public static class JobComparator implements Comparator<Job> {
+	// @Override
+	// public int compare(Job o1, Job o2) {
+	// return o1.hard != o2.hard ? (o1.hard - o2.hard) : (o2.money - o1.money);
+	// }
+	// }
+
+	// public static int[] getMoneys(Job[] job, int[] ability) {
+	// Arrays.sort(job, new JobComparator());
+	// TreeMap<Integer, Integer> map = new TreeMap<>();
+	// map.put(job[0].hard, job[0].money);
+	// Job pre = job[0];
+	// for (int i = 1; i < job.length; i++) {
+	// if (job[i].hard != pre.hard && job[i].money > pre.money) {
+	// pre = job[i];
+	// map.put(pre.hard, pre.money);
+	// }
+	// }
+	// int[] ans = new int[ability.length];
+	// for (int i = 0; i < ability.length; i++) {
+	// Integer key = map.ceilingKey(ability[i]);
+	// ans[i] = key != null ? map.get(key) : 0;
+	// }
+	// return ans;
+	// }
 
 	public static int[] getMoneys(Job[] job, int[] ability) {
-		Arrays.sort(job, new JobComparator());
-		TreeMap<Integer, Integer> map = new TreeMap<>();
+		Arrays.sort(job, new Comparator<Job>() { // 保证每次hard相同时，money最多的总在第一个
+			@Override
+			public int compare(Job o1, Job o2) {
+				return o1.hard == o2.hard ? o2.money - o1.money : o1.hard - o2.hard;
+			}
+		});
+		TreeMap<Integer, Integer> map = new TreeMap<>(); // NOTE: 用普通的数组也行
 		map.put(job[0].hard, job[0].money);
+
 		Job pre = job[0];
-		for (int i = 1; i < job.length; i++) {
+		for (int i = 0; i < job.length; i++) {
 			if (job[i].hard != pre.hard && job[i].money > pre.money) {
-				pre = job[i];
-				map.put(pre.hard, pre.money);
+				map.put(job[i].hard, job[i].money);
 			}
 		}
-		int[] ans = new int[ability.length];
-		for (int i = 0; i < ability.length; i++) {
+
+		int[] res = new int[ability.length];
+		for (int i = 0; i < res.length; i++) {
 			Integer key = map.ceilingKey(ability[i]);
-			ans[i] = key != null ? map.get(key) : 0;
+			res[i] = key == null ? 0 : key;
 		}
-		return ans;
+		return res;
 	}
 
 	public static void main(String[] args) {
-		TreeMap<Integer, Integer> map = new TreeMap<>();
-		Integer key = map.ceilingKey(5);
-		int test1 = key != null ? map.get(key) : 0;
-		System.out.println(test1);
-		System.out.println("====");
-		int test2 = map.get(map.ceilingKey(5));
-		System.out.println(test2);
+
 	}
 
 }
