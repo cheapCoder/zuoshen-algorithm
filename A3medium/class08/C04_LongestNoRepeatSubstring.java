@@ -5,6 +5,8 @@ package A3medium.class08;
 // abcabcbb没有重复字符的最长子串是abc，长度为3 bbbbb，答案是b，长度为1
 // pwwkew，答案是wke，长度是3
 // 要求:答案必须是子串，"pwke" 是一个子字符序列但不是一个子字符串。
+
+// NOTE: 看到子串和子数组的问题，就想想以任意一个位置i结尾时的情况
 public class C04_LongestNoRepeatSubstring {
 
 	public static int maxUnique(String str) {
