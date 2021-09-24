@@ -73,6 +73,9 @@ public class C05_EditCost {
 
 	// NOTE: 尝试用暴力递归任意位置i的三种选择，并使用当所有选择都用替换时的代价作为边界排除多余的递归
 
+
+	// way2：动态规划
+
 	public static void main(String[] args) {
 		String str1 = "ab12cd3";
 		String str2 = "abcdf";

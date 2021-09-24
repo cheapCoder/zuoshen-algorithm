@@ -48,29 +48,26 @@ public class C04_PreAndInArrayToPosArray {
 		}
 
 		int[] pos = new int[pre.length];
-		process(pre, in, pos, map, 0, pre.length - 1, 0, in.length - 1);
+		process(pre, in, pos, map, 0, pre.length - 1, 0, in.length - 1, 0, pos.length - 1);
 		return pos;
 	}
 
 	public static void process(int[] pre, int[] in, int[] pos, HashMap<Integer, Integer> map, int preS, int preE, int inS,
-			int inE) {
-		if (preS > preE || inS > inE) {
+			int inE, int posS, int posE) {
+		if (preS > preE || inS > inE || posS > posE) {
 			return;
 		}
-
-		int headIndex = map.get(pre[preS]);
-//	{ 1, 2, 4, 5, 3, 6, 7 };
-//	{ 4, 2, 5, 1, 6, 3, 7 };
-//  { 4  5  2  6  7  3  1 }
-	 // 0  1  2  3  4  5  6
 		// 更改当前子树的头节点
-		// TODO:位置对应关系不对
-		pos[inE] = pre[preS];
-	
-		// 左侧递归更改值
-		process(pre, in, pos, map, preS + 1, preS + (headIndex - inS), inS, headIndex - 1); // preE为preS + 1 +( headIndex - inS) - 1
+		pos[posE] = pre[preS];
+		int headIndex = map.get(pre[preS]);
+
+		// int leftCount = headIndex - inS;
+		// int rightCount = inE - headIndex;
+
+		// // 左侧递归更改值,// preE为preS + 1 +( headIndex - inS) - 1
+		process(pre, in, pos, map, preS + 1, preS + headIndex - inS, inS, headIndex - 1, posS, posS + headIndex - inS - 1);
 		// 右侧递归更改值
-		process(pre, in, pos, map, preS + (headIndex - inS) + 1, preE, headIndex + 1, inE);
+		process(pre, in, pos, map, preS + headIndex - inS + 1, preE, headIndex + 1, inE, posS + headIndex - inS, posE - 1);
 	}
 
 	// for test
@@ -88,7 +85,7 @@ public class C04_PreAndInArrayToPosArray {
 		int[] pre = { 1, 2, 4, 5, 3, 6, 7 };
 		int[] in = { 4, 2, 5, 1, 6, 3, 7 };
 		int[] pos = getPosArray(pre, in);
-		printArray(pos);
+		printArray(pos); // { 4 5 2 6 7 3 1 }
 
 	}
 }
