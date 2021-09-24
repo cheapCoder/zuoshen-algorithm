@@ -3,6 +3,7 @@ package greed;
 import java.util.Arrays;
 import java.util.Comparator;
 
+// TODO: 
 public class C04_BestArrange {
 
 	public static class Program {
