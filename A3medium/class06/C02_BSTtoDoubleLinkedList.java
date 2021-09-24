@@ -82,6 +82,7 @@ public class C02_BSTtoDoubleLinkedList {
 				rightList.end != null ? rightList.end : head);
 	}
 
+	// for test
 	public static void printBSTInOrder(Node head) {
 		System.out.print("BST in-order: ");
 		if (head != null) {
@@ -90,6 +91,7 @@ public class C02_BSTtoDoubleLinkedList {
 		System.out.println();
 	}
 
+	// for test
 	public static void inOrderPrint(Node head) {
 		if (head == null) {
 			return;
@@ -99,6 +101,7 @@ public class C02_BSTtoDoubleLinkedList {
 		inOrderPrint(head.right);
 	}
 
+	// for test
 	public static void printDoubleLinkedList(Node head) {
 		System.out.print("Double Linked List: ");
 		Node end = null;
@@ -149,5 +152,4 @@ public class C02_BSTtoDoubleLinkedList {
 		printDoubleLinkedList(head);
 
 	}
-
 }

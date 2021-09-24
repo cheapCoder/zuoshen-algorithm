@@ -15,54 +15,96 @@ import java.util.TreeMap;
 
 public class C01_GetFolderTree {
 
-	public static class Node {
-		public String name;
-		public TreeMap<String, Node> nextMap;
+	// public static class Node {
+	// public String name;
+	// public TreeMap<String, Node> nextMap;
 
-		public Node(String name) {
-			this.name = name;
-			nextMap = new TreeMap<>();
+	// public Node(String name) {
+	// this.name = name;
+	// nextMap = new TreeMap<>();
+	// }
+	// }
+
+	// public static void print(String[] folderPaths) {
+	// if (folderPaths == null || folderPaths.length == 0) {
+	// return;
+	// }
+	// Node head = generateFolderTree(folderPaths);
+	// printProcess(head, 0);
+	// }
+
+	// public static Node generateFolderTree(String[] folderPaths) {
+	// Node head = new Node("");
+	// for (String foldPath : folderPaths) {
+	// String[] paths = foldPath.split("\\\\");
+	// Node cur = head;
+	// for (int i = 0; i < paths.length; i++) {
+	// if (!cur.nextMap.containsKey(paths[i])) {
+	// cur.nextMap.put(paths[i], new Node(paths[i]));
+	// }
+	// cur = cur.nextMap.get(paths[i]);
+	// }
+	// }
+	// return head;
+	// }
+
+	// public static void printProcess(Node head, int level) {
+	// if (level != 0) {
+	// System.out.println(get2nSpace(level) + head.name);
+	// }
+	// for (Node next : head.nextMap.values()) {
+	// printProcess(next, level + 1);
+	// }
+	// }
+
+	// public static String get2nSpace(int n) {
+	// String res = "";
+	// for (int i = 1; i < n; i++) {
+	// res += " ";
+	// }
+	// return res;
+	// }
+
+	public static class Node<T> {
+		public T value;
+		public TreeMap<String, Node<T>> map = new TreeMap<>();
+
+		public Node(T v) {
+			this.value = v;
 		}
 	}
 
-	public static void print(String[] folderPaths) {
-		if (folderPaths == null || folderPaths.length == 0) {
-			return;
+	public static void print(String[] arr) {
+		Node<String> head = initialTree(arr);
+
+		for (Node<String> node : head.map.values()) {
+			recurPrint(node, 0);
 		}
-		Node head = generateFolderTree(folderPaths);
-		printProcess(head, 0);
+
 	}
 
-	public static Node generateFolderTree(String[] folderPaths) {
-		Node head = new Node("");
-		for (String foldPath : folderPaths) {
-			String[] paths = foldPath.split("\\\\");
-			Node cur = head;
-			for (int i = 0; i < paths.length; i++) {
-				if (!cur.nextMap.containsKey(paths[i])) {
-					cur.nextMap.put(paths[i], new Node(paths[i]));
+	private static Node<String> initialTree(String[] arr) {
+		Node<String> head = new Node<String>("HEAD");
+		Node<String> curNode = head;
+		String[] tem;
+		for (int i = 0; i < arr.length; i++) {
+			tem = arr[i].split("\\\\");
+			for (int j = 0; j < tem.length; j++) {
+				if (!curNode.map.containsKey(tem[j])) {
+					curNode.map.put(tem[j], new Node<String>(tem[j]));
 				}
-				cur = cur.nextMap.get(paths[i]);
+				curNode = curNode.map.get(tem[j]);
 			}
+			curNode = head;
 		}
 		return head;
 	}
 
-	public static void printProcess(Node head, int level) {
-		if (level != 0) {
-			System.out.println(get2nSpace(level) + head.name);
+	private static <E> void recurPrint(Node<E> head, int whitespace) {
+		System.out.println(" ".repeat(whitespace) + head.value);
+		for (Node<E> node : head.map.values()) {
+			recurPrint(node, whitespace + 2);
 		}
-		for (Node next : head.nextMap.values()) {
-			printProcess(next, level + 1);
-		}
-	}
-
-	public static String get2nSpace(int n) {
-		String res = "";
-		for (int i = 1; i < n; i++) {
-			res += "  ";
-		}
-		return res;
 	}
 
 	public static void main(String[] args) {

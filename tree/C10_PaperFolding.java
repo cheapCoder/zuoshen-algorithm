@@ -7,14 +7,14 @@ public class C10_PaperFolding {
 	// System.out.println();
 	// }
 
-	public static void printProcess(int i, int N, boolean down) {
-	if (i > N) {
-	return;
-	}
-	printProcess(i + 1, N, true);
-	System.out.print(down ? "down " : "up " + " ");
-	printProcess(i + 1, N, false);
-	}
+	// public static void printProcess(int i, int N, boolean down) {
+	// if (i > N) {
+	// return;
+	// }
+	// printProcess(i + 1, N, true);
+	// System.out.print(down ? "down " : "up " + " ");
+	// printProcess(i + 1, N, false);
+	// }
 
 	public static void printAllFolds2(int n) {
 
