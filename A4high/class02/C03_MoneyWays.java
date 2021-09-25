@@ -1,13 +1,14 @@
 package A4high.class02;
 
+// 现有n1+n2种面值的硬币，其中前n1种为普通币，可以取任意枚，后n2种为纪念币，
+// 每种最多只能取一枚，每种硬币有一个面值，问能用多少种方法拼出m的面值?
 public class C03_MoneyWays {
 
 	public static int moneyWays(int[] arbitrary, int[] onlyone, int money) {
 		if (money < 0) {
 			return 0;
 		}
-		if ((arbitrary == null || arbitrary.length == 0)
-				&& (onlyone == null || onlyone.length == 0)) {
+		if ((arbitrary == null || arbitrary.length == 0) && (onlyone == null || onlyone.length == 0)) {
 			return money == 0 ? 1 : 0;
 		}
 		int[][] dparb = getDpArb(arbitrary, money);
@@ -20,8 +21,7 @@ public class C03_MoneyWays {
 		}
 		int res = 0;
 		for (int i = 0; i <= money; i++) {
-			res += dparb[dparb.length - 1][i]
-					* dpone[dpone.length - 1][money - i];
+			res += dparb[dparb.length - 1][i] * dpone[dpone.length - 1][money - i];
 		}
 		return res;
 	}

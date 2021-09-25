@@ -6,7 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-// 给定一个数组，求如果排序之后，相邻两数的最大差值。要求时间复杂度O(N)，且要求不能用非基于比较的排序。
+
+
 public class C01_BuildingOutline {
 
 	// 描述高度变化的对象
@@ -59,15 +60,13 @@ public class C01_BuildingOutline {
 				if (!mapHeightTimes.containsKey(nodes[i].h)) { // 没有出现的高度直接新加记录
 					mapHeightTimes.put(nodes[i].h, 1);
 				} else { // 之前出现的高度，次数加1即可
-					mapHeightTimes.put(nodes[i].h,
-							mapHeightTimes.get(nodes[i].h) + 1);
+					mapHeightTimes.put(nodes[i].h, mapHeightTimes.get(nodes[i].h) + 1);
 				}
 			} else { // 如果当前是删除操作
 				if (mapHeightTimes.get(nodes[i].h) == 1) { // 如果当前的高度出现次数为1，直接删除记录
 					mapHeightTimes.remove(nodes[i].h);
 				} else { // 如果当前的高度出现次数大于1，次数减1即可
-					mapHeightTimes.put(nodes[i].h,
-							mapHeightTimes.get(nodes[i].h) - 1);
+					mapHeightTimes.put(nodes[i].h, mapHeightTimes.get(nodes[i].h) - 1);
 				}
 			}
 

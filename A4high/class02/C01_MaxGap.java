@@ -2,6 +2,10 @@ package A4high.class02;
 
 import java.util.Arrays;
 
+// 给定一个数组，求如果排序之后，相邻两数的最大差值。要求时间复杂度O(N)，
+// 且要求不能用非基于比较的排序。
+
+// NOTE: 使用空桶之间的差这一平方解一定大于同一桶内的任意两值差来优化，就不用考虑桶内的数之差了
 public class C01_MaxGap {
 
 	public static int maxGap(int[] nums) {

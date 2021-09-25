@@ -2,6 +2,9 @@ package A4high.class02;
 
 import java.util.HashMap;
 
+// 给出n个数字 a_1,...,a_n，问最多有多少不重叠的非空区间，使得每个区间内数字的xor(异或运算)都等于0。
+
+// NOTE: 假设答案法
 public class C02_MostEOR {
 
 	public static int mostEOR(int[] arr) {
@@ -25,6 +28,9 @@ public class C02_MostEOR {
 		return ans;
 	}
 
+	//TODO: 暴力递归和动态规划
+
+	
 	// for test
 	public static int comparator(int[] arr) {
 		if (arr == null || arr.length == 0) {
@@ -67,6 +73,8 @@ public class C02_MostEOR {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
+		
+		
 		System.out.println();System.out.println();System.out.println();
 	}
 

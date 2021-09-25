@@ -1,5 +1,6 @@
 package A3medium.class08;
 
+// NOTE: (重要)编辑距离问题
 // 给定两个字符串str1和str2，再给定三个整数ic、dc和rc，分别代表插入、删除和替换一个字符的代价，返回将str1编辑成str2的最小代价。
 // 【举例】
 // str1="abc"，str2="adc"，ic=5，dc=3，rc=2 从"abc"编辑成"adc"，把'b'替换成'd'是代价最小的，所以返回2
