@@ -17,69 +17,147 @@ public class C02_BSTtoDoubleLinkedList {
 		}
 	}
 
+	// public static Node convert1(Node head) {
+	// Queue<Node> queue = new LinkedList<Node>();
+	// inOrderToQueue(head, queue);
+	// if (queue.isEmpty()) {
+	// return head;
+	// }
+	// head = queue.poll();
+	// Node pre = head;
+	// pre.left = null;
+	// Node cur = null;
+	// while (!queue.isEmpty()) {
+	// cur = queue.poll();
+	// pre.right = cur;
+	// cur.left = pre;
+	// pre = cur;
+	// }
+	// pre.right = null;
+	// return head;
+	// }
+
+	// public static void inOrderToQueue(Node head, Queue<Node> queue) {
+	// if (head == null) {
+	// return;
+	// }
+	// inOrderToQueue(head.left, queue);
+	// queue.offer(head);
+	// inOrderToQueue(head.right, queue);
+	// }
+
+	// public static class RetrunType {
+	// public Node start;
+	// public Node end;
+
+	// public RetrunType(Node start, Node end) {
+	// this.start = start;
+	// this.end = end;
+	// }
+	// }
+
+	// public static Node convert2(Node head) {
+	// if (head == null) {
+	// return null;
+	// }
+	// return process(head).start;
+	// }
+
+	// public static RetrunType process(Node head) {
+	// if (head == null) {
+	// return new RetrunType(null, null);
+	// }
+	// RetrunType leftList = process(head.left);
+	// RetrunType rightList = process(head.right);
+	// if (leftList.end != null) {
+	// leftList.end.right = head;
+	// }
+	// head.left = leftList.end;
+	// head.right = rightList.start;
+	// if (rightList.start != null) {
+	// rightList.start.left = head;
+	// }
+	// return new RetrunType(leftList.start != null ? leftList.start : head,
+	// rightList.end != null ? rightList.end : head);
+	// }
+
+	// 申请额外数据结构处理
 	public static Node convert1(Node head) {
-		Queue<Node> queue = new LinkedList<Node>();
-		inOrderToQueue(head, queue);
-		if (queue.isEmpty()) {
-			return head;
+		if (head == null) {
+			return null;
 		}
-		head = queue.poll();
-		Node pre = head;
+		// 中序入队
+		Queue<Node> queue = new LinkedList<>();
+		inOrderInQueue(head, queue);
+
+		// 为每个节点添加pre, next节点信息
+		Node pre = queue.poll();
+		head = pre;
 		pre.left = null;
-		Node cur = null;
+		Node cur;
 		while (!queue.isEmpty()) {
 			cur = queue.poll();
-			pre.right = cur;
 			cur.left = pre;
+			pre.right = cur;
 			pre = cur;
 		}
-		pre.right = null;
 		return head;
 	}
 
-	public static void inOrderToQueue(Node head, Queue<Node> queue) {
+	private static void inOrderInQueue(Node head, Queue<Node> queue) {
 		if (head == null) {
 			return;
 		}
-		inOrderToQueue(head.left, queue);
-		queue.offer(head);
-		inOrderToQueue(head.right, queue);
+		inOrderInQueue(head.left, queue);
+		queue.add(head);
+		inOrderInQueue(head.right, queue);
 	}
 
-
-	public static class RetrunType {
-		public Node start;
-		public Node end;
-
-		public RetrunType(Node start, Node end) {
-			this.start = start;
-			this.end = end;
-		}
-	}
-	
+	// 使用递归
 	public static Node convert2(Node head) {
 		if (head == null) {
 			return null;
 		}
-		return process(head).start;
+		return process(head).minNode;
 	}
 
-	public static RetrunType process(Node head) {
-		if (head == null) {
-			return new RetrunType(null, null);
+	public static class ReturnType {
+		Node maxNode;
+		Node minNode;
+
+		public ReturnType(Node maxNode, Node minNode) {
+			this.maxNode = maxNode;
+			this.minNode = minNode;
 		}
-		RetrunType leftList = process(head.left);
-		RetrunType rightList = process(head.right);
-		if (leftList.end != null) {
-			leftList.end.right = head;
-		}
-		head.left = leftList.end;
-		head.right = rightList.start;
-		if (rightList.start != null) {
-			rightList.start.left = head;
-		}
-		return new RetrunType(leftList.start != null ? leftList.start : head,
-				rightList.end != null ? rightList.end : head);
+	}
+
+	private static ReturnType process(Node head) {
+	if (head == null) {
+	return null;
+	}
+
+	ReturnType leftType = process(head.left);
+	ReturnType rightType = process(head.right);
+	Node maxNode = head;
+	Node minNode = head;
+
+	if (leftType != null) {
+	head.left = leftType.maxNode;
+	leftType.maxNode.right = head;
+	minNode = leftType.minNode;
+	} else {
+	// head.left = null;
+	}
+
+	if (rightType != null) {
+	head.right = rightType.minNode;
+	rightType.minNode.left = head;
+	maxNode = rightType.maxNode;
+	} else {
+	// head.right = null;
+	}
+
+	return new ReturnType(maxNode, minNode);
 	}
 
 	// for test
