@@ -2,6 +2,9 @@ package A4high.class02;
 
 import java.util.Arrays;
 
+// 给定两个一维int数组A和B.其中:A是长度为m、元素从小到大排好序的有序数组。B是长度为n、元素从小 到大排好序的有序数组。希望从A和B数组中，找出最大的k个数字，要求:使用尽量少的时间复杂度。
+
+// NOTE: pretty pretty pretty pretty hard
 public class C05_FindKthMinNumber {
 
 	public static int findKthNum(int[] arr1, int[] arr2, int kth) {
@@ -33,8 +36,7 @@ public class C05_FindKthMinNumber {
 		return getUpMedian(shorts, 0, s - 1, longs, kth - s, kth - 1);
 	}
 
-	public static int getUpMedian(int[] a1, int s1, int e1, int[] a2, int s2,
-			int e2) {
+	public static int getUpMedian(int[] a1, int s1, int e1, int[] a2, int s2, int e2) {
 		int mid1 = 0;
 		int mid2 = 0;
 		int offset = 0;
@@ -55,6 +57,10 @@ public class C05_FindKthMinNumber {
 		return Math.min(a1[s1], a2[s2]);
 	}
 
+	// 法一:双指针
+
+	// 法二：
+
 	// For test, this method is inefficient but absolutely right
 	public static int[] getSortedAllArray(int[] arr1, int[] arr2) {
 		if (arr1 == null || arr2 == null) {
@@ -72,6 +78,7 @@ public class C05_FindKthMinNumber {
 		return arrAll;
 	}
 
+	// For test
 	public static int[] generateSortedArray(int len, int maxValue) {
 		int[] res = new int[len];
 		for (int i = 0; i != len; i++) {
@@ -81,6 +88,7 @@ public class C05_FindKthMinNumber {
 		return res;
 	}
 
+	// For test
 	public static void printArray(int[] arr) {
 		for (int i = 0; i != arr.length; i++) {
 			System.out.print(arr[i] + " ");

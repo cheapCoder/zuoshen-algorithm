@@ -26,6 +26,7 @@ public class C06_SubArrayMaxSum {
 	// }
 	// return max;
 	// }
+
 	public static int maxSum(int[] arr) {
 		if (arr == null || arr.length == 0) {
 			return 0;
