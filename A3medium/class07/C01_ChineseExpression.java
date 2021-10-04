@@ -122,48 +122,138 @@ public class C01_ChineseExpression {
 	// }
 
 	public static String getNumChiExp(int num) {
-		// String res = num < 0 ? "负" : "";
-		String res = "";
+		String res = num < 0 ? "负" : "";
 		num = Math.abs(num);
 
 		// while (true) {
 		// if (num == 0) {
 		// break;
 		// } else
-		if (num < 10) {
+		if (num < 10) { // 个位
 			res += num1To9(num, true);
-		} else if (num < 100) {
+		} else if (num < 100) { // 十位
 			res += numTen(num, false);
-		} else if (num < 1000) {
-			res += numHundred(num, false);
-		} else if (num < 10000) {
-			res += numToThousand(num);
-		} else if (num > 100000000) { // 亿位
-
+		} else if (num < 1000) { // 百位
+			res += numHundred(num);
+		} else if (num < 10000) { // 千位
+			res += numThousand(num);
+		} else if (num < 100000000) { // 万位
+			res += numWan(num);
+		} else if (num >= 100000000) { // 亿位
+			res += numToYi(num);
 		}
 		// }
 		return res;
 	}
 
-	private static String numToThousand(int num) {
-		if (num >= 10000) {
+	private static String numToYi(int num) {
+		if (num < 100000000) {
 			throw new RuntimeException("参数不合法！");
 		}
 
-		int thousandDig = num / 1000;
-		return num1To9(thousandDig, false) + "千" + numHundred(num % 1000, thousandDig != 0);
+		String s = "";
+
+		// while (num >= 100000000) {
+		int dig = num / 100000000;
+		int remain = num % 100000000;
+		if (dig > 10000) {
+			s += numWan(dig);
+		} else if (dig >= 1000) {
+			s += numThousand(dig);
+		} else if (dig >= 100) {
+			s += numHundred(dig);
+		} else if (dig >= 10) {
+			s += numTen(dig, false);
+		} else {
+			s += num1To9(dig, false);
+		}
+
+		if (remain >= 10000) {
+			s += "亿" + (remain > 10000000? "" : "零") + numWan(remain);
+		} else if (remain >= 1000) {
+			s += "亿零" + numThousand(remain);
+		} else if (remain >= 100) {
+			s += "亿零" + numHundred(remain);
+		} else if (remain >= 10) {
+			s += "亿零" + numTen(remain, true);
+		} else if (remain == 0) {
+			s += "亿";
+		} else {
+			s += "亿零" + num1To9(remain, false);
+		}
+
+		// num = dig;
+		// }
+
+		return s;
 	}
 
-	private static String numHundred(int num, boolean hasThousand) {
-		if (num >= 1000) {
+	private static String numWan(int num) {
+		if (num >= 100000000 || num < 10000) {
 			throw new RuntimeException("参数不合法！");
 		}
 
-		int hundredDig = num / 100;
-		if (hundredDig != 0) {
-			return num1To9(hundredDig, false) + "百" + numTen(num % 100, true);
+		int dig = num / 10000;
+		int remain = num % 10000;
+		String s = "";
+
+		if (dig >= 1000) {
+			s += numThousand(dig);
+		} else if (dig >= 100) {
+			s += numHundred(dig);
+		} else if (dig >= 10) {
+			s += numTen(dig, false);
 		} else {
-			return hasThousand ? "零" : "" + numTen(num % 100, false);
+			s += num1To9(dig, false);
+		}
+
+		if (remain >= 1000) {
+			s += "万" + numThousand(remain);
+		} else if (remain >= 100) {
+			s += "万零" + numHundred(remain);
+		} else if (remain >= 10) {
+			s += "万零" + numTen(remain, true);
+		} else if (remain == 0) {
+			s += "万";
+		} else {
+			s += "万零" + num1To9(remain, false);
+		}
+
+		return s;
+	}
+
+	private static String numThousand(int num) {
+		if (num >= 10000 || num < 1000) {
+			throw new RuntimeException("参数不合法！");
+		}
+
+		int dig = num / 1000;
+		int remain = num % 1000;
+		if (remain >= 100) {
+			return num1To9(dig, false) + "千" + numHundred(remain);
+		} else if (remain >= 10) {
+			return num1To9(dig, false) + "千零" + numTen(remain, true);
+		} else if (remain == 0) {
+			return num1To9(dig, false) + "千";
+		} else {
+			return num1To9(dig, false) + "千零" + num1To9(remain, false);
+		}
+	}
+
+	private static String numHundred(int num) {
+		if (num >= 1000 || num < 100) {
+			throw new RuntimeException("参数不合法！");
+		}
+
+		int dig = num / 100;
+		int remain = num % 100;
+
+		if (remain >= 10) {
+			return num1To9(dig, false) + "百" + numTen(num % 100, true);
+		} else if (remain == 0) {
+			return num1To9(dig, false) + "百";
+		} else {
+			return num1To9(dig, false) + "百零" + num1To9(remain, false);
 		}
 	}
 
@@ -201,26 +291,33 @@ public class C01_ChineseExpression {
 			System.out.println(getNumChiExp(15));
 			System.out.println(getNumChiExp(55));
 			System.out.println(getNumChiExp(110));
+			System.out.println(getNumChiExp(125));
 			System.out.println(getNumChiExp(100));
 			System.out.println(getNumChiExp(709));
+			System.out.println(getNumChiExp(1234));
+			System.out.println(getNumChiExp(1000));
+			System.out.println(getNumChiExp(1008));
 			System.out.println(getNumChiExp(1010));
-			// System.out.println(getNumChiExp(10010));
-			// System.out.println(getNumChiExp(1900000000));
-			// System.out.println(getNumChiExp(1000000010));
-			// System.out.println(getNumChiExp(1010100010));
+			System.out.println(getNumChiExp(10000));
+			System.out.println(getNumChiExp(10010));
+			System.out.println(getNumChiExp(12310));
+			System.out.println(getNumChiExp(12316));
+			System.out.println(getNumChiExp(1900000000));
+			System.out.println(getNumChiExp(1000000010));
+			System.out.println(getNumChiExp(805545971));
 
-			// System.out.println(Integer.MAX_VALUE);
-			// System.out.println(getNumChiExp(Integer.MAX_VALUE));
+			System.out.println(Integer.MAX_VALUE);
+			System.out.println(getNumChiExp(Integer.MAX_VALUE));
 
 			// System.out.println(Integer.MIN_VALUE);
 			// System.out.println(getNumChiExp(Integer.MIN_VALUE));
 
-			// int testTime = 10000;
-			// for (int i = 0; i < testTime; i++) {
-			// int num = generateRandomNum();
-			// System.out.println(num);
-			// System.out.println(getNumChiExp(num));
-			// }
+			int testTime = 20;
+			for (int i = 0; i < testTime; i++) {
+			int num = generateRandomNum();
+			System.out.println(num);
+			System.out.println(getNumChiExp(num));
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
