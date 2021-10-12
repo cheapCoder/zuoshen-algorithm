@@ -13,30 +13,71 @@ public class C05_CompleteTreeNodeNumber {
 		}
 	}
 
+	// 时间复杂度优化
+	// public static int nodeNum(Node head) {
+	// if (head == null) {
+	// return 0;
+	// }
+	// return bs(head, 1, mostLeftLevel(head, 1));
+	// }
+
+	// public static int bs(Node node, int l, int h) {
+	// if (l == h) {
+	// return 1;
+	// }
+	// if (mostLeftLevel(node.right, l + 1) == h) {
+	// return (1 << (h - l)) + bs(node.right, l + 1, h);
+	// } else {
+	// return (1 << (h - l - 1)) + bs(node.left, l + 1, h);
+	// }
+	// }
+
+	// public static int mostLeftLevel(Node node, int level) {
+	// while (node != null) {
+	// level++;
+	// node = node.left;
+	// }
+	// return level - 1;
+	// }
+
+	// 时间复杂度O(n)
 	public static int nodeNum(Node head) {
 		if (head == null) {
 			return 0;
 		}
-		return bs(head, 1, mostLeftLevel(head, 1));
+		return nodeNum(head.left) + 1 + nodeNum(head.right);
 	}
 
-	public static int bs(Node node, int l, int h) {
-		if (l == h) {
-			return 1;
+	// 时间复杂度优化
+	public static int nodeNum2(Node head) {
+		if (head == null) {
+			return 0;
 		}
-		if (mostLeftLevel(node.right, l + 1) == h) {
-			return (1 << (h - l)) + bs(node.right, l + 1, h);
-		} else {
-			return (1 << (h - l - 1)) + bs(node.left, l + 1, h);
-		}
+
+		return process(head, getMostLeftHeight(head));
 	}
 
-	public static int mostLeftLevel(Node node, int level) {
-		while (node != null) {
-			level++;
-			node = node.left;
+	private static int process(Node head, int height) {
+		if (head == null) {
+			return 0;
 		}
-		return level - 1;
+
+		int count;
+		if (getMostLeftHeight(head.right) == height - 1) { // 左子树为满二叉树
+			count = 1 + (int) Math.pow(2, height - 1) - 1 + process(head.right, height - 1);
+		} else { // 右子树为满二叉树
+			count = 1 + (int) Math.pow(2, height - 2) - 1 + process(head.left, height - 1);
+		}
+		return count;
+	}
+
+	private static int getMostLeftHeight(Node head) {
+		int height = 0;
+		while (head != null) {
+			height++;
+			head = head.left;
+		}
+		return height;
 	}
 
 	public static void main(String[] args) {
@@ -46,8 +87,10 @@ public class C05_CompleteTreeNodeNumber {
 		head.left.left = new Node(4);
 		head.left.right = new Node(5);
 		head.right.left = new Node(6);
+		head.right.right = new Node(7);
+		head.left.left.left = new Node(8);
 		System.out.println(nodeNum(head));
-
+		System.out.println(nodeNum2(head));
 	}
 
 }

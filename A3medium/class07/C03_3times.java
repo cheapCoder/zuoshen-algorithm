@@ -15,16 +15,16 @@ package A3medium.class07;
 // 解题思路:判断一个数能不能被3整除，等价于一个数的每位之和能否被3整除。刚开始想打表，但发现数据 量是1e9，一维数组最多只能开到1e8.所以就纯暴力判断了，不过数据是有规律的，第一个数是1、第二个数是12，第三个数是123，所以只用判断n*(n+1)/2%3即可。因为数量太大了，所以用long long
 public class C03_3times {
 
-	public static int getNum(int l, int r) {
-		int sum = 0;
-		for (int i = l; i <= r; i++) {
-			long tmp = (long) (i + 1) * (long) i / 2L;
-			if (tmp % 3 == 0) {
-				sum++;
-			}
-		}
-		return sum;
-	}
+	// public static int getNum(int l, int r) {
+	// 	int sum = 0;
+	// 	for (int i = l; i <= r; i++) {
+	// 		long tmp = (long) (i + 1) * (long) i / 2L;
+	// 		if (tmp % 3 == 0) {
+	// 			sum++;
+	// 		}
+	// 	}
+	// 	return sum;
+	// }
 
 	// TODO: 求余数，求模的运算性质
 	// NOTE:10的任意倍数 % 3 都是1
@@ -46,7 +46,7 @@ public class C03_3times {
 	public static void main(String[] args) {
 		int l = 100;
 		int r = 5000;
-		System.out.println(getNum(l, r));
+		// System.out.println(getNum(l, r));
 		System.out.println(getNum2(l, r));
 	}
 }

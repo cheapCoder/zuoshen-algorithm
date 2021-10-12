@@ -37,6 +37,7 @@ public class C02_PrintNoInArray {
 	// }
 	// }
 
+	// 法一
 	public static void printNumberNoInArray(int[] arr) {
 		if (arr == null || arr.length == 0) {
 			return;
@@ -65,6 +66,7 @@ public class C02_PrintNoInArray {
 		}
 	}
 
+	// 法二
 	// NOTE: 可以通过改为负数，来标记对应索引的数存在
 	public static void printNumberNoInArray2(int[] arr) {
 		if (arr == null || arr.length == 0) {

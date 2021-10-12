@@ -121,6 +121,7 @@ public class C01_ChineseExpression {
 	// }
 	// }
 
+	// TODO: 优化
 	public static String getNumChiExp(int num) {
 		String res = num < 0 ? "负" : "";
 		num = Math.abs(num);
