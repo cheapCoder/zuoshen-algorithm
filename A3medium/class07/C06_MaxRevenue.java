@@ -1,10 +1,13 @@
 package A3medium.class07;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map.Entry;
+
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 // CC直播的运营部门组织了很多运营活动，每个活动需要花费一定的时间参与，主播每参加完一个活动即可得到一定的奖励，
 // 参与活动可以从任意活动开始，但一旦开始，就需要将后续活动参加完毕(注意:最后一个活动必须参与)，
@@ -82,43 +85,114 @@ public class C06_MaxRevenue {
 		return new int[] { allMap.floorKey(allTime), allMap.get(allMap.floorKey(allTime)) };
 	}
 
-	// 暴力解法
+	// 法一：暴力解法
 	public static int[] maxRevenue2(int allTime, int[] revenue, int[] times, int[][] dependents) {
 		if (allTime < 0 || revenue == null || times == null || dependents == null) {
-			return null;
+			return new int[] { -1, -1 };
 		}
 
-		TODO:
-		// int[] res = process(allTime, revenue, times, dependents, 0, 0);
-		// if (res == null) {
-		// 	return new int[] { -1, -1 };
-		// }
-		// return new int[] { allTime - res[0], res[1] };
+		int[] res = process(allTime - times[times.length - 1], revenue, times, dependents, times.length - 1,
+				revenue[times.length - 1]);
+		return new int[] { allTime - res[0], res[1] };
 	}
 
 	private static int[] process(int remainTime, int[] revenue, int[] times, int[][] dependents, int i, int rewards) {
-		// if (i == times.length) {
-		// 	return new int[] { remainTime, rewards };
-		// }
-		// if (remainTime < 0) {
-		// 	return null;
-		// }
-		// int maxRewards = rewards;
-		// int maxRemainTimes = remainTime;
-		// for (int j = 0; j < dependents[i].length; j++) {
-		// 	if (dependents[i][j] == 0) {
-		// 		continue;
-		// 	}
+		if (remainTime < 0) {
+			return new int[] { 0, 0 };
+		}
+		if (i < -1) {
+			System.out.println(i);
+			return new int[] { remainTime, rewards };
+		}
 
-		// 	int[] res = process(remainTime - times[i], revenue, times, dependents, i + 1, rewards + revenue[i]);
-		// 	if (res != null && maxRewards < res[1]) {
-		// 		maxRewards = res[1];
-		// 		maxRemainTimes = res[0];
-		// 	}
+		int[] max = new int[] { remainTime, rewards };
+		for (int j = 0; j < i; j++) {
+			if (dependents[j][i] == 0 || remainTime - times[j] < 0) {
+				continue;
+			}
 
-		// }
+			int[] res = process(remainTime - times[j], revenue, times, dependents, j, rewards + revenue[j]);
+			if (max[1] < res[1]) {
+				max[1] = res[1];
+				max[0] = res[0];
+			}
+		}
+		return max;
+	}
 
-		// return new int[] { maxRemainTimes, maxRewards };
+	// 法二：
+	private static class Node {
+		public int time;
+		public int revenue;
+
+		public Node(int time, int revenue) {
+			this.time = time;
+			this.revenue = revenue;
+		}
+	}
+
+	private static class MyList {
+		public ArrayList<Node> list = new ArrayList<>();
+
+		public void add(Node n) {
+			list.add(n);
+		}
+	}
+
+	public static int[] maxRevenue3(int allTime, int[] revenue, int[] times, int[][] dependents) {
+		if (allTime < 0 || revenue == null || times == null || dependents == null) {
+			return new int[] { -1, -1 };
+		}
+
+		if (times[times.length - 1] > allTime) {
+			return new int[] { 0, 0 };
+		}
+
+		// HashMap<Integer, ArrayList<Node>> map = new HashMap<>(); //
+		// 元素索引--该元素的所有路线treeMap表
+		MyList[] arr = new MyList[times.length];
+		arr[arr.length - 1] = new MyList();
+		arr[arr.length - 1].add(new Node(times[times.length - 1], revenue[revenue.length - 1]));
+		// map.put(times.length - 1, new ArrayList<>());
+		// map.get(times.length - 1).add(new Node(times[times.length - 1],
+		// revenue[revenue.length - 1]));
+
+		for (int i = dependents.length - 1; i > 0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (dependents[j][i] == 0) { // 筛选出能到i位置的有哪些位置
+					continue;
+				}
+
+				if (arr[j] == null) {
+					arr[j] = new MyList();
+				}
+
+				for (Node n : arr[i].list) {
+					if (n.time + times[j] <= allTime) {
+						arr[j].add(new Node(n.time + times[j], n.revenue + revenue[j]));
+					}
+				}
+			}
+		}
+
+		// 通过treeSet排序
+		TreeSet<Node> treeSet = new TreeSet<>(new Comparator<Node>() {
+			@Override
+			public int compare(Node o1, Node o2) {
+				return o2.revenue - o1.revenue;
+			}
+		});
+
+		for (int i = 0; i < arr.length; i++) {
+			for (Node n : arr[i].list) {
+				treeSet.add(n);
+			}
+		}
+		Node n = treeSet.first();
+		if (n == null) {
+			return new int[] { -1, -1 };
+		}
+		return new int[] { n.time, n.revenue };
 	}
 
 	public static void main(String[] args) {
@@ -133,6 +207,8 @@ public class C06_MaxRevenue {
 		System.out.println(res[0] + " , " + res[1]);
 		int[] res2 = maxRevenue2(allTime, revenue, times, dependents);
 		System.out.println(res2[0] + " , " + res2[1]);
+		int[] res3 = maxRevenue3(allTime, revenue, times, dependents);
+		System.out.println(res3[0] + " , " + res3[1]);
 
 	}
 }
