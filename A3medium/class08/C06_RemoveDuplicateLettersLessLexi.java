@@ -51,4 +51,28 @@ public class C06_RemoveDuplicateLettersLessLexi {
 		return String.valueOf(res, 0, index);
 	}
 
+	public static String removeDuplicateLetters2(String s) {
+		if (s == null || s.length() <= 1) {
+			return s;
+		}
+
+		char[] arr = s.toCharArray();
+
+		// Map
+		int[] charCount = new int[26];
+		for (int i = 0; i < arr.length; i++) {
+			charCount[arr[i] - 97]++;
+		}
+
+		int minCharI = 0;
+		for (int i = 0; i < arr.length; i++) {
+			charCount[arr[i] - 97]--;
+			minCharI = arr[i] <= arr[minCharI] ? i : minCharI;
+			if (charCount[arr[i] - 97] == 0) {
+				break;
+			}
+		}
+		return arr[minCharI]
+				+ removeDuplicateLetters2(s.substring(minCharI + 1).replaceAll(String.valueOf(arr[minCharI]), ""));
+	}
 }
