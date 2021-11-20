@@ -2,11 +2,7 @@ package A3medium.class07;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map.Entry;
 
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 // CC直播的运营部门组织了很多运营活动，每个活动需要花费一定的时间参与，主播每参加完一个活动即可得到一定的奖励，
@@ -32,58 +28,64 @@ import java.util.TreeSet;
 public class C06_MaxRevenue {
 
 	// 请保证只有唯一的最后节点
-	public static int[] maxRevenue(int allTime, int[] revenue, int[] times, int[][] dependents) {
-		int size = revenue.length;
-		HashMap<Integer, ArrayList<Integer>> parents = new HashMap<>();
-		for (int i = 0; i < size; i++) {
-			parents.put(i, new ArrayList<>());
-		}
-		int end = -1;
-		for (int i = 0; i < dependents.length; i++) {
-			boolean allZero = true;
-			for (int j = 0; j < dependents[0].length; j++) {
-				if (dependents[i][j] != 0) {
-					parents.get(j).add(i);
-					allZero = false;
-				}
-			}
-			if (allZero) {
-				end = i;
-			}
-		}
-		HashMap<Integer, TreeMap<Integer, Integer>> nodeCostRevenueMap = new HashMap<>();
-		for (int i = 0; i < size; i++) {
-			nodeCostRevenueMap.put(i, new TreeMap<>());
-		}
-		nodeCostRevenueMap.get(end).put(times[end], revenue[end]);
-		LinkedList<Integer> queue = new LinkedList<>();
-		queue.add(end);
-		while (!queue.isEmpty()) {
-			int cur = queue.poll();
-			for (int last : parents.get(cur)) {
-				for (Entry<Integer, Integer> entry : nodeCostRevenueMap.get(cur).entrySet()) {
-					int lastCost = entry.getKey() + times[last];
-					int lastRevenue = entry.getValue() + revenue[last];
-					TreeMap<Integer, Integer> lastMap = nodeCostRevenueMap.get(last);
-					if (lastMap.floorKey(lastCost) == null || lastMap.get(lastMap.floorKey(lastCost)) < lastRevenue) {
-						lastMap.put(lastCost, lastRevenue);
-					}
-				}
-				queue.add(last);
-			}
-		}
-		TreeMap<Integer, Integer> allMap = new TreeMap<>();
-		for (TreeMap<Integer, Integer> curMap : nodeCostRevenueMap.values()) {
-			for (Entry<Integer, Integer> entry : curMap.entrySet()) {
-				int cost = entry.getKey();
-				int reven = entry.getValue();
-				if (allMap.floorKey(cost) == null || allMap.get(allMap.floorKey(cost)) < reven) {
-					allMap.put(cost, reven);
-				}
-			}
-		}
-		return new int[] { allMap.floorKey(allTime), allMap.get(allMap.floorKey(allTime)) };
-	}
+	// public static int[] maxRevenue(int allTime, int[] revenue, int[] times,
+	// int[][] dependents) {
+	// int size = revenue.length;
+	// HashMap<Integer, ArrayList<Integer>> parents = new HashMap<>();
+	// for (int i = 0; i < size; i++) {
+	// parents.put(i, new ArrayList<>());
+	// }
+	// int end = -1;
+	// for (int i = 0; i < dependents.length; i++) {
+	// boolean allZero = true;
+	// for (int j = 0; j < dependents[0].length; j++) {
+	// if (dependents[i][j] != 0) {
+	// parents.get(j).add(i);
+	// allZero = false;
+	// }
+	// }
+	// if (allZero) {
+	// end = i;
+	// }
+	// }
+	// HashMap<Integer, TreeMap<Integer, Integer>> nodeCostRevenueMap = new
+	// HashMap<>();
+	// for (int i = 0; i < size; i++) {
+	// nodeCostRevenueMap.put(i, new TreeMap<>());
+	// }
+	// nodeCostRevenueMap.get(end).put(times[end], revenue[end]);
+	// LinkedList<Integer> queue = new LinkedList<>();
+	// queue.add(end);
+	// while (!queue.isEmpty()) {
+	// int cur = queue.poll();
+	// for (int last : parents.get(cur)) {
+	// for (Entry<Integer, Integer> entry : nodeCostRevenueMap.get(cur).entrySet())
+	// {
+	// int lastCost = entry.getKey() + times[last];
+	// int lastRevenue = entry.getValue() + revenue[last];
+	// TreeMap<Integer, Integer> lastMap = nodeCostRevenueMap.get(last);
+	// if (lastMap.floorKey(lastCost) == null ||
+	// lastMap.get(lastMap.floorKey(lastCost)) < lastRevenue) {
+	// lastMap.put(lastCost, lastRevenue);
+	// }
+	// }
+	// queue.add(last);
+	// }
+	// }
+	// TreeMap<Integer, Integer> allMap = new TreeMap<>();
+	// for (TreeMap<Integer, Integer> curMap : nodeCostRevenueMap.values()) {
+	// for (Entry<Integer, Integer> entry : curMap.entrySet()) {
+	// int cost = entry.getKey();
+	// int reven = entry.getValue();
+	// if (allMap.floorKey(cost) == null || allMap.get(allMap.floorKey(cost)) <
+	// reven) {
+	// allMap.put(cost, reven);
+	// }
+	// }
+	// }
+	// return new int[] { allMap.floorKey(allTime),
+	// allMap.get(allMap.floorKey(allTime)) };
+	// }
 
 	// 法一：暴力解法
 	public static int[] maxRevenue2(int allTime, int[] revenue, int[] times, int[][] dependents) {
@@ -203,8 +205,8 @@ public class C06_MaxRevenue {
 				{ 0, 0, 0, 0, 1, 1, 1, 0 }, { 0, 0, 0, 0, 0, 0, 0, 1 }, { 0, 0, 0, 0, 0, 0, 0, 1 }, { 0, 0, 0, 0, 0, 0, 0, 1 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
 
-		int[] res = maxRevenue(allTime, revenue, times, dependents);
-		System.out.println(res[0] + " , " + res[1]);
+		// int[] res = maxRevenue(allTime, revenue, times, dependents);
+		// System.out.println(res[0] + " , " + res[1]);
 		int[] res2 = maxRevenue2(allTime, revenue, times, dependents);
 		System.out.println(res2[0] + " , " + res2[1]);
 		int[] res3 = maxRevenue3(allTime, revenue, times, dependents);
