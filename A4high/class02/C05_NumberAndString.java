@@ -1,4 +1,4 @@
-package A4high.class01;
+package A4high.class02;
 
 public class C05_NumberAndString {
 

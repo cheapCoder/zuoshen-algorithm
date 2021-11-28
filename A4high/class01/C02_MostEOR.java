@@ -1,4 +1,4 @@
-package A4high.class02;
+package A4high.class01;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package A4high.class01;
+package A4high.class02;
 public class C03_LongestLessSumSubArrayLength {
 
 	public static int maxLengthAwesome(int[] arr, int k) {

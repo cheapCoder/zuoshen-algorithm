@@ -1,4 +1,4 @@
-package A4high.class01;
+package A4high.class02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+// 问题：天际线问题(https://leetcode-cn.com/problems/the-skyline-problem/)
+// 给定一个N×3的矩阵matrix，对于每一个长度为3的小数组arr，都表示一个大楼的三个数据。
+// arr[0]表示大楼的左边界，arr[1]表示大楼的右边界，arr[2]表示大楼的高度(一定大于0)。
+// 每座大楼的地基都在X轴上，大楼之间可能会有重叠，请返回整体的轮廓线数组。
 
 public class C01_BuildingOutline {
 
