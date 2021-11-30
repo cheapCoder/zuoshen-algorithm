@@ -2,6 +2,7 @@ package hash_function;
 
 import java.util.LinkedList;
 
+// NOTE:滑动窗口
 public class C07_SlidingWindowMaxArray {
 
 	// public static int[] getMaxWindow(int[] arr, int w) {

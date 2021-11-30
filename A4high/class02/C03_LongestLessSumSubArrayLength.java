@@ -1,4 +1,9 @@
 package A4high.class02;
+
+// 问题：数组有正，有负，有零时怎么求和小于等于K的最长子数组长度？
+
+// 补充问题：数组有正，有负，有零时怎么求和大于等于K的最长子数组长度呢？
+
 public class C03_LongestLessSumSubArrayLength {
 
 	public static int maxLengthAwesome(int[] arr, int k) {
@@ -97,5 +102,5 @@ public class C03_LongestLessSumSubArrayLength {
 		}
 
 	}
-	
+
 }

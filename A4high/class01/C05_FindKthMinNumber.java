@@ -9,55 +9,56 @@ import java.util.Arrays;
 // NOTE: pretty pretty pretty pretty hard
 public class C05_FindKthMinNumber {
 
-	public static int findKthNum(int[] arr1, int[] arr2, int kth) {
-		if (arr1 == null || arr2 == null) {
-			throw new RuntimeException("Your arr is invalid!");
-		}
-		if (kth < 1 || kth > arr1.length + arr2.length) {
-			throw new RuntimeException("K is invalid!");
-		}
-		int[] longs = arr1.length >= arr2.length ? arr1 : arr2;
-		int[] shorts = arr1.length < arr2.length ? arr1 : arr2;
-		int l = longs.length;
-		int s = shorts.length;
-		if (kth <= s) {
-			return getUpMedian(shorts, 0, kth - 1, longs, 0, kth - 1);
-		}
-		if (kth > l) {
-			if (shorts[kth - l - 1] >= longs[l - 1]) {
-				return shorts[kth - l - 1];
-			}
-			if (longs[kth - s - 1] >= shorts[s - 1]) {
-				return longs[kth - s - 1];
-			}
-			return getUpMedian(shorts, kth - l, s - 1, longs, kth - s, l - 1);
-		}
-		if (longs[kth - s - 1] >= shorts[s - 1]) {
-			return longs[kth - s - 1];
-		}
-		return getUpMedian(shorts, 0, s - 1, longs, kth - s, kth - 1);
-	}
+	// public static int findKthNum(int[] arr1, int[] arr2, int kth) {
+	// if (arr1 == null || arr2 == null) {
+	// throw new RuntimeException("Your arr is invalid!");
+	// }
+	// if (kth < 1 || kth > arr1.length + arr2.length) {
+	// throw new RuntimeException("K is invalid!");
+	// }
+	// int[] longs = arr1.length >= arr2.length ? arr1 : arr2;
+	// int[] shorts = arr1.length < arr2.length ? arr1 : arr2;
+	// int l = longs.length;
+	// int s = shorts.length;
+	// if (kth <= s) {
+	// return getUpMedian(shorts, 0, kth - 1, longs, 0, kth - 1);
+	// }
+	// if (kth > l) {
+	// if (shorts[kth - l - 1] >= longs[l - 1]) {
+	// return shorts[kth - l - 1];
+	// }
+	// if (longs[kth - s - 1] >= shorts[s - 1]) {
+	// return longs[kth - s - 1];
+	// }
+	// return getUpMedian(shorts, kth - l, s - 1, longs, kth - s, l - 1);
+	// }
+	// if (longs[kth - s - 1] >= shorts[s - 1]) {
+	// return longs[kth - s - 1];
+	// }
+	// return getUpMedian(shorts, 0, s - 1, longs, kth - s, kth - 1);
+	// }
 
-	public static int getUpMedian(int[] a1, int s1, int e1, int[] a2, int s2, int e2) {
-		int mid1 = 0;
-		int mid2 = 0;
-		int offset = 0;
-		while (s1 < e1) {
-			mid1 = (s1 + e1) / 2;
-			mid2 = (s2 + e2) / 2;
-			offset = ((e1 - s1 + 1) & 1) ^ 1;
-			if (a1[mid1] > a2[mid2]) {
-				e1 = mid1;
-				s2 = mid2 + offset;
-			} else if (a1[mid1] < a2[mid2]) {
-				s1 = mid1 + offset;
-				e2 = mid2;
-			} else {
-				return a1[mid1];
-			}
-		}
-		return Math.min(a1[s1], a2[s2]);
-	}
+	// public static int getUpMedian(int[] a1, int s1, int e1, int[] a2, int s2, int
+	// e2) {
+	// int mid1 = 0;
+	// int mid2 = 0;
+	// int offset = 0;
+	// while (s1 < e1) {
+	// mid1 = (s1 + e1) / 2;
+	// mid2 = (s2 + e2) / 2;
+	// offset = ((e1 - s1 + 1) & 1) ^ 1;
+	// if (a1[mid1] > a2[mid2]) {
+	// e1 = mid1;
+	// s2 = mid2 + offset;
+	// } else if (a1[mid1] < a2[mid2]) {
+	// s1 = mid1 + offset;
+	// e2 = mid2;
+	// } else {
+	// return a1[mid1];
+	// }
+	// }
+	// return Math.min(a1[s1], a2[s2]);
+	// }
 
 	// 法一:双指针
 	public static int findKthNum2(int[] arr1, int[] arr2, int kth) {
@@ -81,7 +82,18 @@ public class C05_FindKthMinNumber {
 		return cur;
 	}
 
-	// 法二：
+	// 法二：二分法O(logN*logM)
+	// TODO:P31/32
+
+	// 法三：O(log(min(M, N)))
+	// NOTE:算法原型：
+	// 两个长度相同，有序的数组arr1, arr2, 求其上中位数：
+	// 计算各自的中位数mid1,mid2,
+	// 若mid1>mid2，则arr1的mid1+1 ~ len1 - 1都不可能是上中位数，arr2的0 ~ mid2都不可能是上中位数;
+	// 若arr1,arr2长度偶数，对剩下的一半递归求中位数，
+	// 若为奇数，比较mid2+1和mid1来手动排除一个数，再对剩下的求中位数
+
+	// 分类讨论三种情况
 	public static int findKthNum3(int[] arr1, int[] arr2, int kth) {
 		if (arr1 == null || arr1.length == 0 || arr2 == null || arr2.length == 0 || kth > arr1.length + arr2.length) {
 			return -1;
@@ -194,7 +206,7 @@ public class C05_FindKthMinNumber {
 		int[] sortedAll = getSortedAllArray(arr1, arr2);
 		printArray(sortedAll);
 		int kth = 17;
-		System.out.println(findKthNum(arr1, arr2, kth));
+		// System.out.println(findKthNum(arr1, arr2, kth));
 		System.out.println(findKthNum2(arr1, arr2, kth));
 		System.out.println(findKthNum3(arr1, arr2, kth));
 		System.out.println(sortedAll[kth - 1]);

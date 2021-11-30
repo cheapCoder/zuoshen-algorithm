@@ -1,5 +1,13 @@
 package A4high.class02;
 
+// 问题：给定一个数组arr，该数组无序，但每个值均为正数，再给定一个正数k。
+// 求arr的所有子数组中所有元素相加和为k的最长子数组长度。
+// 例如，arr=[1,2,1,1,1]，k=3。累加和为3的最长子数组为[1,1,1]，所以结果返回3。
+// 要求:时间复杂度O(N)，额外空间复杂度O(1)
+
+// 补充问题：数组有正，有负，有零时怎么求和为K的最长子数组长度
+
+// NOTE: 滑动窗口
 public class C02_LongestSumSubArrayLengthInPositiveArray {
 
 	public static int getMaxLength(int[] arr, int k) {

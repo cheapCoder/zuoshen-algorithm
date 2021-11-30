@@ -2,6 +2,8 @@ package sort;
 
 import java.util.Arrays;
 
+// 计数排序
+// NOTE: 适合数据离散，范围小，个数多的情况
 public class C16_CountSort {
 
 	// only for 0~200 value

@@ -36,7 +36,7 @@ public class C04_LongestNoRepeatSubstring {
 
 	// }
 
-	// 法二：思考任意一个位置i结尾时的情况
+	// 法二：思考任意一个位置i结尾时的无重复子串长度
 	public static int maxUnique3(String str) {
 		if (str == null || str.equals("")) {
 			return 0;
@@ -74,11 +74,6 @@ public class C04_LongestNoRepeatSubstring {
 		}
 		return String.valueOf(str);
 	}
-
-
-	// 法一：尝试滑动窗口6
-
-	// 法二：思考必须以i位置结尾时的无重复子串长度
 
 	// for test
 	public static String maxUniqueString(String str) {
