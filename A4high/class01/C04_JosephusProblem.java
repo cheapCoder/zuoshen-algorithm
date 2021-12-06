@@ -16,66 +16,125 @@ package A4high.class01;
 // 4231
 // 输出
 // 1
+// NOTE: 题意中distance是动态的，解答中只考虑的固定值的解法
 
 // NOTE: 原型：约瑟夫环
 // 数形结合，从y = x % i的数学函数图像启发
 public class C04_JosephusProblem {
 
-	public static class Node {
-		public int value;
-		public Node next;
+	// public static class Node {
+	// public int value;
+	// public Node next;
 
-		public Node(int data) {
-			this.value = data;
+	// public Node(int data) {
+	// this.value = data;
+	// }
+	// }
+
+	// 时间复杂度：O(M * N)
+	// public static Node josephusKill1(Node head, int m) {
+	// if (head == null || head.next == head || m < 1) {
+	// return head;
+	// }
+	// Node last = head;
+	// while (last.next != head) {
+	// last = last.next;
+	// }
+	// int count = 0;
+	// while (head != last) {
+	// if (++count == m) {
+	// last.next = head.next;
+	// count = 0;
+	// } else {
+	// last = last.next;
+	// }
+	// head = last.next;
+	// }
+	// return head;
+	// }
+
+	// 时间复杂度：O(N)
+	// public static Node josephusKill2(Node head, int m) {
+	// if (head == null || head.next == head || m < 1) {
+	// return head;
+	// }
+	// Node cur = head.next;
+	// int tmp = 1; // tmp -> list size
+	// while (cur != head) {
+	// tmp++;
+	// cur = cur.next;
+	// }
+	// tmp = getLive(tmp, m); // tmp -> service node position
+	// while (--tmp != 0) {
+	// head = head.next;
+	// }
+	// head.next = head;
+	// return head;
+	// }
+
+	// public static int getLive(int i, int m) {
+	// if (i == 1) {
+	// return 1;
+	// }
+	// return (getLive(i - 1, m) + m - 1) % i + 1;
+	// }
+
+	private static class Node {
+		int value;
+		Node next;
+
+		public Node(int v) {
+			this.value = v;
 		}
 	}
 
-	// 时间复杂度：O(M * N)
-	public static Node josephusKill1(Node head, int m) {
-		if (head == null || head.next == head || m < 1) {
-			return head;
+	// 法一：时间复杂度：O(distance * N)
+	public static Node josephusKill1(Node head, int distance) {
+		if (head == null) {
+			return null;
 		}
-		Node last = head;
-		while (last.next != head) {
-			last = last.next;
-		}
-		int count = 0;
-		while (head != last) {
-			if (++count == m) {
-				last.next = head.next;
-				count = 0;
-			} else {
-				last = last.next;
+
+		while (head.next != head) {
+			// distance-2是为了因为distance从1开始计数，并为了让指针最后听到被删节点的前一个，画图更好理解
+			for (int i = 0; i < distance - 2; i++) {
+				head = head.next;
 			}
-			head = last.next;
+			head.next = head.next.next;
+			head = head.next;
 		}
+
 		return head;
 	}
 
 	// 时间复杂度：O(N)
-	public static Node josephusKill2(Node head, int m) {
-		if (head == null || head.next == head || m < 1) {
-			return head;
+	public static Node josephusKill2(Node head, int distance) {
+		if (head == null) {
+			return null;
 		}
-		Node cur = head.next;
-		int tmp = 1; // tmp -> list size
-		while (cur != head) {
-			tmp++;
-			cur = cur.next;
+
+		// 计算长度
+		int len = 1;
+		Node node = head.next;
+		while (node != head) {
+			len++;
+			node = node.next;
 		}
-		tmp = getLive(tmp, m); // tmp -> service node position
-		while (--tmp != 0) {
+
+		int num = process(len, distance);
+		while (num != 1) {
 			head = head.next;
+			num--;
 		}
 		head.next = head;
+
 		return head;
 	}
 
-	public static int getLive(int i, int m) {
-		if (i == 1) {
+	private static int process(int len, int distance) {
+		if (len == 1) {
 			return 1;
 		}
-		return (getLive(i - 1, m) + m - 1) % i + 1;
+		return (process(len - 1, distance) + distance - 1) % len + 1;
 	}
 
 	// for test
@@ -98,7 +157,10 @@ public class C04_JosephusProblem {
 		head1.next.next = new Node(3);
 		head1.next.next.next = new Node(4);
 		head1.next.next.next.next = new Node(5);
-		head1.next.next.next.next.next = head1;
+		head1.next.next.next.next.next = new Node(6);
+		head1.next.next.next.next.next.next = new Node(7);
+		head1.next.next.next.next.next.next.next = new Node(8);
+		head1.next.next.next.next.next.next.next.next = head1;
 		printCircularList(head1);
 		head1 = josephusKill1(head1, 3);
 		printCircularList(head1);
@@ -108,7 +170,10 @@ public class C04_JosephusProblem {
 		head2.next.next = new Node(3);
 		head2.next.next.next = new Node(4);
 		head2.next.next.next.next = new Node(5);
-		head2.next.next.next.next.next = head2;
+		head2.next.next.next.next.next = new Node(6);
+		head2.next.next.next.next.next.next = new Node(7);
+		head2.next.next.next.next.next.next.next = new Node(8);
+		head2.next.next.next.next.next.next.next.next = head2;
 		printCircularList(head2);
 		head2 = josephusKill2(head2, 3);
 		printCircularList(head2);
