@@ -1,5 +1,7 @@
 package A4high.class03;
 
+// 请注意区分子串和子序列的不同，给定两个字符串str1和str2，求两个字符串的最长公共子串。
+// 动态规划空间压缩的技巧讲解
 public class C04_LCSubstring {
 
 	public static String lcst1(String str1, String str2) {

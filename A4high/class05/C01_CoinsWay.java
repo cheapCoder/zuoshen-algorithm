@@ -1,5 +1,9 @@
 package A4high.class05;
 
+// 给定一个正数数组arr，arr[i]表示第i种货币的面值，可以使用任意张。
+// 给定一个正数aim，返回组成aim的方法数有多少种?
+
+// 动态规划优化状态依赖的技巧
 public class C01_CoinsWay {
 
 	public static int coins1(int[] arr, int aim) {

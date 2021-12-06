@@ -1,6 +1,6 @@
 package A4high.class04;
-//package class04;
 
+// 在一个无序数组中，求最小的第k个数。
 public class C06_BFPRT {
 
 	public static int[] getMinKNumsByBFPRT(int[] arr, int k) {

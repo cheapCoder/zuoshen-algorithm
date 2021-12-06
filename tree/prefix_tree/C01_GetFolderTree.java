@@ -11,6 +11,8 @@ package tree.prefix_tree;
 // 	cst
 // d
 // 同一级的需要按字母顺序排列，不能乱。
+
+// NOTE: 前缀树
 import java.util.TreeMap;
 
 public class C01_GetFolderTree {

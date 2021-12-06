@@ -7,6 +7,8 @@ package A4high.class02;
 // 例如，chs=['A', 'B', 'C']，则字符串与整数的对应关系如下: A,B,C,AA,AB...CC,AAA...CCC,AAAA...
 // 1, 2,3,4,5...12,13...39,40...
 // 给定一个数组 chs，实现根据对应关系完成字符串与整数相互转换的两个函数。
+
+// NOTE: K伪进制
 public class C05_NumberAndString {
 
 	public static String getString(char[] chs, int n) {

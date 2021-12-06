@@ -1,5 +1,7 @@
 package A4high.class03;
 
+// 给定一棵二叉树的头节点head，可以从树中的任何一点出发，如果走的话只能向下，
+//  也可以选择随时停止，所形成的轨迹叫做一条路径，路径上所有值的累加和叫作路径和。求这棵树上的最大路径和。
 public class C01_MaxPathSumInBT {
 
 	public static class Node {
