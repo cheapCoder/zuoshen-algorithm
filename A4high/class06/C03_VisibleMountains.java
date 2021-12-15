@@ -3,6 +3,18 @@ package A4high.class06;
 import java.util.HashSet;
 import java.util.Stack;
 
+// 一个不含有负数的数组可以代表一圈环形山，每个位置的值代表山的高度。
+// 比如， {3,1,2,4,5}、{4,5,3,1,2}或{1,2,4,5,3}都代表同样结构的环形山。
+// 山峰A和山峰B能够相互看见的条件为: 
+// 1.如果A和B是同一座山，认为不能相互看见。
+// 2.如果A和B是不同的山，并且在环中相邻，认为可以相互看见。
+// 3.如果A和B是不同的山，并且在环中不相邻，假设两座山高度的最小值为min。
+// 1)如果A通过顺时针方向到B的途中没有高度比min大的山峰，认为A和B可以相互 看见
+// 2)如果A通过逆时针方向到B的途中没有高度比min大的山峰，认为A和B可以相互 看见
+// 3)两个方向只要有一个能看见，就算A和B可以相互看见 给定一个不含有负数且没有重复值的数组 arr，请返回有多少对山峰能够相互看见。
+
+// 进阶: 给定一个不含有负数但可能含有重复值的数组arr，返回有多少对山峰能够相互看见。
+
 public class C03_VisibleMountains {
 
 	public static class Record {
@@ -169,7 +181,9 @@ public class C03_VisibleMountains {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-		System.out.println();System.out.println();System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
