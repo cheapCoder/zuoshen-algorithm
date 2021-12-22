@@ -1,11 +1,13 @@
 package A4high.class02;
 
+import java.util.HashMap;
+
 // 问题：给定一个数组arr，该数组无序，但每个值均为正数，再给定一个正数k。
 // 求arr的所有子数组中所有元素相加和为k的最长子数组长度。
 // 例如，arr=[1,2,1,1,1]，k=3。累加和为3的最长子数组为[1,1,1]，所以结果返回3。
 // 要求:时间复杂度O(N)，额外空间复杂度O(1)
 
-// TODO:
+// NOTE: 预处理出前缀和
 // 补充问题：数组有正，有负，有零时怎么求和为K的最长子数组长度
 
 // NOTE: 滑动窗口
@@ -63,6 +65,29 @@ public class C02_LongestSumSubArrayLengthInPositiveArray {
 		return maxLen;
 	}
 
+	// 补充问题：数组有正，有负，有零时怎么求和为K的最长子数组长度
+	public static int getMaxLengthInAnyRange(int[] arr, int k) {
+		if (arr == null || arr.length == 0 || k <= 0) {
+			return 0;
+		}
+
+		HashMap<Integer, Integer> map = new HashMap<>();
+		int sum = 0;
+		int maxLen = 0;
+		for (int i = 0; i < arr.length; i++) {
+			sum += arr[i];
+			if (map.containsKey(sum - k)) {
+				maxLen = Math.max(maxLen, i - map.get(sum - k));
+			}
+
+			if (!map.containsKey(sum)) {
+				map.put(sum, i);
+			}
+		}
+
+		return maxLen;
+	}
+
 	// for test
 	public static int[] generatePositiveArray(int size) {
 		int[] result = new int[size];
@@ -86,14 +111,14 @@ public class C02_LongestSumSubArrayLengthInPositiveArray {
 		for (int i = 0; i < 10000; i++) {
 			int[] arr = generatePositiveArray(len);
 			// printArray(arr);
-			int one = getMaxLength(arr, k);
+			// int one = getMaxLength(arr, k);
 			int two = getMaxLength2(arr, k);
-			if (one != two) {
-				System.out.println("error");
-				printArray(arr);
-				System.out.println(one);
-				System.out.println(two);
-			}
+			// if (one != two) {
+			// System.out.println("error");
+			printArray(arr);
+			// System.out.println(one);
+			System.out.println(two);
+			// }
 		}
 
 		// System.out.println(getMaxLength2(new int[] { 2, 3, 1, 9 }, 15));

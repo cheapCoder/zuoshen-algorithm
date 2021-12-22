@@ -8,16 +8,26 @@ package A4high.class02;
 public class C04_Nim {
 
 	// 保证arr是正数数组
-	public static void printWinner(int[] arr) {
-		int eor = 0;
-		for (int num : arr) {
-			eor ^= num;
+	// public static void printWinner(int[] arr) {
+	// int eor = 0;
+	// for (int num : arr) {
+	// eor ^= num;
+	// }
+	// if (eor == 0) {
+	// System.out.println("后手赢");
+	// } else {
+	// System.out.println("先手赢");
+	// }
+	// }
+
+	// https://www.cnblogs.com/jiangjun/archive/2012/11/01/2749937.html
+	public static void nimu(int[] arr) {
+		int xor = 0;
+		for (int i = 0; i < arr.length; i++) {
+			xor ^= arr[i];
 		}
-		if (eor == 0) {
-			System.out.println("后手赢");
-		} else {
-			System.out.println("先手赢");
-		}
+
+		System.out.println(xor == 0 ? "后手赢": "先手赢");
 	}
 
 }
