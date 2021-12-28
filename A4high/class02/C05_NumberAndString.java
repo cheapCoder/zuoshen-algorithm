@@ -42,6 +42,32 @@ public class C05_NumberAndString {
 		return chs[k - 1];
 	}
 
+	// NOTE:因为伪进制没有0，所有应先确保每位都至少有1再定具体值
+	public static String getString2(int num) {
+		if (num <= 0) {
+			return "";
+		}
+
+		// 获取str的长度
+		int len = 0;
+		num -= 1;
+		while (num > 0) {
+			len++;
+			num -= Math.pow(26, len);
+		}
+		num += Math.pow(26, len);
+
+		System.out.println(len);
+
+		char[] res = new char[len];
+		for (int i = 0; i < len; i++) {
+			res[i] = (char) ((num / (int) Math.pow(26, len - 1 - i)) + 64 + 1); // +1是之前有存的1
+			num = num % ((int) (Math.pow(26, len - 1 - i)));
+		}
+
+		return String.valueOf(res);
+	}
+
 	public static int getNum(char[] chs, String str) {
 		if (chs == null || chs.length == 0) {
 			return 0;
@@ -68,29 +94,45 @@ public class C05_NumberAndString {
 		return res;
 	}
 
+	public static int getNum2(String str) {
+		if (str == null || str.length() == 0) {
+			return 0;
+		}
+
+		char[] arr = str.toUpperCase().toCharArray();
+		int res = 0;
+		for (int i = arr.length - 1; i >= 0; i--) {
+			res += Math.pow(26, arr.length - 1 - i) * (arr[i] - 65 + 1);
+		}
+		return res;
+	}
+
 	public static void main(String[] args) {
 		char[] chs = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
 				'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
 				'X', 'Y', 'Z' };
-		int len = 1;
-		String res = "";
-		for (int i = 1; i != 705; i++) {
-			res = getString(chs, i);
-			if (res.length() != len) {
-				len = res.length();
-				System.out.println("================");
-			}
-			System.out.print(res + " ");
-			if (i % chs.length == 0) {
-				System.out.println();
-			}
-		}
-		System.out.println();
-		System.out.println("========================");
+		// int len = 1;
+		// String res = "";
+		// for (int i = 1; i != 705; i++) {
+		// res = getString(chs, i);
+		// if (res.length() != len) {
+		// len = res.length();
+		// System.out.println("================");
+		// }
+		// System.out.print(res + " ");
+		// if (i % chs.length == 0) {
+		// System.out.println();
+		// }
+		// }
+		// System.out.println();
+		// System.out.println("========================");
 		int testNum = 78128712;
-		System.out.println(getNum(chs, getString(chs, testNum)));
-		String testStr = "BZZA";
+		// System.out.println(getNum(chs, getString(chs, testNum)));
+		// System.out.println(getNum2(getString(chs, testNum)));
+		String testStr = "ZsgSsG";
+		System.out.println(getNum(chs, testStr));
+		System.out.println(getNum2(testStr));
 		System.out.println(getString(chs, getNum(chs, testStr)));
-
+		System.out.println(getString2(getNum2(testStr)));
 	}
 }
