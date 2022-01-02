@@ -45,40 +45,97 @@ public class C03_LongestLessSumSubArrayLength {
 		return res;
 	}
 
+	// public static int maxLength(int[] arr, int k) {
+	// int[] h = new int[arr.length + 1];
+	// int sum = 0;
+	// h[0] = sum;
+	// for (int i = 0; i != arr.length; i++) {
+	// sum += arr[i];
+	// h[i + 1] = Math.max(sum, h[i]);
+	// }
+	// sum = 0;
+	// int res = 0;
+	// int pre = 0;
+	// int len = 0;
+	// for (int i = 0; i != arr.length; i++) {
+	// sum += arr[i];
+	// pre = getLessIndex(h, sum - k);
+	// len = pre == -1 ? 0 : i - pre + 1;
+	// res = Math.max(res, len);
+	// }
+	// return res;
+	// }
+
+	// public static int getLessIndex(int[] arr, int num) {
+	// int low = 0;
+	// int high = arr.length - 1;
+	// int mid = 0;
+	// int res = -1;
+	// while (low <= high) {
+	// mid = (low + high) / 2;
+	// if (arr[mid] >= num) {
+	// res = mid;
+	// high = mid - 1;
+	// } else {
+	// low = mid + 1;
+	// }
+	// }
+	// return res;
+	// }
+
+	// 暴力法O(n2)
 	public static int maxLength(int[] arr, int k) {
-		int[] h = new int[arr.length + 1];
-		int sum = 0;
-		h[0] = sum;
-		for (int i = 0; i != arr.length; i++) {
-			sum += arr[i];
-			h[i + 1] = Math.max(sum, h[i]);
+		if (arr == null || arr.length == 0) {
+			return 0;
 		}
-		sum = 0;
+
 		int res = 0;
-		int pre = 0;
-		int len = 0;
-		for (int i = 0; i != arr.length; i++) {
-			sum += arr[i];
-			pre = getLessIndex(h, sum - k);
-			len = pre == -1 ? 0 : i - pre + 1;
-			res = Math.max(res, len);
+		for (int i = 0; i < arr.length; i++) {
+			int curLen = 0;
+			int sum = 0;
+			for (int j = i; j < arr.length; j++) {
+				sum += arr[j];
+				if (sum <= k) {
+					curLen = j - i + 1;
+				}
+			}
+
+			res = Math.max(res, curLen);
 		}
+
 		return res;
 	}
 
-	public static int getLessIndex(int[] arr, int num) {
-		int low = 0;
-		int high = arr.length - 1;
-		int mid = 0;
-		int res = -1;
-		while (low <= high) {
-			mid = (low + high) / 2;
-			if (arr[mid] >= num) {
-				res = mid;
-				high = mid - 1;
-			} else {
-				low = mid + 1;
+	// O(N)
+	public static int maxLengthAwesome2(int[] arr, int k) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+
+		int[] minSumIndex = new int[arr.length];
+		int[] minSum = new int[arr.length];
+		minSum[arr.length - 1] = arr[arr.length - 1];
+		minSumIndex[arr.length - 1] = arr.length - 1;
+		for (int i = arr.length - 2; i >= 0; i--) {
+			minSum[i] = minSum[i + 1] > 0 ? arr[i] : minSum[i + 1] + arr[i];
+			minSumIndex[i] = minSum[i + 1] > 0 ? i : minSumIndex[i + 1];
+		}
+
+		int res = 0;
+		int sum = 0;
+		int curRight = 0;
+		for (int left = 0; left < arr.length; left++) {
+			while (curRight < arr.length && sum + minSum[curRight] <= k) {
+				sum += minSum[curRight];
+				curRight = minSumIndex[curRight] + 1;
 			}
+			res = Math.max(res, curRight - left);
+			// TODO: 为什么不判断curRight有没右移过也行？
+			// if (left == curRight) {
+			// curRight = left + 1;
+			// } else {
+			sum -= arr[left];
+			// }
 		}
 		return res;
 	}
@@ -93,11 +150,17 @@ public class C03_LongestLessSumSubArrayLength {
 	}
 
 	public static void main(String[] args) {
-		for (int i = 0; i < 10000000; i++) {
+		for (int i = 0; i < 100000000; i++) {
 			int[] arr = generateRandomArray(10, 20);
 			int k = (int) (Math.random() * 20) - 5;
-			if (maxLengthAwesome(arr, k) != maxLength(arr, k)) {
+			int second = maxLengthAwesome(arr, k);
+			// System.out.println(second);
+			int first = maxLengthAwesome2(arr, k);
+			// System.out.println(first);
+			if (first != second) {
 				System.out.println("oops!");
+			} else {
+				// System.out.println("equal");
 			}
 		}
 
