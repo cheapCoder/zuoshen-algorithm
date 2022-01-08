@@ -1,6 +1,8 @@
 package A4high.class04;
 
 // 给定一个字符串str，求最长的回文子序列。注意区分子序列和子串的不同。
+
+// NOTE:范围上尝试模型
 public class C02_PalindromeSubsequence {
 
 	public static int maxLen1(String str) {

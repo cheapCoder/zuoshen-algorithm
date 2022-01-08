@@ -6,6 +6,8 @@ package A4high.class04;
 // str="AB"。可以在'A'之前添加'B'，使str整体都是回文串，故可以返回"BAB"。
 // 也可以在'B'之后添加'A'，使str整体都是回文串，故也可以返回"ABA"。
 // 总之，只要添加的字符数最少，返回其中一种结果即可。
+
+// NOTE:范围上尝试模型
 public class C03_PalindromeMinAdd {
 
 	public static String getPalindrome1(String str) {

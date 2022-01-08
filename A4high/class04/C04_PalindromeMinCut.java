@@ -4,6 +4,8 @@ package A4high.class04;
 // str="ABA"。
 // 不需要切割，str本身就是回文串，所以返回0。
 // str="ACDCDCDAD"。 最少需要切2次变成3个回文子串，比如"A"、"CDCDC"和"DAD"，所以返回2。
+
+// NOTE:从左往右尝试模型， 验证是否为回文串时是范围上尝试模型(valid函数)
 public class C04_PalindromeMinCut {
 
 	public static int minCut(String str) {

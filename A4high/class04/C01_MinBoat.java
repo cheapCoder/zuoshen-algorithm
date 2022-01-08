@@ -43,6 +43,11 @@ public class C01_MinBoat {
 		return lessUsed + ((lessUnused + 1) >> 1) + moreUnsolved;
 	}
 
+	// 从中间分界位置开始双指针
+
+	// TODO: 对数器验证
+	// 从两端位置开始双指针
+
 	public static void main(String[] args) {
 		int[] arr = { 1, 2, 2, 2, 2, 4, 4, 4, 4, 5 };
 		int weight = 5;
