@@ -51,9 +51,40 @@ public class C03_PalindromeMinAdd {
 		return dp;
 	}
 
+	public static String getPalindrome2(String str) {
+		if (str == null || str.length() == 0) {
+			return "";
+		}
+
+		char[] arr = str.toCharArray();
+		String[][] dpCache = new String[arr.length][arr.length];
+		for (int i = 0; i < dpCache.length - 1; i++) {
+			dpCache[i][i] = String.valueOf(arr[i]);
+			dpCache[i][i + 1] = String.valueOf(arr[i] == arr[i + 1] ? new char[] { arr[i], arr[i + 1] }
+					: new char[] { arr[i], arr[i + 1], arr[i] });
+		}
+		dpCache[arr.length - 1][arr.length - 1] = String.valueOf(arr[arr.length - 1]);
+
+		for (int i = dpCache.length - 3; i >= 0; i--) {
+			for (int j = i + 2; j < dpCache[0].length; j++) {
+				// 左侧和下侧
+				dpCache[i][j] = dpCache[i][j - 1].length() > dpCache[i + 1][j].length() ? arr[i] + dpCache[i + 1][j] + arr[i]
+						: arr[j] + dpCache[i][j - 1] + arr[j];
+				// 对比左下侧
+				if (arr[i] == arr[j] && dpCache[i + 1][j - 1].length() + 2 < dpCache[i][j].length()) {
+					dpCache[i][j] = arr[i] + dpCache[i + 1][j - 1] + arr[i];
+				}
+			}
+		}
+
+		return dpCache[0][arr.length - 1];
+	}
+
 	public static void main(String[] args) {
-		String str = "AB1CD2EFG3H43IJK2L1MN";
+		String str = "AB1CD2EFG3H43IJK2L1MMN";
 		System.out.println(getPalindrome1(str));
+		// 长度得一样,具体的结果字符串可能有多种,保证为回文字符串即可
+		System.out.println(getPalindrome2(str));
 	}
 
 }

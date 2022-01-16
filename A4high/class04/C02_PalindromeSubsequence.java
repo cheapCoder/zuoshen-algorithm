@@ -93,7 +93,7 @@ public class C02_PalindromeSubsequence {
 
 		// 状态转移方程
 		for (int i = dpCache.length - 3; i >= 0; i--) {
-			for (int j = i + 2; j < dpCache.length; j++) {
+			for (int j = i + 2; j < dpCache[0].length; j++) {
 				dpCache[i][j] = Math.max(dpCache[i][j - 1], dpCache[i + 1][j]);
 				if (arr[i] == arr[j] && dpCache[i + 1][j - 1] + 2 > dpCache[i][j]) {
 					dpCache[i][j] = dpCache[i + 1][j - 1] + 2;
