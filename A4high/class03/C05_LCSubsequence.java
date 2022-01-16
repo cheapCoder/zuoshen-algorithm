@@ -121,7 +121,7 @@ public class C05_LCSubsequence {
 		String str1 = "A1BC2D3EFGH45I6JK7LXMN";
 		String str2 = "A12OPQ3RST4U5V6W7XYZ";
 		System.out.println(lcse(str1, str2));
-		System.out.println(lcse2(str1, str2));
+		// System.out.println(lcse2(str1, str2));
 
 	}
 }

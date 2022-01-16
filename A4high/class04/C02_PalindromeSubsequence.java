@@ -1,18 +1,20 @@
 package A4high.class04;
 
+import A4high.class03.C05_LCSubsequence;
+
 // 给定一个字符串str，求最长的回文子序列。注意区分子序列和子串的不同。
 
 // NOTE:范围上尝试模型
 public class C02_PalindromeSubsequence {
 
-	public static int maxLen1(String str) {
-		if (str == null || str.length() == 0) {
-			return 0;
-		}
-		char[] str1 = str.toCharArray();
-		char[] str2 = reverse(str1);
-		return lcse(str1, str2);
-	}
+	// public static int maxLen1(String str) {
+	// if (str == null || str.length() == 0) {
+	// return 0;
+	// }
+	// char[] str1 = str.toCharArray();
+	// char[] str2 = reverse(str1);
+	// return lcse(str1, str2);
+	// }
 
 	public static char[] reverse(char[] str) {
 		char[] reverse = new char[str.length];
@@ -22,47 +24,84 @@ public class C02_PalindromeSubsequence {
 		return reverse;
 	}
 
-	public static int lcse(char[] str1, char[] str2) {
-		int[][] dp = new int[str1.length][str2.length];
-		dp[0][0] = str1[0] == str2[0] ? 1 : 0;
-		for (int i = 1; i < str1.length; i++) {
-			dp[i][0] = Math.max(dp[i - 1][0], str1[i] == str2[0] ? 1 : 0);
+	// public static int lcse(char[] str1, char[] str2) {
+	// int[][] dp = new int[str1.length][str2.length];
+	// dp[0][0] = str1[0] == str2[0] ? 1 : 0;
+	// for (int i = 1; i < str1.length; i++) {
+	// dp[i][0] = Math.max(dp[i - 1][0], str1[i] == str2[0] ? 1 : 0);
+	// }
+	// for (int j = 1; j < str2.length; j++) {
+	// dp[0][j] = Math.max(dp[0][j - 1], str1[0] == str2[j] ? 1 : 0);
+	// }
+	// for (int i = 1; i < str1.length; i++) {
+	// for (int j = 1; j < str2.length; j++) {
+	// dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+	// if (str1[i] == str2[j]) {
+	// dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - 1] + 1);
+	// }
+	// }
+	// }
+	// return dp[str1.length - 1][str2.length - 1];
+	// }
+
+	// public static int maxLen2(String s) {
+	// if (s == null || s.length() == 0) {
+	// return 0;
+	// }
+	// char[] str = s.toCharArray();
+	// int[][] dp = new int[str.length][str.length];
+	// for (int i = 0; i < str.length; i++) {
+	// dp[i][i] = 1;
+	// }
+	// for (int i = 0; i < str.length - 1; i++) {
+	// dp[i][i + 1] = str[i] == str[i + 1] ? 2 : 1;
+	// }
+	// for (int i = str.length - 2; i >= 0; i--) {
+	// for (int j = i + 2; j < str.length; j++) {
+	// dp[i][j] = Math.max(dp[i][j - 1], dp[i + 1][j]);
+	// if (str[i] == str[j]) {
+	// dp[i][j] = Math.max(dp[i + 1][j - 1] + 2, dp[i][j]);
+	// }
+	// }
+	// }
+	// return dp[0][str.length - 1];
+	// }
+
+	// 法一：对字符串取反后与自己求最长公共子序列
+	public static String maxLen1(String str) {
+		if (str == null || str.length() == 0) {
+			return "";
 		}
-		for (int j = 1; j < str2.length; j++) {
-			dp[0][j] = Math.max(dp[0][j - 1], str1[0] == str2[j] ? 1 : 0);
-		}
-		for (int i = 1; i < str1.length; i++) {
-			for (int j = 1; j < str2.length; j++) {
-				dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-				if (str1[i] == str2[j]) {
-					dp[i][j] = Math.max(dp[i][j], dp[i - 1][j - 1] + 1);
-				}
-			}
-		}
-		return dp[str1.length - 1][str2.length - 1];
+		char[] reStr = reverse(str.toCharArray());
+		System.out.println(String.valueOf(reStr));
+		return C05_LCSubsequence.lcse2(String.valueOf(reStr), str);
 	}
 
-	public static int maxLen2(String s) {
-		if (s == null || s.length() == 0) {
+	public static int maxLen2(String str) {
+		if (str == null || str.length() == 0) {
 			return 0;
 		}
-		char[] str = s.toCharArray();
-		int[][] dp = new int[str.length][str.length];
-		for (int i = 0; i < str.length; i++) {
-			dp[i][i] = 1;
+
+		char[] arr = str.toCharArray();
+		// 初始化
+		int[][] dpCache = new int[arr.length][arr.length];
+		for (int i = 0; i < dpCache.length - 1; i++) {
+			dpCache[i][i] = 1;
+			dpCache[i][i + 1] = arr[i] == arr[i + 1] ? 2 : 1;
 		}
-		for (int i = 0; i < str.length - 1; i++) {
-			dp[i][i + 1] = str[i] == str[i + 1] ? 2 : 1;
-		}
-		for (int i = str.length - 2; i >= 0; i--) {
-			for (int j = i + 2; j < str.length; j++) {
-				dp[i][j] = Math.max(dp[i][j - 1], dp[i + 1][j]);
-				if (str[i] == str[j]) {
-					dp[i][j] = Math.max(dp[i + 1][j - 1] + 2, dp[i][j]);
+		dpCache[arr.length - 1][arr.length - 1] = 1;
+
+		// 状态转移方程
+		for (int i = dpCache.length - 3; i >= 0; i--) {
+			for (int j = i + 2; j < dpCache.length; j++) {
+				dpCache[i][j] = Math.max(dpCache[i][j - 1], dpCache[i + 1][j]);
+				if (arr[i] == arr[j] && dpCache[i + 1][j - 1] + 2 > dpCache[i][j]) {
+					dpCache[i][j] = dpCache[i + 1][j - 1] + 2;
 				}
 			}
 		}
-		return dp[0][str.length - 1];
+
+		return dpCache[0][arr.length - 1];
 	}
 
 	public static void main(String[] args) {

@@ -126,7 +126,7 @@ public class C05_NumberAndString {
 		// }
 		// System.out.println();
 		// System.out.println("========================");
-		int testNum = 78128712;
+		// int testNum = 78128712;
 		// System.out.println(getNum(chs, getString(chs, testNum)));
 		// System.out.println(getNum2(getString(chs, testNum)));
 		String testStr = "ZsgSsG";
