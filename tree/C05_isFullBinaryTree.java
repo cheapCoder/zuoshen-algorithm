@@ -1,6 +1,7 @@
 package tree;
 
-public class C11_isFullBinaryTree {
+// 如何判断一颗二叉树是否是满二叉树?
+public class C05_isFullBinaryTree {
 
   public static class Node {
     public int value;

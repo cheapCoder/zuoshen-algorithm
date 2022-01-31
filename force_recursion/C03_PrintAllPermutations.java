@@ -2,6 +2,7 @@ package force_recursion;
 
 import java.util.ArrayList;
 
+// 打印一个字符串的全部排列，要求不要出现重复的排列
 public class C03_PrintAllPermutations {
 
 	// public static ArrayList<String> Permutation(String str) {

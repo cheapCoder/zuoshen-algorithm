@@ -3,6 +3,7 @@ package graph;
 import java.util.HashSet;
 import java.util.Stack;
 
+// 深度优先
 public class C02_DFS {
 
 	// public static void dfs(Node node) {

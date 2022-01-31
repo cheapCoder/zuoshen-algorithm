@@ -1,5 +1,6 @@
 package force_recursion;
 
+// 汉诺塔问题 打印n层汉诺塔从最左边移动到最右边的全部过程
 public class C01_Hanoi {
 
 	// public static void hanoi(int n) {

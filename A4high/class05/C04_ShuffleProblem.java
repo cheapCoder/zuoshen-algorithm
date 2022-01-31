@@ -2,8 +2,10 @@ package A4high.class05;
 
 import java.util.Arrays;
 
+// 完美洗牌问题
 // 给定一个长度为偶数的数组arr，长度记为2*N。前N个为左部分，后N个为右部分。
 // arr就可以表示为{L1,L2,..,Ln,R1,R2,..,Rn}， 请将数组调整成{R1,L1,R2,L2,..,Rn,Ln}的样子。
+// 要求时间复杂度O(Nlog3N)空间复杂度O(1)
 public class C04_ShuffleProblem {
 
 	// 数组的长度为len，调整前的位置是i，返回调整之后的位置

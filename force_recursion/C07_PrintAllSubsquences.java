@@ -3,6 +3,7 @@ package force_recursion;
 import java.util.ArrayList;
 import java.util.List;
 
+// 打印一个字符串的全部子序列，包括空字符串
 public class C07_PrintAllSubsquences {
 
 	// public static void printAllSubsequence(String str) {

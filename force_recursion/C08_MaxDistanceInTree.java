@@ -1,5 +1,8 @@
 package force_recursion;
 
+// 叉树节点间的最大距离问题
+// 从二叉树的节点a出发，可以向上或者向下走，但沿途的节点只能经过一次，到达节点b时路径上的节点个数叫作a到b的距离，那么二叉树任何两个节点之间都有距离，
+// 求整棵树上的最大距离。
 public class C08_MaxDistanceInTree {
 
 	public static class Node {
@@ -46,7 +49,6 @@ public class C08_MaxDistanceInTree {
 		return new ReturnType(Math.max(maxDisOverFa, maxDisNotOverFa), Math.max(left.h, right.h) + 1);
 	}
 
-
 	// answer
 
 	// public static int maxDistance(Node head) {
@@ -55,17 +57,17 @@ public class C08_MaxDistanceInTree {
 	// }
 
 	// public static ReturnType process(Node head) {
-	// 	if (head == null) {
-	// 		return new ReturnType(0, 0);
-	// 	}
-	// 	ReturnType leftReturnType = process(head.left);
-	// 	ReturnType rightReturnType = process(head.right);
-	// 	int includeHeadDistance = leftReturnType.h + 1 + rightReturnType.h;
-	// 	int p1 = leftReturnType.maxDistance;
-	// 	int p2 = rightReturnType.maxDistance;
-	// 	int resultDistance = Math.max(Math.max(p1, p2), includeHeadDistance);
-	// 	int hitSelf = Math.max(leftReturnType.h, rightReturnType.h) + 1;
-	// 	return new ReturnType(resultDistance, hitSelf);
+	// if (head == null) {
+	// return new ReturnType(0, 0);
+	// }
+	// ReturnType leftReturnType = process(head.left);
+	// ReturnType rightReturnType = process(head.right);
+	// int includeHeadDistance = leftReturnType.h + 1 + rightReturnType.h;
+	// int p1 = leftReturnType.maxDistance;
+	// int p2 = rightReturnType.maxDistance;
+	// int resultDistance = Math.max(Math.max(p1, p2), includeHeadDistance);
+	// int hitSelf = Math.max(leftReturnType.h, rightReturnType.h) + 1;
+	// return new ReturnType(resultDistance, hitSelf);
 	// }
 
 	// 法二： 通过一个对象记住当前最大距离

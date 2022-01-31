@@ -1,5 +1,7 @@
 package sort;
 
+// 4)一个数组中有一种数出现了奇数次，其他数都出现了偶数次，怎么找到这一个数 
+// 5)一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到这两个数
 public class C07_EvenTimesOddTimes {
 
 	public static void printOddTimesNum1(int[] arr) {

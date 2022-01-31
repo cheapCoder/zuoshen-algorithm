@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
+// 广度优先
 public class C01_BFS {
 
 	// public static void bfs(Node node) {

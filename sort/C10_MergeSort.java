@@ -2,6 +2,7 @@ package sort;
 
 import java.util.Arrays;
 
+// 归并排序
 public class C10_MergeSort {
 
 	// public static void mergeSort(int[] arr) {

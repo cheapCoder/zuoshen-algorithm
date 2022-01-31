@@ -1,7 +1,6 @@
 package tree;
 
-// import java.util.LinkedList;
-
+// 如何判断一颗二叉树是否是搜索二叉树
 public class C04_IsBST {
 
 	public static class Node {

@@ -1,5 +1,9 @@
 package bit_operation;
+
+// 位运算的题目
 // 给定两个有符号32位整数a和b，返回a和b中较大的。
+// 【要求】
+// 不用做任何比较判断。
 public class C01_GetMax {
 
 	// public static int flip(int n) {

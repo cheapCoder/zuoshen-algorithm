@@ -1,5 +1,10 @@
 package tree.senior_tree;
 
+// 介绍SB树及其实现
+// 平衡性:
+// 每棵子树的大小，不小于其兄弟的子树大小
+// 既每棵叔叔树的大小，不小于其任何侄子树的大小
+// 具体实现与调整细节
 public class C01_SizeBalancedTreeMap {
 
 	public static class SBTNode<K extends Comparable<K>, V> {

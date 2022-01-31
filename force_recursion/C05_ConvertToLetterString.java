@@ -1,13 +1,7 @@
-/*
- * @Author: your name
- * @Date: 2018-12-20 12:25:36
- * @LastEditTime: 2021-08-01 18:20:56
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \algo\force_recursion\C5_ConvertToLetterString.java
- */
 package force_recursion;
 
+// 规定1和A对应、2和B对应、3和C对应...那么一个数字字符串比如"111"，就可以转化为"AAA"、"KA"和"AK"。
+// 给定一个只有数字字符组成的字符串str，返回有多少种转化结果。
 public class C05_ConvertToLetterString {
 
 	// public static int number(String str) {

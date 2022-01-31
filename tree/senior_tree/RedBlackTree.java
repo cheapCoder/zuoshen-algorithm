@@ -9,6 +9,8 @@ package tree.senior_tree;
  * @created May 6, 2011
  * 
  */
+
+//  红黑树
 public class RedBlackTree extends AbstractSelfBalancingBinarySearchTree {
 
     protected enum ColorEnum {

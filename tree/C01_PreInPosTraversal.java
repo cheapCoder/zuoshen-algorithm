@@ -2,6 +2,7 @@ package tree;
 
 import java.util.Stack;
 
+// 用递归和非递归两种方式实现二叉树的先序、中序、后序遍历
 public class C01_PreInPosTraversal {
 
 	public static class Node {

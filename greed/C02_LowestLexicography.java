@@ -2,6 +2,10 @@ package greed;
 
 import java.util.Arrays;
 
+// 例子:
+// 给定一个字符串类型的数组strs，找到一种拼接方式，使得把所有字符串拼起来之后形成的 字符串具有最小的字典序。
+
+// 证明贪心策略可能是件非常腌心的事情。平时当然推荐你搞清楚所有的来龙去脉，但是笔试时用对数器的方式!
 public class C02_LowestLexicography {
 
 	// public static class MyComparator implements Comparator<String> {

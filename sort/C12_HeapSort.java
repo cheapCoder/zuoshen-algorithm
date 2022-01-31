@@ -2,7 +2,7 @@ package sort;
 
 import java.util.Arrays;
 
-// TODO: review
+// 堆排序
 public class C12_HeapSort {
 
 	// public static void heapSort(int[] arr) {

@@ -3,6 +3,7 @@ package hash_function;
 import java.util.HashMap;
 import java.util.Stack;
 
+// 并查集结构的详解和实现
 public class C04_UnionFind {
 
 	// public static class Element<V> {

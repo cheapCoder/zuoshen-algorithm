@@ -96,6 +96,10 @@ public class C03_BiggestBSTTopologyInTree {
 		}
 	}
 
+	// 暴力方法O(N2)
+
+	// O(N)解法
+
 	// for test -- print tree
 	public static void printTree(Node head) {
 		System.out.println("Binary Tree:");

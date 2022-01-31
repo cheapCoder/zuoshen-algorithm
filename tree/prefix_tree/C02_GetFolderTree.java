@@ -15,7 +15,7 @@ package tree.prefix_tree;
 // NOTE: 前缀树
 import java.util.TreeMap;
 
-public class C01_GetFolderTree {
+public class C02_GetFolderTree {
 
 	// public static class Node {
 	// public String name;

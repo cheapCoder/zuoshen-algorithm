@@ -2,6 +2,10 @@ package tree.senior_tree;
 
 import java.util.ArrayList;
 
+// 介绍SkipList及其实现
+// 平衡性:
+// 利用随机函数打破输入规律
+// 具体实现与调整细节
 public class C03_SkipListMap {
 
 	public static class SkipListNode<K extends Comparable<K>, V> {

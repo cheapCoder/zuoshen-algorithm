@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+// 哈希表和有序表
 public class C01_HashAndTree {
 
 	public static class Node {

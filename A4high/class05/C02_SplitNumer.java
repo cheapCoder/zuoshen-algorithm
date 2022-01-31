@@ -48,23 +48,41 @@ public class C02_SplitNumer {
 		return dp[1][n];
 	}
 
+	// public static int ways3(int n) {
+	// if (n < 1) {
+	// return 0;
+	// }
+	// int[][] dp = new int[n + 1][n + 1];
+	// for (int pre = 1; pre < dp.length; pre++) {
+	// dp[pre][0] = 1;
+	// }
+	// for (int pre = 1; pre < dp.length; pre++) {
+	// dp[pre][pre] = 1;
+	// }
+	// for (int pre = n - 1; pre > 0; pre--) {
+	// for (int rest = pre + 1; rest <= n; rest++) {
+	// dp[pre][rest] = dp[pre + 1][rest] + dp[pre][rest - pre];
+	// }
+	// }
+	// return dp[1][n];
+	// }
+
+	// 斜率优化
 	public static int ways3(int n) {
-		if (n < 1) {
+		if (n <= 0) {
 			return 0;
 		}
-		int[][] dp = new int[n + 1][n + 1];
-		for (int pre = 1; pre < dp.length; pre++) {
-			dp[pre][0] = 1;
+
+		int[][] dpCache = new int[n][n + 1]; // row: 当前分裂的最大值；col: 剩余值
+		for (int i = 0; i < dpCache.length; i++) {
+			dpCache[i][0] = 1;
 		}
-		for (int pre = 1; pre < dp.length; pre++) {
-			dp[pre][pre] = 1;
-		}
-		for (int pre = n - 1; pre > 0; pre--) {
-			for (int rest = pre + 1; rest <= n; rest++) {
-				dp[pre][rest] = dp[pre + 1][rest] + dp[pre][rest - pre];
+
+		for (int i = 1; i < dpCache.length; i++) {
+			for (int j = 1; j < dpCache[0].length; j++) {
+				
 			}
 		}
-		return dp[1][n];
 	}
 
 	public static void main(String[] args) {

@@ -1,5 +1,6 @@
-package sort;
+package binary_search;
 
+// 二分递归求最大值
 public class C08_GetMax {
 
 	public static int getMax(int[] arr) {
@@ -7,13 +8,13 @@ public class C08_GetMax {
 	}
 
 	// public static int process_answer(int[] arr, int L, int R) {
-	// 	if (L == R) {
-	// 		return arr[L];
-	// 	}
-	// 	int mid = L + ((R - L) >> 1);
-	// 	int leftMax = process(arr, L, mid);
-	// 	int rightMax = process(arr, mid + 1, R);
-	// 	return Math.max(leftMax, rightMax);
+	// if (L == R) {
+	// return arr[L];
+	// }
+	// int mid = L + ((R - L) >> 1);
+	// int leftMax = process(arr, L, mid);
+	// int rightMax = process(arr, mid + 1, R);
+	// return Math.max(leftMax, rightMax);
 	// }
 
 	public static int process(int[] arr, int L, int R) {

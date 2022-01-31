@@ -1,5 +1,7 @@
 package hash_function;
 
+// KMP算法解决的问题 
+// 字符串str1和str2，str1是否包含str2，如果包含返回str2在str1中开始的位置。 如何做到时间复杂度O(N)完成?
 public class C05_KMP {
 
 	public static int getIndexOf(String s, String m) {

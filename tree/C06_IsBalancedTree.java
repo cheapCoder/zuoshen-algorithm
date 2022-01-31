@@ -1,5 +1,6 @@
 package tree;
 
+// 如何判断一颗二叉树是否是平衡二叉树?
 public class C06_IsBalancedTree {
 
 	public static class Node {

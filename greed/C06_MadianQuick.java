@@ -3,7 +3,7 @@ package greed;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-
+// 一个数据流中，随时可以取得中位数
 public class C06_MadianQuick {
 
 	// public static class MedianHolder {

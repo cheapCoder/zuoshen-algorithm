@@ -1,5 +1,6 @@
 package tree;
 
+// 如何直观的打印一颗二叉树
 public class C02_PrintBinaryTree {
 
 	public static class Node {

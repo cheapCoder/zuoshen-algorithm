@@ -3,6 +3,9 @@ package tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// 二叉树的序列化和反序列化
+// 就是内存里的一棵树如何变成字符串形式，又如何从字符串形式变成内存里的树
+// 如何判断一颗二叉树是不是另一棵二叉树的子树?
 public class C09_SerializeAndReconstructTree {
 
 	public static class Node {
@@ -16,7 +19,7 @@ public class C09_SerializeAndReconstructTree {
 	}
 
 	// TODO:未做
-	public static String serialByPre(Node head) {	
+	public static String serialByPre(Node head) {
 		if (head == null) {
 			return "#!";
 		}

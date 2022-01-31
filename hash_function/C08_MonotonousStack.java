@@ -3,6 +3,8 @@ package hash_function;
 import java.util.LinkedList;
 import java.util.Stack;
 
+// 窗口内最大值与最小值更新结构的原理与实现
+// 窗口只能右边界或左边界向右滑的情况下，维持窗口内部最大值或者最小值快速更新的结构
 public class C08_MonotonousStack {
 
 	// public static int[][] getNearLessNoRepeat(int[] arr) {
@@ -204,9 +206,9 @@ public class C08_MonotonousStack {
 				break;
 			}
 			if (!isEqual(getNearLess(arr2), rightWay(arr2))) {
-			System.out.println("Oops!");
-			printArray(arr2);
-			break;
+				System.out.println("Oops!");
+				printArray(arr2);
+				break;
 			}
 		}
 	}

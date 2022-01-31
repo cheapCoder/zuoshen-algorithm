@@ -17,6 +17,12 @@ package tree.senior_tree;
  * @created Jun 28, 2011
  * 
  */
+
+// 介绍AVL树及其实现
+// 1，当插入或者删除一个节点时，可能会让整棵AVL不平衡。此时，只需要把最小不平衡子 树调整即可恢复整体的平衡性。
+// 2，介绍树的LL，RR，LR，RL调整
+// 3，介绍插入节点时的调整细节
+// 4，介绍删除节点时的调整细节
 public class AVLTree extends AbstractSelfBalancingBinarySearchTree {
 
     /**

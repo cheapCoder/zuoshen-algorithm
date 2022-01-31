@@ -5,6 +5,8 @@ package A4high.class07;
 // arr = {3} 数组只有1个数，所以只有一个子数组，就是这个数组本身，最大异或和为3
 // arr = {3, -28, -29, 2}
 // 子数组有很多，但是{-28, -29}这个子数组的异或和为7，是所有子数组中最大的
+
+// NOTE: 前缀树
 public class C02_MaxEOR {
 
 	public static class Node {

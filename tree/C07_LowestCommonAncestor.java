@@ -1,8 +1,6 @@
 package tree;
 
-// import java.util.HashMap;
-// import java.util.HashSet;
-
+// 给定两个二叉树的节点node1和node2，找到他们的最低公共祖先节点
 public class C07_LowestCommonAncestor {
 
 	public static class Node {

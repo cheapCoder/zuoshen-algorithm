@@ -2,6 +2,7 @@ package sort;
 
 import java.util.Arrays;
 
+// 快速排序
 public class C15_QuickSort {
 
 	// public static void quickSort(int[] arr) {

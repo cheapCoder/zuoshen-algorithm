@@ -1,6 +1,6 @@
 package tree;
 
-// import java.util.HashMap;
+// 如何完成二叉树的宽度优先遍历(常见题目:求一棵二叉树的宽度)
 import java.util.LinkedList;
 
 public class C03_TreeMaxWidth {

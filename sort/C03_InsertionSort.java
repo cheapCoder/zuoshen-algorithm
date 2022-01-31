@@ -2,6 +2,7 @@ package sort;
 
 import java.util.Arrays;
 
+// 插入排序
 public class C03_InsertionSort {
 
 	public static void insertionSort(int[] arr) {
