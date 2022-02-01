@@ -1,8 +1,10 @@
 package A4high.class04;
 
-// 在一个无序数组中，求最小的第k个数。(之前的题是有序数组)
+// 在一个无序数组中，求最小的第k个数。(之前的题是两个有序数组)
 
 // NOTE:BFPRT算法、或尝试大根堆
+
+// TODO:
 public class C06_BFPRT {
 
 	public static int[] getMinKNumsByBFPRT(int[] arr, int k) {

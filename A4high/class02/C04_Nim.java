@@ -20,8 +20,8 @@ public class C04_Nim {
 	// }
 	// }
 
-	// https://www.cnblogs.com/jiangjun/archive/2012/11/01/2749937.html
-	public static void nimu(int[] arr) {
+	// NOTE:https://www.cnblogs.com/jiangjun/archive/2012/11/01/2749937.html
+	public static void nim(int[] arr) {
 		int xor = 0;
 		for (int i = 0; i < arr.length; i++) {
 			xor ^= arr[i];

@@ -1,10 +1,10 @@
 package tree;
 
-TODO:看
+// TODO:看笔记
 // Morris遍历 一种遍历二叉树的方式，并且时间复杂度O(N)，额外空间复杂度O(1) 
 // 通过利用原树中大量空闲指针的方式，达到节省空间的目的
 public class C12_MorrisTraversal {
-	
+
 	public static class Node {
 		public int value;
 		Node left;
@@ -21,9 +21,9 @@ public class C12_MorrisTraversal {
 		}
 		Node cur = head;
 		Node mostRight = null;
-		while (cur != null) {	
-			mostRight = cur.left;	
-			if (mostRight != null) {	// cur有左树
+		while (cur != null) {
+			mostRight = cur.left;
+			if (mostRight != null) { // cur有左树
 				while (mostRight.right != null && mostRight.right != cur) {
 					mostRight = mostRight.right;
 				}
@@ -36,7 +36,7 @@ public class C12_MorrisTraversal {
 				}
 			}
 			System.out.print(cur.value + " ");
-			cur = cur.right;	// cur没有左树，向右移动
+			cur = cur.right; // cur没有左树，向右移动
 		}
 		System.out.println();
 	}
