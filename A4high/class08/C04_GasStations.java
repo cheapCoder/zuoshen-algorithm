@@ -4,6 +4,8 @@ package A4high.class08;
 // dis[i]代表第i个加油站到环中下一个加油站相隔多少千米。
 // 假设你有一辆油箱足够大的车，初始时车里没有油。如果车从第i个加油站出发，最终可以回到这个加油站，那么第i个加油站就算良好出发点，否则就不算。
 // 请返回长度为N的boolean型数组res，res[i]代表第i个加油站是不是良好出发点。
+
+// NOTE: 往两边扩展的滑动窗口
 public class C04_GasStations {
 
 	public static boolean[] stations(int[] dis, int[] oil) {
@@ -22,6 +24,7 @@ public class C04_GasStations {
 				init = i;
 			}
 		}
+		Integer.toString(123).toCharArray()
 		return init;
 	}
 

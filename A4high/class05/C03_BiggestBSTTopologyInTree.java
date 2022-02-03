@@ -96,8 +96,6 @@ public class C03_BiggestBSTTopologyInTree {
 		}
 	}
 
-	// 暴力方法O(N2)
-
 	// O(N)解法
 
 	// for test -- print tree
@@ -150,6 +148,7 @@ public class C03_BiggestBSTTopologyInTree {
 
 		System.out.println(bstTopoSize1(head));
 		System.out.println(bstTopoSize2(head));
+		System.out.println(bstTopoSize3(head));
 
 	}
 

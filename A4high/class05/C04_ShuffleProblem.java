@@ -2,10 +2,16 @@ package A4high.class05;
 
 import java.util.Arrays;
 
-// 完美洗牌问题
+// NOTE: 完美洗牌问题
+// 结论：当数组长度符合3的k次方-1时，每个独立循环的范围是0,2,8,26...3的k-1次方-1(k>=1)
+
 // 给定一个长度为偶数的数组arr，长度记为2*N。前N个为左部分，后N个为右部分。
 // arr就可以表示为{L1,L2,..,Ln,R1,R2,..,Rn}， 请将数组调整成{R1,L1,R2,L2,..,Rn,Ln}的样子。
 // 要求时间复杂度O(Nlog3N)空间复杂度O(1)
+
+// 题目：给定任意长度的无序数组,请经过一些操作使数组变成两两相邻的数字为循环的大于小于规律
+// 即 1<2>3<4>5<6...
+
 public class C04_ShuffleProblem {
 
 	// 数组的长度为len，调整前的位置是i，返回调整之后的位置
@@ -111,6 +117,112 @@ public class C04_ShuffleProblem {
 		}
 	}
 
+	public static void wiggleSort2(int[] arr) {
+		if (arr == null || arr.length == 0 || arr.length % 2 != 0) {
+			return;
+		}
+
+		Arrays.sort(arr);
+		if ((arr.length & 1) == 1) { // 是奇数
+			shuffle2(arr, 1, arr.length - 1);
+		} else {
+			shuffle(arr);
+			reverse(arr, 0, arr.length - 1);
+		}
+	}
+
+	public static void shuffle2(int[] arr) {
+		if (arr == null || arr.length == 0 || arr.length % 2 != 0) {
+			return;
+		}
+
+		// arr = new int[] { 1, 47, 70, 32, 86, 46, 54, 25, 40, 70 };
+		shuffle2(arr, 0, arr.length - 1);
+		// printArray(arr);
+	}
+
+	public static void shuffle2(int[] arr, int start, int end) {
+		if (start >= end) {
+			return;
+		}
+
+		// System.out.println(start);
+		// System.out.println(end);
+
+		// 计算k的最大值，范围是0,2,8,26...3的k-1次方-1(k>=1)
+		int k = -1;
+		while (Math.pow(3, k + 1) - 1 <= end - start + 1) {
+			k++;
+		}
+		// System.out.println(k);
+		// System.out.println("-----");
+		int maxCanComputeSubArrLength = (int) Math.pow(3, k) - 1;
+
+		// 分部分翻转的几个数学关系:
+		// left-right为当前数组长的一半((end - start + 1) / 2)
+		// border-right为可套用推论的最长子数组长度(maxCanComputeSubArrLength / 2)
+		// left-border则为剩下长度
+		partReverse(arr, (start + end + 1) / 2 - ((end - start + 1) / 2 - maxCanComputeSubArrLength / 2),
+				(start + end + 1) / 2 + maxCanComputeSubArrLength / 2 - 1, (start + end) / 2);
+		// System.out.println("reverse");
+		// printArray(arr);
+
+		for (int i = 1; i <= k; i++) {
+			loopReplace(arr, (int) Math.pow(3, i - 1) - 1 + start, start, start + maxCanComputeSubArrLength - 1);
+			// printArray(arr);
+
+		}
+
+		shuffle2(arr, maxCanComputeSubArrLength + start, end);
+	}
+
+	// 将数组的左部分迁移到右部分
+	// border处于左部分内
+	private static void partReverse(int[] arr, int start, int end, int border) {
+		if (border < start || end < border) {
+			return;
+		}
+
+		reverseBetween(arr, start, border);
+		reverseBetween(arr, border + 1, end);
+		reverseBetween(arr, start, end);
+	}
+
+	private static void reverseBetween(int[] arr, int start, int end) {
+		if (start >= end) {
+			return;
+		}
+		int tem;
+		for (int delta = 0; start + delta < end - delta; delta++) {
+			tem = arr[start + delta];
+			arr[start + delta] = arr[end - delta];
+			arr[end - delta] = tem;
+		}
+	}
+
+	// 46 1 54 47 25 70 40 32
+	private static void loopReplace(int[] arr, int i, int start, int end) {
+		int inputI = i;
+		int cur = arr[i];
+		int pre;
+		int nextI;
+		do {
+			nextI = getIndex(end - start + 1, i - start) + start;
+			pre = cur;
+			cur = arr[nextI];
+			arr[nextI] = pre;
+			i = nextI;
+		} while (i != inputI);
+	}
+
+	private static int getIndex(int length, int i) {
+		if (i < length / 2) {
+			return 2 * i + 1;
+		} else {
+			return 2 * i - length;
+		}
+	}
+
 	// for test
 	public static boolean isValidWiggle(int[] arr) {
 		for (int i = 1; i < arr.length; i++) {
@@ -147,7 +259,8 @@ public class C04_ShuffleProblem {
 	public static void main(String[] args) {
 		for (int i = 0; i < 5000000; i++) {
 			int[] arr = generateArray();
-			wiggleSort(arr);
+			// printArray(arr);
+			wiggleSort2(arr);
 			if (!isValidWiggle(arr)) {
 				System.out.println("ooops!");
 				printArray(arr);

@@ -6,6 +6,7 @@ import java.util.Arrays;
 // 其中:A是长度为m、元素从小到大排好序的有序数组。B是长度为n、元素从小到大排好序的有序数组。
 // 希望从A和B数组中，找出最大的第k个数字，要求:使用尽量少的时间复杂度。
 
+// 相关题目：https://leetcode-cn.com/problems/median-of-two-sorted-arrays/
 // NOTE: pretty pretty pretty pretty hard
 public class C05_FindKthMinNumber {
 

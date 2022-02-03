@@ -15,6 +15,7 @@ import java.util.Stack;
 
 // 进阶: 给定一个不含有负数但可能含有重复值的数组arr，返回有多少对山峰能够相互看见。
 
+// 没讲
 public class C03_VisibleMountains {
 
 	public static class Record {

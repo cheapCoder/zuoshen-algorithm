@@ -1,12 +1,13 @@
 package A4high.class07;
 
 // 数组异或和的定义:把数组中所有的数异或起来得到的值
-// 给定一个整型数组 arr，其中可能有正、有负、有零，求其中子数组的最大异或和 【举例】
+// 给定一个整型数组 arr，其中可能有正、有负、有零，求其中子数组的最大异或和 
+// 【举例】
 // arr = {3} 数组只有1个数，所以只有一个子数组，就是这个数组本身，最大异或和为3
 // arr = {3, -28, -29, 2}
 // 子数组有很多，但是{-28, -29}这个子数组的异或和为7，是所有子数组中最大的
 
-// NOTE: 前缀树
+// NOTE: 前缀树 + 二进制 + 贪心
 public class C02_MaxEOR {
 
 	public static class Node {
@@ -56,6 +57,47 @@ public class C02_MaxEOR {
 		return max;
 	}
 
+	// 暴力O(N2)
+	public static int maxXorSubarray2(int[] arr) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+		int res = Integer.MIN_VALUE;
+		for (int i = 0; i < arr.length; i++) {
+			int sum = 0;
+			for (int j = i; j < arr.length; j++) {
+				sum ^= arr[j];
+				res = Math.max(res, sum);
+			}
+		}
+
+		return res;
+	}
+
+	// O(N)
+	public static int maxXorSubarray3(int[] arr) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+
+		int res = Integer.MIN_VALUE;
+
+	}
+
+	private static class TrieTree {
+		public Node path;
+
+		public void add(int num) {
+
+		}
+
+		// 通过传入参数获取前缀树内保存值能取到的最大的异或和
+		public int getMax(int num) {
+
+		}
+
+	}
+
 	// for test
 	public static int comparator(int[] arr) {
 		if (arr == null || arr.length == 0) {
@@ -89,7 +131,8 @@ public class C02_MaxEOR {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
-		System.out.println();System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 
 	// for test
@@ -100,7 +143,7 @@ public class C02_MaxEOR {
 		boolean succeed = true;
 		for (int i = 0; i < testTime; i++) {
 			int[] arr = generateRandomArray(maxSize, maxValue);
-			int res = maxXorSubarray(arr);
+			int res = maxXorSubarray3(arr);
 			int comp = comparator(arr);
 			if (res != comp) {
 				succeed = false;

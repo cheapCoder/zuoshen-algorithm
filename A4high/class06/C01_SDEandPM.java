@@ -25,6 +25,8 @@ import java.util.PriorityQueue;
 // int sde=2;
 // int[][]programs={{1,1,1,2},{1,2,1,1},{1,3,2,2},{2,1,1,2},{2,3,5,5}};
 // 返回:{3, 4, 5, 3, 9}
+
+// 没讲
 public class C01_SDEandPM {
 
 	public static class Program {
