@@ -20,6 +20,8 @@ package A4high.class07;
 // 如果先打爆5，获得2*5;再打爆3，获得3*2;最后打爆2，获得2;最后总分18
 // 如果先打爆5，获得2*5;再打爆2，获得3*2;最后打爆3，获得3;最后总分19 
 // 返回能获得的最大分数为50
+
+// NOTE: 范围上尝试的动态规划
 public class C03_BurstBalloons {
 
 	public static int maxCoins1(int[] arr) {
@@ -94,6 +96,20 @@ public class C03_BurstBalloons {
 			}
 		}
 		return dp[1][N];
+	}
+
+	public static int maxCoins3(int[] arr) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+
+		// 数组前后补齐一个1，作为哨兵
+
+		// 1 2 4 5 6
+	}
+
+	private static int process(int[] arr, int left, int right) {
+
 	}
 
 	public static void main(String[] args) {

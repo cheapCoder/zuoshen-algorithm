@@ -6,7 +6,7 @@ import java.util.Map;
 // 给定一棵二叉树的头节点head，已知所有节点的值都不一样，
 // 返回其中最大的且符合搜索二叉树条件的最大拓扑结构的大小。 
 // 拓扑结构:不是子树，只要能连起来的结构都算。
-public class C03_BiggestBSTTopologyInTree {
+class C03_BiggestBSTTopologyInTree {
 
 	public static class Node {
 		public int value;
@@ -23,6 +23,8 @@ public class C03_BiggestBSTTopologyInTree {
 			return 0;
 		}
 		int max = maxTopo(head, head);
+		// System.out.println(head.value + " ||||| " + max);
+
 		max = Math.max(bstTopoSize1(head.left), max);
 		max = Math.max(bstTopoSize1(head.right), max);
 		return max;
@@ -30,6 +32,9 @@ public class C03_BiggestBSTTopologyInTree {
 
 	public static int maxTopo(Node h, Node n) {
 		if (h != null && n != null && isBSTNode(h, n, n.value)) {
+			// System.out.println(h.value + " " + n.value + " " + (maxTopo(h, n.left) +
+			// maxTopo(h, n.right) + 1));
+			// System.out.println("------");
 			return maxTopo(h, n.left) + maxTopo(h, n.right) + 1;
 		}
 		return 0;
@@ -96,7 +101,112 @@ public class C03_BiggestBSTTopologyInTree {
 		}
 	}
 
+	// 暴力方法O(N2)
+	public static int bstTopoSize3(Node head) {
+		if (head == null) {
+			return 0;
+		}
+
+		int[] res = new int[] { 0 };
+		getMaxCount(head, head, res);
+		// System.out.println(head.value + " ||||| " + res[0]);
+		res[0] = Math.max(res[0], bstTopoSize3(head.left));
+		res[0] = Math.max(res[0], bstTopoSize3(head.right));
+		return res[0];
+	}
+
+	// 获取root为顶点时的最大二叉搜索树能有多大
+	private static void getMaxCount(Node root, Node cur, int[] res) {
+		if (cur == null || root == null) {
+			return;
+		}
+		if (!canBSTFindNode(root, cur)) {
+			return;
+		}
+		res[0]++;
+		// System.out.println(root.value + " " + cur.value + " " + res[0]);
+		// System.out.println("------");
+		getMaxCount(root, cur.left, res);
+		getMaxCount(root, cur.right, res);
+	}
+
+	// 以二叉搜索树性质在node下查找target，能找到就为true
+	private static boolean canBSTFindNode(Node node, Node target) {
+		if (node == null || target == null) {
+			return false;
+		}
+		while (node != null) {
+			if (target.value == node.value) {
+				return true;
+			} else if (target.value > node.value) {
+				node = node.right;
+			} else {
+				node = node.left;
+			}
+		}
+		return false;
+	}
+
 	// O(N)解法
+	public static int bstTopoSize4(Node head) {
+		if (head == null) {
+			return 0;
+		}
+
+		// int[]索引0表示left，1表示right
+		HashMap<Node, Integer> map = new HashMap<>();
+		process(head, map);
+		return map.get(head);
+	}
+
+	private static void process(Node node, HashMap<Node, Integer> map) {
+		if (node == null) {
+			return;
+		}
+		if (!map.containsKey(node)) {
+			map.put(node, 0);
+		}
+
+		// 获取node左边的贡献值
+		process(node.left, map);
+		int left = node.left == null || node.value < node.left.value ? 0
+				: map.get(node.left) - getLeftDecrease(node, map) + 1;
+		// System.out.println("left: " + left);
+
+		// 获取node右边的贡献值
+		process(node.right, map);
+		int right = node.right == null || node.value > node.right.value ? 0
+				: map.get(node.left) - getRightDecrease(node, map) + 1;
+		// System.out.println("right: " + right);
+		map.put(node, left + right + 1);
+	}
+
+	private static int getLeftDecrease(Node cur, HashMap<Node, Integer> map) {
+		// if (cur.left == null) {
+		// return 0;
+		// }
+		int big = cur.value;
+		Node pre;
+		cur = cur.left;
+		while (cur.right != null && cur.right.value < big) {
+			cur = cur.right;
+		}
+		System.out.println("left: " + big + ": " + (cur.right == null ? 0 : map.get(cur)));
+		return cur.right == null ? 0 : map.get(cur);
+	}
+
+	private static int getRightDecrease(Node cur, HashMap<Node, Integer> map) {
+		// if (cur.right == null) {
+		// return 0;
+		// }
+		int small = cur.value;
+		cur = cur.right;
+		while (cur.left != null && cur.left.value > small) {
+			cur = cur.left;
+		}
+		System.out.println("right: " + small + ": " + (cur.left == null ? 0 : map.get(cur)));
+		return cur.left == null ? 0 : map.get(cur);
+	}
 
 	// for test -- print tree
 	public static void printTree(Node head) {
@@ -149,6 +259,7 @@ public class C03_BiggestBSTTopologyInTree {
 		System.out.println(bstTopoSize1(head));
 		System.out.println(bstTopoSize2(head));
 		System.out.println(bstTopoSize3(head));
+		System.out.println(bstTopoSize4(head));
 
 	}
 

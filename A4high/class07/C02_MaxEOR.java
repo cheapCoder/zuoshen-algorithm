@@ -1,8 +1,8 @@
 package A4high.class07;
 
 // 数组异或和的定义:把数组中所有的数异或起来得到的值
-// 给定一个整型数组 arr，其中可能有正、有负、有零，求其中子数组的最大异或和 
-// 【举例】
+// 给定一个整型数组 arr，其中可能有正、有负、有零，求其中子数组的最大异或和
+// 【举例】		
 // arr = {3} 数组只有1个数，所以只有一个子数组，就是这个数组本身，最大异或和为3
 // arr = {3, -28, -29, 2}
 // 子数组有很多，但是{-28, -29}这个子数组的异或和为7，是所有子数组中最大的
@@ -24,6 +24,7 @@ public class C02_MaxEOR {
 				cur.nexts[path] = cur.nexts[path] == null ? new Node() : cur.nexts[path];
 				cur = cur.nexts[path];
 			}
+
 		}
 
 		public int maxXor(int num) {
@@ -54,6 +55,7 @@ public class C02_MaxEOR {
 			max = Math.max(max, numTrie.maxXor(eor));
 			numTrie.add(eor);
 		}
+
 		return max;
 	}
 
@@ -79,21 +81,55 @@ public class C02_MaxEOR {
 		if (arr == null || arr.length == 0) {
 			return 0;
 		}
-
+		TrieTree tree = new TrieTree();
 		int res = Integer.MIN_VALUE;
+		int sum = 0;
+		tree.add(0); // 添加0表示：[0,i]要去掉多余异或和的子数组长度可为0，即[0,-1]，即表示当前值就为0-i的异或和
+		for (int i = 0; i < arr.length; i++) {
+			sum ^= arr[i];
+			res = Math.max(res, tree.getMax(sum));
+			tree.add(sum); // 异或的数组最少长度为1，这行提到max前就表示可为空数组，即异或和有一个固定值0了
+		}
+
+		return res;
 
 	}
 
+	private static class Head {
+		public Head[] Path = new Head[2];
+	}
+
 	private static class TrieTree {
-		public Node path;
+		public Head head = new Head();
 
 		public void add(int num) {
+			Head tem = head;
+			for (int i = 31; i >= 0; i--) {
+				if (tem.Path[(num >> i) & 1] == null) {
+					tem.Path[(num >> i) & 1] = new Head();
+				}
+				tem = tem.Path[(num >> i) & 1];
+			}
 
 		}
 
 		// 通过传入参数获取前缀树内保存值能取到的最大的异或和
 		public int getMax(int num) {
+			int res = 0;
+			Head tem = head;
+			for (int i = 31; i >= 0; i--) {
+				int wish = i == 31 ? (num >> i) & 1 : ((num >> i) & 1) ^ 1;
+				if (tem.Path[wish] != null) { // 0或1两者必有一条路，因为当初add时候就一定会选一条路
+					res |= (wish << i);
+					tem = tem.Path[wish];
+				} else {
+					res |= ((wish ^ 1) << i);
+					tem = tem.Path[wish ^ 1];
+				}
 
+			}
+
+			return num ^ res;
 		}
 
 	}
@@ -143,8 +179,10 @@ public class C02_MaxEOR {
 		boolean succeed = true;
 		for (int i = 0; i < testTime; i++) {
 			int[] arr = generateRandomArray(maxSize, maxValue);
+			// int[] arr = new int[] { -1, -19 };
+
 			int res = maxXorSubarray3(arr);
-			int comp = comparator(arr);
+			int comp = maxXorSubarray(arr);
 			if (res != comp) {
 				succeed = false;
 				printArray(arr);
