@@ -24,7 +24,7 @@ public class C04_GasStations {
 				init = i;
 			}
 		}
-		Integer.toString(123).toCharArray()
+		Integer.toString(123).toCharArray();
 		return init;
 	}
 
