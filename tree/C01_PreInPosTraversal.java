@@ -102,7 +102,6 @@ public class C01_PreInPosTraversal {
 	// System.out.println();
 	// }
 
-	// TODO:不明白
 	public static void posOrderUnRecur2_(Node h) {
 		System.out.print("pos-order: ");
 		if (h != null) {
@@ -173,6 +172,7 @@ public class C01_PreInPosTraversal {
 		System.out.println();
 	}
 
+	// 中序遍历
 	private static void inOrderUnRecur(Node head) {
 		// if (head == null) {
 		// return;
@@ -193,6 +193,7 @@ public class C01_PreInPosTraversal {
 		System.out.println();
 	}
 
+	// 后序遍历
 	private static void posOrderUnRecur1(Node head) {
 		if (head == null) {
 			return;
@@ -221,9 +222,26 @@ public class C01_PreInPosTraversal {
 		System.out.println();
 	}
 
-	// TODO:
 	private static void posOrderUnRecur2(Node head) {
+		if (head == null) {
+			return;
+		}
 
+		Stack<Node> stack = new Stack<>();
+		stack.push(head);
+		Node pre = null;
+		while (!stack.isEmpty()) {
+			Node tem = stack.peek();
+			if (tem.left != null && tem.left != pre && tem.right != pre) {
+				stack.push(tem.left);
+			} else if (tem.right != null && tem.right != pre) {
+				stack.push(tem.right);
+			} else {
+				System.out.print(tem.value + " ");
+				stack.pop();
+			}
+			pre = tem;
+		}
 	}
 
 	public static void main(String[] args) {

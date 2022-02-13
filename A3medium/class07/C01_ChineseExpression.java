@@ -121,7 +121,6 @@ public class C01_ChineseExpression {
 	// }
 	// }
 
-	// TODO: 优化
 	public static String getNumChiExp(int num) {
 		String res = num < 0 ? "负" : "";
 		num = Math.abs(num);
@@ -170,7 +169,7 @@ public class C01_ChineseExpression {
 		}
 
 		if (remain >= 10000) {
-			s += "亿" + (remain > 10000000? "" : "零") + numWan(remain);
+			s += "亿" + (remain > 10000000 ? "" : "零") + numWan(remain);
 		} else if (remain >= 1000) {
 			s += "亿零" + numThousand(remain);
 		} else if (remain >= 100) {
@@ -310,14 +309,11 @@ public class C01_ChineseExpression {
 			System.out.println(Integer.MAX_VALUE);
 			System.out.println(getNumChiExp(Integer.MAX_VALUE));
 
-			// System.out.println(Integer.MIN_VALUE);
-			// System.out.println(getNumChiExp(Integer.MIN_VALUE));
-
 			int testTime = 20;
 			for (int i = 0; i < testTime; i++) {
-			int num = generateRandomNum();
-			System.out.println(num);
-			System.out.println(getNumChiExp(num));
+				int num = generateRandomNum();
+				System.out.println(num);
+				System.out.println(getNumChiExp(num));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

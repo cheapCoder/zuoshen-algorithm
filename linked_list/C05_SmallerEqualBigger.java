@@ -207,17 +207,6 @@ public class C05_SmallerEqualBigger {
 			head = next;
 		}
 
-		// // small and equal reconnect
-		// if (ST != null) { // TODO: 不明白
-		// ST.next = EH;
-		// ET = ET == null ? ST : ET;
-		// }
-		// // all reconnect
-		// if (ET != null) {
-		// ET.next = BH;
-		// }
-		// return SH != null ? SH : EH != null ? EH : BH;
-
 		if (SH != null) {
 			ST.next = EH != null ? EH : BH;
 		}

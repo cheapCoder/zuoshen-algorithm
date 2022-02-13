@@ -3,8 +3,7 @@ package A4high.class05;
 import java.util.HashMap;
 import java.util.Map;
 
-// 给定一棵二叉树的头节点head，已知所有节点的值都不一样，
-// 返回其中最大的且符合搜索二叉树条件的最大拓扑结构的大小。 
+// 给定一棵二叉树的头节点head，已知所有节点的值都不一样，返回其中最大的且符合搜索二叉树条件的最大拓扑结构的大小。 
 // 拓扑结构:不是子树，只要能连起来的结构都算。
 class C03_BiggestBSTTopologyInTree {
 
@@ -169,12 +168,12 @@ class C03_BiggestBSTTopologyInTree {
 
 		// 获取node左边的贡献值
 		process(node.left, map);
+		
+		// 获取node右边的贡献值
+		process(node.right, map);
 		int left = node.left == null || node.value < node.left.value ? 0
 				: map.get(node.left) - getLeftDecrease(node, map) + 1;
 		// System.out.println("left: " + left);
-
-		// 获取node右边的贡献值
-		process(node.right, map);
 		int right = node.right == null || node.value > node.right.value ? 0
 				: map.get(node.left) - getRightDecrease(node, map) + 1;
 		// System.out.println("right: " + right);
@@ -182,11 +181,7 @@ class C03_BiggestBSTTopologyInTree {
 	}
 
 	private static int getLeftDecrease(Node cur, HashMap<Node, Integer> map) {
-		// if (cur.left == null) {
-		// return 0;
-		// }
 		int big = cur.value;
-		Node pre;
 		cur = cur.left;
 		while (cur.right != null && cur.right.value < big) {
 			cur = cur.right;
@@ -196,9 +191,6 @@ class C03_BiggestBSTTopologyInTree {
 	}
 
 	private static int getRightDecrease(Node cur, HashMap<Node, Integer> map) {
-		// if (cur.right == null) {
-		// return 0;
-		// }
 		int small = cur.value;
 		cur = cur.right;
 		while (cur.left != null && cur.left.value > small) {

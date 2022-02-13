@@ -129,7 +129,6 @@ public class C05_FindKthMinNumber {
 
 	}
 
-	// 原型算法：
 	private static int getUpMid3(int[] arr1, int[] arr2, int left1, int right1, int left2, int right2) {
 		if (arr1 == null || arr1.length == 0 || arr2 == null || arr2.length == 0 || arr1.length != arr2.length || left1 < 0
 				|| left2 < 0 || right1 >= arr1.length || right2 >= arr2.length) {

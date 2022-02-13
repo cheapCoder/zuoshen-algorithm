@@ -7,7 +7,6 @@ import java.util.Comparator;
 // 给你每一个项目开始的时间和结束的时间(给你一个数组，里面是一个个具体的项目)，你来安排宣讲的日程，要求会议室进行的宣讲的场次最多。
 // 返回这个最多的宣讲场次。
 
-// TODO: 
 public class C04_BestArrange {
 
 	public static class Program {
@@ -39,6 +38,22 @@ public class C04_BestArrange {
 			}
 		}
 		return result;
+	}
+
+	public static int bestArrange2(Program[] programs, int start) {
+		if (programs == null || programs.length == 0) {
+			return 0;
+		}
+		Arrays.sort(programs, new ProgramComparator());
+
+		int res = 0;
+		for (int i = 0; i < programs.length; i++) {
+			if (programs[i].end > start) {
+				res++;
+				start = programs[i].end;
+			}
+		}
+		return res;
 	}
 
 	public static void main(String[] args) {
