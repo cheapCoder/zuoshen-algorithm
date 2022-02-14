@@ -153,51 +153,48 @@ class C03_BiggestBSTTopologyInTree {
 		}
 
 		// int[]索引0表示left，1表示right
-		HashMap<Node, Integer> map = new HashMap<>();
-		process(head, map);
-		return map.get(head);
+		HashMap<Node, int[]> map = new HashMap<>(); // 数组长度为2,0为left，1为right
+
+		return process(map, head);
 	}
 
-	private static void process(Node node, HashMap<Node, Integer> map) {
+	private static int process(HashMap<Node, int[]> map, Node node) {
 		if (node == null) {
-			return;
+			return 0;
 		}
 		if (!map.containsKey(node)) {
-			map.put(node, 0);
+			map.put(node, new int[2]);
 		}
 
 		// 获取node左边的贡献值
-		process(node.left, map);
-		
+		int leftRes = process(map, node.left);
 		// 获取node右边的贡献值
-		process(node.right, map);
-		int left = node.left == null || node.value < node.left.value ? 0
-				: map.get(node.left) - getLeftDecrease(node, map) + 1;
-		// System.out.println("left: " + left);
-		int right = node.right == null || node.value > node.right.value ? 0
-				: map.get(node.left) - getRightDecrease(node, map) + 1;
-		// System.out.println("right: " + right);
-		map.put(node, left + right + 1);
+		int rightRes = process(map, node.right);
+
+		updateMap(node.left, node.value, map, true);
+		updateMap(node.right, node.value, map, false);
+
+		map.get(node)[0] = map.get(node.left) == null ? 0 : map.get(node.left)[0] + map.get(node.left)[1] + 1;
+		map.get(node)[1] = map.get(node.right) == null ? 0 : map.get(node.right)[0] + map.get(node.right)[1] + 1;
+
+		return Math.max(map.get(node)[0] + map.get(node)[1] + 1, Math.max(leftRes, rightRes));
 	}
 
-	private static int getLeftDecrease(Node cur, HashMap<Node, Integer> map) {
-		int big = cur.value;
-		cur = cur.left;
-		while (cur.right != null && cur.right.value < big) {
-			cur = cur.right;
+	private static int updateMap(Node node, int topVal, HashMap<Node, int[]> map, boolean isFatherLeft) {
+		if (node == null || !map.containsKey(node)) {
+			return 0;
 		}
-		System.out.println("left: " + big + ": " + (cur.right == null ? 0 : map.get(cur)));
-		return cur.right == null ? 0 : map.get(cur);
-	}
 
-	private static int getRightDecrease(Node cur, HashMap<Node, Integer> map) {
-		int small = cur.value;
-		cur = cur.right;
-		while (cur.left != null && cur.left.value > small) {
-			cur = cur.left;
+		// 达到最低点(topVal > 或者 < node.value)
+		if ((isFatherLeft && node.value >= topVal) || (!isFatherLeft && node.value <= topVal)) {
+			int[] n = map.get(node);
+			map.remove(node);
+			return n[0] + n[1] + 1;
+		} else { // 达到最低点(topVal > 或者 < node.value),递归找最低点
+			int delta = updateMap(isFatherLeft ? node.right : node.left, topVal, map, isFatherLeft);
+			map.get(node)[isFatherLeft ? 1 : 0] = map.get(node)[isFatherLeft ? 1 : 0] - delta;
+			return delta;
 		}
-		System.out.println("right: " + small + ": " + (cur.left == null ? 0 : map.get(cur)));
-		return cur.left == null ? 0 : map.get(cur);
 	}
 
 	// for test -- print tree
