@@ -84,6 +84,62 @@ public class C04_GasStations {
 		return index == size - 1 ? 0 : (index + 1);
 	}
 
+	// 1.暴力方式
+	public static boolean[] process1(int[] dis, int[] oil) {
+		if (dis == null || dis.length == 0 || oil == null || oil.length == 0 || dis.length != oil.length) {
+			return null;
+		}
+
+		int[] merge = new int[dis.length];
+		for (int i = 0; i < merge.length; i++) {
+			merge[i] = oil[i] - dis[i];
+		}
+
+		boolean[] res = new boolean[dis.length];
+
+		for (int i = 0; i < merge.length; i++) {
+			if (merge[i] < 0) {
+				res[i] = false;
+				continue;
+			}
+			int j = i;
+			int sum = 0;
+			do {
+				sum += merge[j];
+				if (sum < 0) {
+					break;
+				}
+				j = j == merge.length - 1 ? 0 : j + 1;
+			} while (i != j);
+			res[i] = i == j ? true : false;
+		}
+		return res;
+	}
+
+	// 2.两头扩展的滑动窗口
+	public static boolean[] process2(int[] dis, int[] oil) {
+		if (dis == null || dis.length == 0 || oil == null || oil.length == 0 || dis.length != oil.length) {
+			return null;
+		}
+
+		int[] merge = new int[dis.length];
+		for (int i = 0; i < merge.length; i++) {
+			merge[i] = oil[i] - dis[i];
+		}
+
+		boolean[] res = new boolean[dis.length];
+
+		int start = 0;
+		while (start < merge.length && merge[start] < 0) {
+			res[start++] = false;
+		}
+		int end = start;
+		
+
+
+		return res;
+	}
+
 	// for test
 	public static boolean[] test(int[] dis, int[] oil) {
 		if (dis == null || oil == null || dis.length < 2 || dis.length != oil.length) {
@@ -167,7 +223,8 @@ public class C04_GasStations {
 			int[] oil1 = copyArray(oil);
 			int[] dis2 = copyArray(dis);
 			int[] oil2 = copyArray(oil);
-			boolean[] res1 = stations(dis1, oil1);
+			// boolean[] res1 = stations(dis1, oil1);
+			boolean[] res1 = process1(dis1, oil1);
 			boolean[] res2 = test(dis2, oil2);
 			if (!isEqual(res1, res2)) {
 				printArray(dis, oil);
