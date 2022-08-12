@@ -1,6 +1,6 @@
 package hash_function;
 
-// Manacher算法解决的问题 字符串str中，最长回文子串的长度如何求解? 如何做到时间复杂度O(N)完成?
+// Manacher算法解决的问题: 字符串str中，最长回文子串的长度如何求解? 如何做到时间复杂度O(N)完成?
 public class C06_Manacher {
 
 	// public static char[] manacherString(String str) {
@@ -42,16 +42,16 @@ public class C06_Manacher {
 
 	// 法一：暴力解法
 	public static int maxLcpsLength1(String str) {
-	char[] arr = mapString(str);
-	int count = 0;
-	for (int i = 0; i < arr.length; i++) {
-	int r = 1;
-	while (i - r >= 0 && i + r < arr.length && arr[i - r] == arr[i + r]) {
-	r++;
-	}
-	count = Math.max( 2 * r - 1, count);
-	}
-	return count / 2;
+		char[] arr = mapString(str);
+		int count = 0;
+		for (int i = 0; i < arr.length; i++) {
+			int r = 1;
+			while (i - r >= 0 && i + r < arr.length && arr[i - r] == arr[i + r]) {
+				r++;
+			}
+			count = Math.max(2 * r - 1, count);
+		}
+		return count / 2;
 	}
 
 	// 法二：Manacher
@@ -113,10 +113,23 @@ public class C06_Manacher {
 		return tem;
 	}
 
+	private static int maxLcpsLength3(char[] arr, int left, int right) {
+		if (arr == null || arr.length == 0 || left > right) {
+			return 0;
+		}
+		if (left == right) {
+			return 1;
+		}
+		int res = Math.max(maxLcpsLength3(arr, left + 1, right), maxLcpsLength3(arr, left, right - 1));
+		int mid = maxLcpsLength3(arr, left + 1, right - 1);
+		return res;
+	}
+
 	public static void main(String[] args) {
 		String str1 = "abc1234321ab";
 		System.out.println(maxLcpsLength1(str1));
 		System.out.println(maxLcpsLength2(str1));
+		System.out.println(maxLcpsLength3(str1.toCharArray(), 0, str1.length() - 1));
 	}
 
 }

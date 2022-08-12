@@ -49,6 +49,18 @@ public class Util {
     }
   }
 
+  private void reverse(char[] s, int left, int right) {
+    if (left >= right) {
+      return;
+    }
+    char tem;
+    for (int i = left; i < left + (right - left + 1) / 2; i++) {
+      tem = s[i];
+      s[i] = s[right - (i - left)];
+      s[right - (i - left)] = tem;
+    }
+  }
+
   public static void main(String[] args) {
     Util.print(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } });
   }
