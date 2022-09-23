@@ -52,7 +52,6 @@
 
 1. 自身的数据状况
 2. 所要求解的标准
-
 #### 待强化：
 
 - [ ] 小根堆，大根堆(例：skill-c18)
@@ -60,3 +59,7 @@
 - [ ] 行列式
 - [ ] 编辑距离问题(https://leetcode-cn.com/problems/edit-distance/)
 - [ ] 字符串相关
+
+### 概念整理for leetcode
+- [字符串哈希](https://leetcode.cn/problems/shortest-palindrome/)
+- [Rabin-Karp算法和KMP算法](https://leetcode.cn/problems/repeated-string-match/) 
