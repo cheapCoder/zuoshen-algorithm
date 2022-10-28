@@ -1,9 +1,43 @@
 package leetcode;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 class Solution71 {
   public String simplifyPath(String path) {
+    if (path == null || path.length() == 0) {
+      return null;
+    }
+    LinkedList<String> stack = new LinkedList<>();
+    String[] arr = path.split("/");
+
+    for (int i = 0; i < arr.length; i++) {
+      if (arr[i].length() == 0) {
+        continue;
+      }
+
+      if (arr[i].equals("..")) {
+        if (!stack.isEmpty()) {
+          stack.pop();
+        }
+      } else if (!arr[i].equals(".")) {
+        stack.push(arr[i]);
+      }
+    }
+
+    if (stack.isEmpty()) {
+      return "/";
+    }
+
+    String res = "";
+    while (!stack.isEmpty()) {
+      res += "/" + stack.pollLast();
+    }
+
+    return res;
+  }
+
+  public String simplifyPath2(String path) {
 
     if (path == null || path.length() == 0) {
       return null;
