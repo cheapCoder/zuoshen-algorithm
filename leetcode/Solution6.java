@@ -1,6 +1,6 @@
 package leetcode;
 
-class Solution {
+class Solution6 {
   public String convert(String s, int numRows) {
     if (s.length() <= 1 || numRows == 1) {
       return s;
