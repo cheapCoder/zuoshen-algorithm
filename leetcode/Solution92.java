@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 /* -----------------------------------
  *  WARNING:
  * -----------------------------------
@@ -24,9 +27,65 @@ package leetcode;
 
 public class Solution92 {
 
-    public ListNode reverseBetween(ListNode head, int left, int right) {
-        ListNode guide = new ListNode(0, head);
+    // 法1：用了O(n)的空间复杂度
+    public ListNode reverseBetween1(ListNode head, int left, int right) {
+        ListNode guide = new ListNode();
+        guide.next = head;
 
+        ListNode cur = guide;
+        Stack<ListNode> cache = new Stack<>();
+        int i = 0;
+        ListNode pre = null;
+        ListNode next = null;
+        while (i != left) {
+            if (i == left - 1) {
+                pre = cur;
+            }
+            cur = cur.next;
+            i++;
+        }
+        while (i <= right) {
+            cache.push(cur);
+            cur = cur.next;
+            i++;
+        }
+        next = cur;
+
+        while (!cache.isEmpty()) {
+            pre.next = cache.pop();
+            pre = pre.next;
+        }
+        pre.next = next;
+        return guide.next;
+    }
+
+    // 法2：用O(1)的空间复杂度
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode guide = new ListNode();
+        guide.next = head;
+
+        ListNode cur = guide;
+        int i = 0;
+        ListNode pre = null;
+        ListNode next = null;
+        while (i != left) {
+            if (i == left - 1) {
+                pre = cur;
+            }
+            cur = cur.next;
+            i++;
+        }
+        while (i <= right) {
+            cur = cur.next;
+            i++;
+        }
+        next = cur;
+
+        while (!cache.isEmpty()) {
+            pre.next = cache.pop();
+            pre = pre.next;
+        }
+        pre.next = next;
         return guide.next;
     }
 
@@ -73,7 +132,7 @@ public class Solution92 {
         return "[" + result.substring(0, result.length() - 2) + "]";
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ListNode head = stringToListNode("[1,2,3,4,5]");
         int left = Integer.parseInt("2");
         int right = Integer.parseInt("4");
