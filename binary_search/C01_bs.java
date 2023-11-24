@@ -1,7 +1,7 @@
 package binary_search;
 
 // TODO:
-public class C01_BS {
+class C01_BS {
 
   // // 第一个 >=5 的元素
   // public static int firstGE5(int[] arr, int n) {

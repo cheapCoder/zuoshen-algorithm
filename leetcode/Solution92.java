@@ -63,6 +63,7 @@ public class Solution92 {
     public ListNode reverseBetween(ListNode head, int left, int right) {
         ListNode guide = new ListNode();
         guide.next = head;
+        Stack<ListNode> cache = new Stack<>();
 
         ListNode cur = guide;
         int i = 0;
